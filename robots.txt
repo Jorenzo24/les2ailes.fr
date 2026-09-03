@@ -1,0 +1,7 @@
+# Aperçu GitHub Pages — indexation désactivée.
+# À remplacer lors de la mise en ligne sur le domaine définitif par :
+#   User-agent: *
+#   Allow: /
+#   Sitemap: https://www.les2ailes.fr/sitemap.xml
+User-agent: *
+Disallow: /

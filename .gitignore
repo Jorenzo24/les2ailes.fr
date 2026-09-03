@@ -1,0 +1,7 @@
+# Données transmises par la cliente (photos + e-mails) — ne pas publier
+_mails/
+mails.zip
+
+.DS_Store
+Thumbs.db
+*.log
