@@ -3,18 +3,19 @@ import common as c
 
 # ---------------------------------------------------------------- EVENT ----
 html = c.head(
-    "Event — ateliers, masterclass et stages | LES 2 L Pays Basque",
+    "Event, ateliers, masterclass et stages | LES 2 L Pays Basque",
     "Un dimanche par mois, Les2L propose des ateliers, masterclass, stages et cours exceptionnels "
     "pendant les vacances, ainsi que des groupes privés le week-end et les jours fériés.",
     "https://www.les2ailes.fr/event/",
+    "../",
 )
-html += c.header("event.html")
+html += c.header("event/", "../")
 html += c.pagehead(
     "Un dimanche par mois",
     "Event",
     "Les2L c’est aussi un Event un dimanche par mois: Ateliers, Masterclass, stages, cours "
     "exceptionnels pendant les vacances.",
-    "assets/img/gallery/g13.jpg",
+    "../assets/img/gallery/g13.jpg",
 )
 html += f"""
 <main id="main">
@@ -22,7 +23,7 @@ html += f"""
     <div class="container">
       <div class="split">
         <div class="split__media reveal">
-          <img src="assets/img/gallery/g02.jpg" alt="Séance de yoga aérien au studio Les2L"
+          <img src="../assets/img/gallery/g02.jpg" alt="Séance de yoga aérien au studio Les2L"
                width="1100" height="1375" loading="lazy" decoding="async">
         </div>
         <div class="split__body reveal" data-delay="1">
@@ -32,7 +33,7 @@ html += f"""
           <p>Les2L c’est aussi un Event un dimanche par mois: Ateliers, Masterclass, stages, cours
           exceptionnels pendant les vacances.</p>
           <p><strong>Rejoignez-nous !</strong></p>
-          <p><a class="btn" href="contact.html">Être informé des prochains events</a></p>
+          <p><a class="btn" href="../contact/">Être informé des prochains events</a></p>
         </div>
       </div>
     </div>
@@ -42,8 +43,8 @@ html += f"""
     <div class="container">
       <div class="split split--reverse">
         <div class="split__media reveal">
-          <img src="assets/img/gallery/g12.jpg" alt="La piscine du studio Les2L au coucher du soleil"
-               width="1100" height="825" loading="lazy" decoding="async">
+          <img src="../assets/img/barre-ballet.jpg" alt="Cours à la barre en petit groupe au studio Les2L"
+               width="1400" height="933" loading="lazy" decoding="async">
         </div>
         <div class="split__body reveal" data-delay="1">
           <p class="eyebrow">Sur réservation</p>
@@ -53,7 +54,7 @@ html += f"""
           groupe privé, la discipline de votre choix avec le professeur de votre choix (EVJF,
           anniversaire, cadeau, etc…). Tous les prétextes sont propices pour partager un moment
           inoubliable !</p>
-          <p><a class="btn btn--ghost" href="contact.html">Réserver un groupe privé</a></p>
+          <p><a class="btn btn--ghost" href="../contact/">Organiser un cours privé</a></p>
         </div>
       </div>
     </div>
@@ -76,26 +77,27 @@ html += f"""
   </section>
 </main>
 """
-html += c.footer()
-open("../event.html", "w", encoding="utf-8").write(html)
+html += c.footer("../")
+open("../event/index.html", "w", encoding="utf-8").write(html)
 print("event.html ok")
 
 # -------------------------------------------------------------- CONTACT ----
 MAP = ("https://www.google.com/maps?q=228+Chemin+de+Pagadoy,+64990+Mouguerre&output=embed")
 
 html = c.head(
-    "Contact — studio Les2L à Mouguerre | Pilates, Yoga, Ballet",
+    "Contact | Studio Les2L à Mouguerre, Pilates, Yoga, Ballet",
     "Contactez le studio Les2L, 228 Chemin de Pagadoy à Mouguerre (64990), à quelques minutes de "
     "Bayonne, Biarritz et Hossegor. Parking gratuit sur place.",
     "https://www.les2ailes.fr/contact/",
+    "../",
 )
-html += c.header("contact.html")
+html += c.header("contact/", "../")
 html += c.pagehead(
     "Écrivez-nous",
     "Contact",
     "Une question sur un cours, un niveau, une réservation ou un groupe privé&nbsp;? "
     "Nous vous répondons rapidement.",
-    "assets/img/lieu-exterieur.jpg",
+    "../assets/img/lieu-exterieur.jpg",
 )
 html += f"""
 <main id="main">
@@ -134,7 +136,7 @@ html += f"""
           <ul class="contact-list">
             <li>{c.IC_PIN}<div><b>Adresse</b>228 Chemin de Pagadoy<br>Mouguerre 64990</div></li>
             <li>{c.IC_MAIL}<div><b>E-mail</b><a href="mailto:{c.EMAIL}">{c.EMAIL}</a></div></li>
-            <li>{c.IC_CAL}<div><b>Horaires</b>Voir <a href="planning.html">le planning des cours</a></div></li>
+            <li>{c.IC_CAL}<div><b>Horaires</b>Voir <a href="../planning/">le planning des cours</a></div></li>
           </ul>
           <p>Un établissement élégant et confortable, avec parking gratuit sur place et accès direct
           à l’autoroute, à quelques minutes de Bayonne, Biarritz et Hossegor.</p>
@@ -153,6 +155,6 @@ html += f"""
   </section>
 </main>
 """
-html += c.footer()
-open("../contact.html", "w", encoding="utf-8").write(html)
+html += c.footer("../")
+open("../contact/index.html", "w", encoding="utf-8").write(html)
 print("contact.html ok")

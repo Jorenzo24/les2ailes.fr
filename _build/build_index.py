@@ -20,10 +20,10 @@ GALLERY_ALT = [
 ]
 
 DISCOVER = [
-    ("Les tarifs", "tarifs.html"),
-    ("Le planning", "planning.html"),
-    ("L’équipe", "equipe.html"),
-    ("Les disciplines", "disciplines.html"),
+    ("Les tarifs", "tarifs/"),
+    ("Le planning", "planning/"),
+    ("L’équipe", "les-professionnels/"),
+    ("Les disciplines", "les-disciplines/"),
 ]
 
 def review_card(name, text):
@@ -63,7 +63,7 @@ SCHEMA = """<script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "SportsActivityLocation",
-  "name": "LES 2 L — Pilates Yoga Ballet",
+  "name": "LES 2 L, Pilates Yoga Ballet",
   "description": "Studio de Pilates, Yoga et Ballet au Pays Basque : 17 disciplines, 8 professeures qualifiées, à quelques minutes de Bayonne, Biarritz et Hossegor.",
   "address": {
     "@type": "PostalAddress",
@@ -82,13 +82,15 @@ SCHEMA = """<script type="application/ld+json">
 """
 
 html = c.head(
-    "LES 2 L — Pilates, Yoga et Ballet au Pays Basque | Mouguerre",
+    "LES 2 L | Pilates, Yoga et Ballet à Mouguerre, Pays Basque",
     "Studio Les2L à Mouguerre, Pays Basque : 17 disciplines de Pilates, Yoga et Ballet, "
     "8 professeures qualifiées, à quelques minutes de Bayonne, Biarritz et Hossegor.",
     "https://www.les2ailes.fr/",
+    "",
+    "script-dancing",
     SCHEMA,
 )
-html += c.header("index.html")
+html += c.header("index")
 html += f"""
 <main id="main">
 
@@ -99,17 +101,16 @@ html += f"""
       <img class="hero__logo" src="assets/img/logo-blanc.png" alt="" width="516" height="580">
       <p class="hero__brand">Les<em>2</em>L</p>
       <h1 class="hero__tagline">Pilates - Yoga - Ballet</h1>
-      <p class="hero__place">Pays Basque</p>
+      <h2 class="hero__place">Mouguerre - Pays Basque</h2>
       <div class="hero__socials">
         <a href="{c.FACEBOOK}" target="_blank" rel="noopener" aria-label="Facebook">{c.IC_FB}</a>
         <a href="{c.INSTAGRAM}" target="_blank" rel="noopener" aria-label="Instagram">{c.IC_IG}</a>
       </div>
       <div class="hero__actions">
-        <a class="btn" href="planning.html">Voir le planning</a>
-        <a class="btn btn--light" href="disciplines.html">Les disciplines</a>
+        <a class="btn" href="planning/">Voir le planning</a>
+        <a class="btn btn--light" href="les-disciplines/">Les disciplines</a>
       </div>
     </div>
-    <span class="hero__scroll" aria-hidden="true"></span>
   </section>
 
   <!-- Le lieu -->
@@ -169,7 +170,7 @@ html += f"""
           <p>Les2L c’est aussi un Event un dimanche par mois: Ateliers, Masterclass, stages, cours
           exceptionnels pendant les vacances.</p>
           <p><strong>Rejoignez-nous !</strong></p>
-          <p><a class="btn" href="contact.html">Réserver un moment privé</a></p>
+          <p><a class="btn" href="contact/">Organiser un cours privé</a></p>
         </div>
       </div>
     </div>

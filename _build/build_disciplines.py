@@ -120,18 +120,20 @@ for i, (name, body, cta) in enumerate(D):
 """
 
 html = c.head(
-    "Les disciplines — Pilates, Yoga et Ballet | LES 2 L Pays Basque",
+    "Les disciplines de Pilates, Yoga et Ballet | LES 2 L Pays Basque",
     "Découvrez les disciplines enseignées au studio Les2L : Pilates Mat, Wall Unit, en suspension, "
     "Stott Pilates, Yin Yoga, Vinyasa, Yoga Aérien, Munz Floor, Danse Classique, Total Barre et Ballet Sculpt.",
     "https://www.les2ailes.fr/les-disciplines/",
+    "../",
+    "script-dancing",
 )
-html += c.header("disciplines.html")
+html += c.header("les-disciplines/", "../")
 html += c.pagehead(
     "Prendre soin de soi",
     "Les disciplines",
-    "17 disciplines pour prendre soin de votre corps, de votre santé et de votre vie — "
+    "17 disciplines pour prendre soin de votre corps, de votre santé et de votre vie, "
     "pour les sportifs ou sédentaires, débutants ou confirmés, mixte et de tout âge.",
-    "assets/img/gallery/g05.jpg",
+    "../assets/img/gallery/g05.jpg",
 )
 html += f"""
 <main id="main">
@@ -151,13 +153,13 @@ html += f"""
         Consultez le planning de la saison, découvrez les tarifs ou venez rencontrer l’équipe.
       </p>
       <p style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:26px">
-        <a class="btn" href="planning.html">Le planning</a>
-        <a class="btn btn--ghost" href="tarifs.html">Les tarifs</a>
+        <a class="btn" href="../planning/">Le planning</a>
+        <a class="btn btn--ghost" href="../tarifs/">Les tarifs</a>
       </p>
     </div>
   </section>
 </main>
 """
-html += c.footer()
-open("../disciplines.html", "w", encoding="utf-8").write(html)
+html += c.footer("../")
+open("../les-disciplines/index.html", "w", encoding="utf-8").write(html)
 print("disciplines.html ok")

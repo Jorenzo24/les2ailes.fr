@@ -62,18 +62,19 @@ for i, (title, sub, price, unit) in enumerate(UNITS):
 """
 
 html = c.head(
-    "Tarifs et abonnements | LES 2 L — Pilates, Yoga, Ballet Pays Basque",
+    "Tarifs et abonnements | LES 2 L Pilates, Yoga, Ballet Pays Basque",
     "Abonnements Liberté, Challenge et Zoom, cours à l’unité, cours individuel et carte 10 cours. "
     "Tarifs modulables, paiement en 10 fois et réductions étudiants, demandeurs d’emploi et familles.",
     "https://www.les2ailes.fr/tarifs/",
+    "../",
 )
-html += c.header("tarifs.html")
+html += c.header("tarifs/", "../")
 html += c.pagehead(
     "Pour tous les budgets",
     "Les tarifs",
     "Tarifs modulables pour tous les budgets, paiement possible en 10 fois et réductions pour "
     "étudiants, demandeurs d’emploi et familles.",
-    "assets/img/gallery/g18.jpg",
+    "../assets/img/gallery/g18.jpg",
 )
 html += f"""
 <main id="main">
@@ -93,7 +94,7 @@ html += f"""
         d'emploi, 25% de réduction pour les étudiants</p>
         <p>Cours sur 35 semaines dans l’année (sauf pendant vacances scolaires)</p>
         <p style="margin-top:1.4em">
-          <a class="btn" href="assets/docs/tarifs.pdf" target="_blank" rel="noopener">
+          <a class="btn" href="../assets/docs/tarifs.pdf" target="_blank" rel="noopener">
             {c.IC_PDF}Télécharger les tarifs (PDF)
           </a>
         </p>
@@ -111,11 +112,11 @@ html += f"""
         privé, la discipline de votre choix avec le professeur de votre choix (EVJF, anniversaire,
         cadeau, etc…).
       </p>
-      <p style="margin-top:24px"><a class="btn btn--light" href="contact.html">Nous contacter</a></p>
+      <p style="margin-top:24px"><a class="btn btn--light" href="../contact/">Nous contacter</a></p>
     </div>
   </section>
 </main>
 """
-html += c.footer()
-open("../tarifs.html", "w", encoding="utf-8").write(html)
+html += c.footer("../")
+open("../tarifs/index.html", "w", encoding="utf-8").write(html)
 print("tarifs.html ok")

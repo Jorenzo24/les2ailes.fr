@@ -50,7 +50,7 @@ for i, (name, role, photo, handle, handle_url, bio) in enumerate(T):
         link = ""
     cards += f"""      <article class="member reveal" data-delay="{i % 3}">
         <div class="member__photo">
-          <img src="assets/img/equipe/{photo}" alt="{name.title()}, professeure au studio Les2L"
+          <img src="../assets/img/equipe/{photo}" alt="{name.title()}, professeure au studio Les2L"
                width="900" height="1200" loading="lazy" decoding="async">
         </div>
         <div class="member__body">
@@ -64,18 +64,19 @@ for i, (name, role, photo, handle, handle_url, bio) in enumerate(T):
 """
 
 html = c.head(
-    "L’équipe — 8 professeures qualifiées | LES 2 L Pays Basque",
+    "L’équipe, 8 professeures qualifiées | LES 2 L Pays Basque",
     "Rencontrez l’équipe du studio Les2L : des professeures qualifiées, certifiées, diplômées et "
     "expérimentées en Pilates, Yoga, Munz Floor et Danse Classique.",
     "https://www.les2ailes.fr/les-professionnels/",
+    "../",
 )
-html += c.header("equipe.html")
+html += c.header("les-professionnels/", "../")
 html += c.pagehead(
     "Faites connaissance",
     "L’équipe",
     "Une équipe de 8 Professeures qualifiées, certifiées, diplômées, expérimentées vous accueille "
     "tout au long de l’année.",
-    "assets/img/barre-ballet.jpg",
+    "../assets/img/barre-ballet.jpg",
 )
 html += f"""
 <main id="main">
@@ -92,13 +93,13 @@ html += f"""
       <h2 class="title">Venez seul ou accompagné&nbsp;!</h2>
       <div class="rule"><span></span></div>
       <p style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:6px">
-        <a class="btn" href="planning.html">Voir le planning</a>
-        <a class="btn btn--ghost" href="contact.html">Nous contacter</a>
+        <a class="btn" href="../planning/">Voir le planning</a>
+        <a class="btn btn--ghost" href="../contact/">Nous contacter</a>
       </p>
     </div>
   </section>
 </main>
 """
-html += c.footer()
-open("../equipe.html", "w", encoding="utf-8").write(html)
+html += c.footer("../")
+open("../les-professionnels/index.html", "w", encoding="utf-8").write(html)
 print("equipe.html ok")

@@ -33,23 +33,29 @@ def prices(items):
 
 
 modules = ""
-for i, (title, level, dates, pr) in enumerate(MODULES):
-    modules += f"""      <article class="module reveal" data-delay="{i % 3}">
-        <h3>{title}</h3>
-        <p class="module__level">{level}</p>
-        <p class="module__dates">{c.IC_CAL}<span>{dates}</span></p>
-        <ul class="module__prices">{prices(pr)}</ul>
+for i, (title, level, dates, pr) in enumerate(MODULES, 1):
+    lignes = "".join('<li><span>%s</span><b>%s</b></li>' % (lbl, p) for lbl, p in pr)
+    modules += f"""      <article class="step reveal">
+        <p class="step__num">{i:02d}</p>
+        <div>
+          <h3 class="step__title">{title}</h3>
+          <p class="step__level">{level}</p>
+          <p class="step__dates">{c.IC_CAL}<span>{dates}</span></p>
+        </div>
+        <ul class="step__prices">{lignes}</ul>
       </article>
 """
 
 cursus = ""
 for i, (icon, title, sub, pr) in enumerate(CURSUS):
-    subhtml = '<p class="module__level">%s</p>' % sub if sub else '<p class="module__level">&nbsp;</p>'
-    cursus += f"""      <article class="module module--pack reveal" data-delay="{i % 3}">
-        <img class="module__icon" src="assets/img/formation/{icon}" alt="" width="600" height="600" loading="lazy">
-        <h3>{title}</h3>
-        {subhtml}
-        <ul class="module__prices">{prices(pr)}</ul>
+    cls = " pack--highlight" if i == 0 else ""
+    detail = sub if sub else "&nbsp;"
+    lignes = "".join('<li><b>%s</b><span>%s</span></li>' % (p, lbl) for lbl, p in pr)
+    cursus += f"""      <article class="pack{cls} reveal" data-delay="{i % 3}">
+        <img class="pack__icon" src="../assets/img/formation/{icon}" alt="" width="600" height="600" loading="lazy">
+        <h3 class="pack__title">{title}</h3>
+        <p class="pack__detail">{detail}</p>
+        <ul class="pack__prices">{lignes}</ul>
       </article>
 """
 
@@ -58,13 +64,14 @@ html = c.head(
     "LES2L Centre de Formation : formation professionnelle qualifiante d’Instructeur Pilates au Pays "
     "Basque. Modules Matwork, Petit matériel, Swiss Ball et Wall Unit, finançables par l’État.",
     "https://www.les2ailes.fr/le-centre-de-formation/",
+    "../",
 )
-html += c.header("centre-de-formation.html")
+html += c.header("le-centre-de-formation/", "../")
 html += c.pagehead(
     "Devenir instructeur Pilates",
     "Le Centre de Formation",
     "Une structure unique dans le Pays Basque, les Landes et le Béarn.",
-    "assets/img/formation/salle.jpg",
+    "../assets/img/formation/salle.jpg",
 )
 html += f"""
 <main id="main">
@@ -73,7 +80,7 @@ html += f"""
     <div class="container">
       <div class="split">
         <div class="split__media reveal">
-          <img src="assets/img/formation/batiment.jpg" alt="Le bâtiment du centre de formation Les2L à Mouguerre"
+          <img src="../assets/img/formation/batiment.jpg" alt="Le bâtiment du centre de formation Les2L à Mouguerre"
                width="1400" height="1050" loading="lazy" decoding="async">
         </div>
         <div class="split__body reveal" data-delay="1">
@@ -97,7 +104,7 @@ html += f"""
     <div class="container">
       <div class="split split--reverse">
         <div class="split__media reveal">
-          <img src="assets/img/formation/salle.jpg" alt="La salle du centre de formation, vue sur la nature"
+          <img src="../assets/img/formation/salle.jpg" alt="La salle du centre de formation, vue sur la nature"
                width="1400" height="1012" loading="lazy" decoding="async">
         </div>
         <div class="split__body reveal" data-delay="1">
@@ -122,7 +129,7 @@ html += f"""
     <div class="container">
       <div class="split">
         <div class="split__media reveal">
-          <img src="assets/img/formation/swissball.jpg" alt="Travail sur Swiss Ball pendant la formation"
+          <img src="../assets/img/formation/swissball.jpg" alt="Travail sur Swiss Ball pendant la formation"
                width="1400" height="704" loading="lazy" decoding="async">
         </div>
         <div class="split__body reveal" data-delay="1">
@@ -150,13 +157,12 @@ html += f"""
 
   <section class="section section--tight">
     <div class="container">
-      <div class="banner reveal">
+      <div class="cta-band reveal">
+        <img src="../assets/img/formation/logo-formation-blanc.png" alt="LES2L Centre de formation"
+             width="500" height="500" loading="lazy">
         <p>Pour faciliter l’accès à ces formations, en cursus complet ou partiel, LES2L centre de
         formation est habilité au financement et à la prise en charge par l’État.</p>
       </div>
-      <img src="assets/img/formation/logo-formation.png" alt="LES2L Centre de formation"
-           width="360" height="360" loading="lazy"
-           style="width:150px;margin:clamp(28px,4vw,44px) auto 0">
     </div>
   </section>
 
@@ -164,7 +170,7 @@ html += f"""
     <div class="container container--wide">
       <div class="info-cards">
         <article class="info-card reveal">
-          <img src="assets/img/formation/ico-lieu.png" alt="" width="112" height="112" loading="lazy">
+          <img src="../assets/img/formation/ico-lieu.png" alt="" width="112" height="112" loading="lazy">
           <h3>Le lieu</h3>
           <p class="subtitle" style="font-size:1.15rem">228 Chemin de Pagadoy<br>Mouguerre 64990</p>
           <p>Un établissement élégant et confortable, avec parking gratuit sur place et accès direct à
@@ -176,7 +182,7 @@ html += f"""
         </article>
 
         <article class="info-card reveal" data-delay="1">
-          <img src="assets/img/formation/ico-enseignement.png" alt="" width="112" height="112" loading="lazy">
+          <img src="../assets/img/formation/ico-enseignement.png" alt="" width="112" height="112" loading="lazy">
           <h3>Les pré-requis</h3>
           <ul>
             <li>Être âgé de 18 ans minimum</li>
@@ -197,7 +203,7 @@ html += f"""
         </article>
 
         <article class="info-card reveal" data-delay="2">
-          <img src="assets/img/formation/ico-evaluation.png" alt="" width="112" height="112" loading="lazy">
+          <img src="../assets/img/formation/ico-evaluation.png" alt="" width="112" height="112" loading="lazy">
           <h3>Les évalutations</h3>
           <p>Un contrôle continu est mis en place pendant toute la formation.</p>
           <p>A la fin de chaque module, les stagiaires donneront une séance de 30mn de cours afin
@@ -208,38 +214,38 @@ html += f"""
     </div>
   </section>
 
-  <section class="section section--navy">
-    <div class="container container--wide">
+  <section class="section section--paper">
+    <div class="container">
       <div class="center" style="margin-bottom:clamp(28px,4vw,44px)">
-        <p class="eyebrow" style="color:var(--plum-light)">Dates &amp; tarifs</p>
+        <p class="eyebrow">Dates et tarifs</p>
         <h2 class="title">Les modules</h2>
-        <div class="rule rule--light"><span></span></div>
+        <div class="rule"><span></span></div>
       </div>
-      <div class="modules">
+      <div class="track">
 {modules}      </div>
 
-      <div class="center" style="margin:clamp(48px,6vw,80px) 0 clamp(28px,4vw,44px)">
+      <div class="center" style="margin:clamp(52px,7vw,88px) 0 clamp(28px,4vw,44px)">
         <h2 class="title">Les formations complètes</h2>
-        <div class="rule rule--light"><span></span></div>
+        <div class="rule"><span></span></div>
       </div>
-      <div class="modules">
+      <div class="packs">
 {cursus}      </div>
     </div>
   </section>
 
   <section class="section section--tight center">
     <div class="container">
-      <img src="assets/img/formation/qualiopi.jpg"
-           alt="Qualiopi — processus certifié — République Française"
+      <img src="../assets/img/formation/qualiopi.jpg"
+           alt="Qualiopi, processus certifié, République Française"
            width="900" height="480" loading="lazy" style="width:min(320px,80%);margin-inline:auto">
       <p style="margin-top:28px">
-        <a class="btn" href="contact.html">Demander des informations</a>
+        <a class="btn" href="../contact/">Demander des informations</a>
       </p>
     </div>
   </section>
 
 </main>
 """
-html += c.footer()
-open("../centre-de-formation.html", "w", encoding="utf-8").write(html)
+html += c.footer("../")
+open("../le-centre-de-formation/index.html", "w", encoding="utf-8").write(html)
 print("centre-de-formation.html ok")

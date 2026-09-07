@@ -7,17 +7,20 @@ Hébergé pour l'instant sur GitHub Pages en aperçu.
 
 ## Contenu
 
-| Fichier | Page |
-|---|---|
-| `index.html` | Accueil |
-| `disciplines.html` | Les disciplines (12 fiches) |
-| `equipe.html` | L'équipe |
-| `planning.html` | Planning 2026-2027 |
-| `tarifs.html` | Tarifs et abonnements |
-| `event.html` | Event |
-| `contact.html` | Contact |
-| `centre-de-formation.html` | Centre de formation professionnelle |
-| `404.html` | Page d'erreur |
+| URL | Fichier | Page |
+|---|---|---|
+| `/` | `index.html` | Accueil |
+| `/les-disciplines/` | `les-disciplines/index.html` | Les disciplines (12 fiches) |
+| `/les-professionnels/` | `les-professionnels/index.html` | L'équipe |
+| `/planning/` | `planning/index.html` | Planning 2026-2027 |
+| `/tarifs/` | `tarifs/index.html` | Tarifs et abonnements |
+| `/event/` | `event/index.html` | Event |
+| `/contact/` | `contact/index.html` | Contact |
+| `/le-centre-de-formation/` | `le-centre-de-formation/index.html` | Centre de formation professionnelle |
+| | `404.html` | Page d'erreur |
+
+Les URL reprennent **exactement** celles du site WordPress actuel : aucune
+redirection ne sera nécessaire au moment de la bascule.
 
 ## Organisation
 
@@ -50,7 +53,7 @@ Modifier un texte : éditer le script correspondant dans `_build/`, puis relance
 | Bleu marine | `#062c5a` |
 | Prune | `#864c80` |
 | Titres et textes | EB Garamond |
-| Accents manuscrits | Alex Brush |
+| Accents manuscrits | Alex Brush (Dancing Script en test sur l'accueil et les disciplines) |
 
 ## Avant la mise en ligne sur le domaine définitif
 

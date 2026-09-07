@@ -48,18 +48,19 @@ for hour, slots in ROWS:
     body += f'        <tr><th scope="row">{hour}</th>{tds}</tr>\n'
 
 html = c.head(
-    "Planning 2026-2027 — cours de Pilates, Yoga et Ballet | LES 2 L",
+    "Planning 2026-2027 des cours de Pilates, Yoga et Ballet | LES 2 L",
     "Le planning 2026-2027 du studio Les2L à Mouguerre : Pilates Mat et machines, Yoga Aérien, "
-    "Yin Yoga, Munz Floor, Ballet Sculpt, Total Barre — du lundi au samedi.",
+    "Yin Yoga, Munz Floor, Ballet Sculpt et Total Barre, du lundi au samedi.",
     "https://www.les2ailes.fr/planning/",
+    "../",
 )
-html += c.header("planning.html")
+html += c.header("planning/", "../")
 html += c.pagehead(
     "Saison 2026-2027",
     "Le planning",
     "Du lundi au samedi, matin, midi et soir. Remplacez librement vos cours selon votre planning "
     "et réservez facilement via l’application.",
-    "assets/img/gallery/g04.jpg",
+    "../assets/img/gallery/g04.jpg",
 )
 html += f"""
 <main id="main">
@@ -81,7 +82,7 @@ html += f"""
           <li><b>***</b> Avancé</li>
         </ul>
         <p style="margin-top:26px">
-          <a class="btn" href="assets/docs/planning.pdf" target="_blank" rel="noopener">
+          <a class="btn" href="../assets/docs/planning.pdf" target="_blank" rel="noopener">
             {c.IC_PDF}Télécharger le planning (PDF)
           </a>
         </p>
@@ -97,7 +98,7 @@ html += f"""
         <div class="rule"><span></span></div>
       </div>
       <figure class="planning-figure reveal">
-        <img src="assets/img/planning-2026-2027.jpg"
+        <img src="../assets/img/planning-2026-2027.jpg"
              alt="Planning des cours 2026-2027 du studio Les2L Mouguerre, du lundi au samedi"
              width="1600" height="2000" loading="lazy" decoding="async">
       </figure>
@@ -110,13 +111,13 @@ html += f"""
         Une question sur un créneau, un niveau ou une réservation&nbsp;? Écrivez-nous, nous vous répondons rapidement.
       </p>
       <p style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:22px">
-        <a class="btn" href="contact.html">Nous contacter</a>
-        <a class="btn btn--ghost" href="tarifs.html">Voir les tarifs</a>
+        <a class="btn" href="../contact/">Nous contacter</a>
+        <a class="btn btn--ghost" href="../tarifs/">Voir les tarifs</a>
       </p>
     </div>
   </section>
 </main>
 """
-html += c.footer()
-open("../planning.html", "w", encoding="utf-8").write(html)
+html += c.footer("../")
+open("../planning/index.html", "w", encoding="utf-8").write(html)
 print("planning.html ok")

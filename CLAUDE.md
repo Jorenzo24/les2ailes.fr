@@ -28,7 +28,7 @@ avec seulement des améliorations visuelles et d'UX.
 | Front | **HTML statique pur** — 1 fichier par page, aucun framework | ✅ |
 | CSS | **1 seule feuille** : `assets/css/style.css`, variables CSS, aucun build | ✅ |
 | JS | **1 seul fichier** : `assets/js/main.js`, vanilla ES5, aucune dépendance | ✅ |
-| Polices | Google Fonts (EB Garamond + Alex Brush) | ✅ |
+| Polices | Google Fonts (EB Garamond, Alex Brush, Dancing Script) | ✅ |
 | Génération | Scripts **Python 3** dans `_build/` (stdlib uniquement) | ✅ |
 | Hébergement | **GitHub Pages** (aperçu) — cible finale à décider avec la cliente | ✅ aperçu |
 
@@ -53,8 +53,20 @@ avec seulement des améliorations visuelles et d'UX.
 3. **Les couleurs de la charte ne changent pas** : bleu marine `#062c5a`,
    prune `#864c80`, blanc. Reprises de l'ancien site.
 4. **Les sections et l'ordre du menu sont conservés** tels que sur l'ancien site :
-   Disciplines · L'équipe · Planning · Tarifs · Event · Contact ·
+   Disciplines, L'équipe, Planning, Tarifs, Event, Contact,
    Centre de formation professionnelle.
+4 bis. **Les URL doivent rester identiques à celles du site actuel.** Chaque page
+   est un `index.html` dans un dossier portant le slug WordPress d'origine
+   (`/les-disciplines/`, `/les-professionnels/`, `/le-centre-de-formation/`...).
+   Ne jamais renommer un dossier : aucune redirection ne doit être nécessaire.
+   Conséquence : dans les scripts de `_build/`, les pages en sous-dossier passent
+   `base="../"` à `c.head()`, `c.header()` et `c.footer()`, et tous leurs chemins
+   d'assets sont préfixés `../`.
+4 ter. **Pas de marqueurs d'écriture IA.** Interdits dans les textes rédigés par
+   Claude : cadratins `—`, points médians `·`, tirets décoratifs en guise de
+   ponctuation. Utiliser virgules, deux-points ou `|` dans les balises title.
+   Exception : les caractères présents dans les textes d'origine de la cliente
+   (ex. le `–` de « LES2L Centre de Formation – est une nouvelle structure »).
 5. **Tant que le site est en aperçu** : `<meta name="robots" content="noindex, nofollow">`
    sur toutes les pages + `robots.txt` en `Disallow: /`. Le site ne doit pas
    concurrencer `les2ailes.fr` dans Google.
@@ -89,14 +101,14 @@ sont extraites dans `_mails/extracted/<sujet du mail>/`.
 
 ```
 les2ailes.fr/
-├── index.html                  Accueil
-├── disciplines.html            12 fiches disciplines
-├── equipe.html                 7 professeures
-├── planning.html               Tableau HTML + visuel + PDF
-├── tarifs.html                 Abonnements, à l'unité, PDF
-├── event.html                  Ateliers / masterclass / groupes privés
-├── contact.html                Formulaire + infos + carte
-├── centre-de-formation.html    Formation Instructeur Pilates
+├── index.html                        /
+├── les-disciplines/index.html        /les-disciplines/
+├── les-professionnels/index.html     /les-professionnels/   (L'équipe)
+├── planning/index.html               /planning/
+├── tarifs/index.html                 /tarifs/
+├── event/index.html                  /event/
+├── contact/index.html                /contact/
+├── le-centre-de-formation/index.html /le-centre-de-formation/
 ├── 404.html
 ├── robots.txt / sitemap.xml / .nojekyll
 ├── assets/
@@ -159,12 +171,43 @@ les2ailes.fr/
 
 ---
 
-## 8. État d'avancement (maj 2026-09-04)
+## 7 bis. Typographie manuscrite (en cours d'arbitrage)
 
-**Fait :** les 8 pages + 404, charte, responsive, accessibilité (skip-link,
-`aria-current`, focus visibles, `prefers-reduced-motion`), SEO
-(meta, canonical, Open Graph, JSON-LD `SportsActivityLocation`), images
-optimisées (7,6 → 5,0 Mo), aperçu en ligne sur GitHub Pages.
+Le site utilise **Alex Brush** (comme l'ancien) pour les accents manuscrits :
+`.eyebrow`, `.hero__place`, `.discipline__name`, `.member__role`.
+
+Joseph la trouve peu lisible. Une variante **Dancing Script** est en test via
+`<body class="script-dancing">`, appliquée **uniquement sur l'accueil et
+`/les-disciplines/`**. Les surcharges de taille et de graisse sont regroupées
+dans `style.css` sous le commentaire « Variante de typographie manuscrite ».
+
+- **Si validée** : passer `--script` à Dancing Script dans `:root`, retirer le
+  bloc `body.script-dancing` en reportant ses ajustements de taille, et retirer
+  `"script-dancing"` des appels `c.head()` dans `build_index.py` et
+  `build_disciplines.py`.
+- **Si refusée** : retirer le bloc CSS et les deux `body_class`.
+
+---
+
+## 8. État d'avancement (maj 2026-09-07)
+
+**Fait :** les 8 pages + 404, URL identiques au site actuel, charte,
+accessibilité (skip-link, `aria-current`, focus visibles,
+`prefers-reduced-motion`), SEO (meta, canonical, Open Graph, JSON-LD
+`SportsActivityLocation`), images optimisées, aperçu en ligne sur GitHub Pages.
+
+**Responsive vérifié** : 0 débordement horizontal sur les 9 pages à 500, 768 et
+1024 px (`scrollWidth == clientWidth`). Les grilles utilisent
+`minmax(min(Xpx,100%),1fr)` pour tenir jusqu'à 320 px. Seul le tableau du
+planning dépasse volontairement, dans un conteneur `.table-scroll`
+(`overflow-x:auto`). ⚠️ Chrome headless refusant de descendre sous 500 px, les
+largeurs 320-390 px n'ont pas pu être testées automatiquement.
+
+**Documents PDF** : le lien « planning » de l'ancien site pointait sur le
+**Planning 2025/2026** (`wp-content/uploads/2025/10/Planing.pdf`). Le PDF du
+site refait est régénéré à partir du visuel **2026-2027** envoyé par la cliente.
+Le `tarifs.pdf` provient toujours de l'ancien site
+(`wp-content/uploads/2025/07/Tarifs.pdf`) : **millésime à faire confirmer**.
 
 **En attente de la cliente :**
 
@@ -174,6 +217,7 @@ optimisées (7,6 → 5,0 Mo), aperçu en ligne sur GitHub Pages.
 | 2 | Contenu réel de la page **Event** | Page construite avec les textes events de l'accueil, faute de mieux |
 | 3 | **Numéro de téléphone** du studio | Introuvable sur l'ancien site et dans les mails ; seul l'e-mail est affiché |
 | 4 | Fiches des disciplines manquantes | La cliente a fourni 12 fiches ; l'accueil en cite d'autres (Yoga Kundalini, Yoga Nidra, Bain Sonore, Pilates Reformer, coaching danseur préprofessionnel) |
+| 5 | Confirmation de la **grille tarifaire** | Le PDF vient de l'ancien site (déposé en 07/2025), comme le planning périmé qui s'y trouvait |
 
 **Décisions techniques en attente :**
 
