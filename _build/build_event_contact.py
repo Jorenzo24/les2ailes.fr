@@ -3,7 +3,7 @@ import common as c
 
 # ---------------------------------------------------------------- EVENT ----
 html = c.head(
-    "Event, ateliers, masterclass et stages | LES 2 L Pays Basque",
+    "Events, ateliers, masterclass et stages | LES 2 L Pays Basque",
     "Un dimanche par mois, Les2L propose des ateliers, masterclass, stages et cours exceptionnels "
     "pendant les vacances, ainsi que des groupes privés le week-end et les jours fériés.",
     "https://www.les2ailes.fr/event/",
@@ -12,10 +12,10 @@ html = c.head(
 html += c.header("event/", "../")
 html += c.pagehead(
     "Un dimanche par mois",
-    "Event",
+    "Events",
     "Les2L c’est aussi un Event un dimanche par mois: Ateliers, Masterclass, stages, cours "
     "exceptionnels pendant les vacances.",
-    "../assets/img/gallery/g13.jpg",
+    "../assets/img/gallery/g04.jpg",
 )
 html += f"""
 <main id="main">
@@ -23,8 +23,9 @@ html += f"""
     <div class="container">
       <div class="split">
         <div class="split__media reveal">
-          <img src="../assets/img/gallery/g02.jpg" alt="Séance de yoga aérien au studio Les2L"
-               width="1100" height="1375" loading="lazy" decoding="async">
+          <!-- TODO cliente : photo dédiée aux ateliers à recevoir -->
+          <img src="../assets/img/gallery/g05.jpg" alt="La salle du studio Les2L, ouverte sur la nature"
+               width="1100" height="825" loading="lazy" decoding="async">
         </div>
         <div class="split__body reveal" data-delay="1">
           <p class="eyebrow">Les rendez-vous</p>
@@ -33,7 +34,8 @@ html += f"""
           <p>Les2L c’est aussi un Event un dimanche par mois: Ateliers, Masterclass, stages, cours
           exceptionnels pendant les vacances.</p>
           <p><strong>Rejoignez-nous !</strong></p>
-          <p><a class="btn" href="../contact/">Être informé des prochains events</a></p>
+          <p><!-- TODO cliente : remplacer par le PDF évènements (c.EVENT_PDF) -->
+          <a class="btn" href="../contact/">Être informé des prochains events</a></p>
         </div>
       </div>
     </div>
@@ -43,8 +45,9 @@ html += f"""
     <div class="container">
       <div class="split split--reverse">
         <div class="split__media reveal">
-          <img src="../assets/img/barre-ballet.jpg" alt="Cours à la barre en petit groupe au studio Les2L"
-               width="1400" height="933" loading="lazy" decoding="async">
+          <!-- TODO cliente : photo dédiée aux groupes privés à recevoir -->
+          <img src="../assets/img/gallery/g18.jpg" alt="Cours à la barre au studio Les2L"
+               width="1100" height="733" loading="lazy" decoding="async">
         </div>
         <div class="split__body reveal" data-delay="1">
           <p class="eyebrow">Sur réservation</p>
@@ -136,7 +139,7 @@ html += f"""
           <ul class="contact-list">
             <li>{c.IC_PIN}<div><b>Adresse</b>228 Chemin de Pagadoy<br>Mouguerre 64990</div></li>
             <li>{c.IC_MAIL}<div><b>E-mail</b><a href="mailto:{c.EMAIL}">{c.EMAIL}</a></div></li>
-            <li>{c.IC_CAL}<div><b>Horaires</b>Voir <a href="../planning/">le planning des cours</a></div></li>
+            <li>{c.IC_CAL}<div><b>Horaires</b>Voir <a href="../{c.PLANNING_PDF}" target="_blank" rel="noopener">le planning des cours</a></div></li>
           </ul>
           <p>Un établissement élégant et confortable, avec parking gratuit sur place et accès direct
           à l’autoroute, à quelques minutes de Bayonne, Biarritz et Hossegor.</p>

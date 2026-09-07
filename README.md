@@ -12,15 +12,16 @@ Hébergé pour l'instant sur GitHub Pages en aperçu.
 | `/` | `index.html` | Accueil |
 | `/les-disciplines/` | `les-disciplines/index.html` | Les disciplines (12 fiches) |
 | `/les-professionnels/` | `les-professionnels/index.html` | L'équipe |
-| `/planning/` | `planning/index.html` | Planning 2026-2027 |
-| `/tarifs/` | `tarifs/index.html` | Tarifs et abonnements |
-| `/event/` | `event/index.html` | Event |
+| `/event/` | `event/index.html` | Events |
 | `/contact/` | `contact/index.html` | Contact |
 | `/le-centre-de-formation/` | `le-centre-de-formation/index.html` | Centre de formation professionnelle |
 | | `404.html` | Page d'erreur |
 
 Les URL reprennent **exactement** celles du site WordPress actuel : aucune
 redirection ne sera nécessaire au moment de la bascule.
+
+Les onglets **Planning** et **Tarifs** du menu ouvrent directement leur PDF
+(`assets/docs/`), comme sur le site d'origine ; ils n'ont pas de page HTML.
 
 ## Organisation
 
@@ -51,7 +52,7 @@ Modifier un texte : éditer le script correspondant dans `_build/`, puis relance
 | | |
 |---|---|
 | Bleu marine | `#062c5a` |
-| Prune | `#864c80` |
+| Violet | `#6e4b87` |
 | Titres et textes | EB Garamond |
 | Accents manuscrits | Dancing Script |
 

@@ -12,15 +12,26 @@ FACEBOOK = "https://www.facebook.com/profile.php?id=100070696928721"
 INSTAGRAM = "https://www.instagram.com/_les2l_/"
 EMAIL = "les2ailespy@gmail.com"
 
-# (dossier de l'URL, libelle) : reprend exactement les URL du site actuel
+# TODO cliente : PDF « évènements » à recevoir, puis remplacer par
+#   EVENT_PDF = "assets/docs/events.pdf"
+EVENT_PDF = "event/"
+
+# TODO cliente : nouveaux PDF planning et tarifs à recevoir ; il suffira de
+# remplacer les fichiers dans assets/docs/, les liens ne bougent pas.
+PLANNING_PDF = "assets/docs/planning.pdf"
+TARIFS_PDF = "assets/docs/tarifs.pdf"
+
+# (cible, libelle, ouverture dans un nouvel onglet)
+# Les pages conservent exactement les URL du site actuel ; Planning et Tarifs
+# pointent directement sur leur PDF, comme sur le site d'origine.
 NAV = [
-    ("les-disciplines/", "Disciplines"),
-    ("les-professionnels/", "L’équipe"),
-    ("planning/", "Planning"),
-    ("tarifs/", "Tarifs"),
-    ("event/", "Event"),
-    ("contact/", "Contact"),
-    ("le-centre-de-formation/", "Centre de formation professionnelle"),
+    ("les-disciplines/", "Disciplines", False),
+    ("les-professionnels/", "L’équipe", False),
+    (PLANNING_PDF, "Planning", True),
+    (TARIFS_PDF, "Tarifs", True),
+    ("event/", "Events", False),
+    ("contact/", "Contact", False),
+    ("le-centre-de-formation/", "Centre de formation professionnelle", False),
 ]
 
 IC_FB = ('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14c-.33-.04-1.55-.14-2.84-.14C12 2 10.5 3.66 10.5 6.7v2.8H8v4h2.5V22H14v-8.5Z"/></svg>')
@@ -66,13 +77,16 @@ def head(title, description, canonical, base="", body_class="", extra=""):
 
 
 def header(active, base=""):
+    blank = ' target="_blank" rel="noopener"'
     links = "".join(
-        '<li><a class="nav__link" href="%s%s"%s>%s</a></li>' % (base, h, CUR if h == active else "", t)
-        for h, t in NAV
+        '<li><a class="nav__link" href="%s%s"%s%s>%s</a></li>'
+        % (base, h, blank if b else "", CUR if h == active else "", t)
+        for h, t, b in NAV
     )
     dlinks = "".join(
-        '<li><a href="%s%s"%s>%s</a></li>' % (base, h, CUR if h == active else "", t)
-        for h, t in NAV
+        '<li><a href="%s%s"%s%s>%s</a></li>'
+        % (base, h, blank if b else "", CUR if h == active else "", t)
+        for h, t, b in NAV
     )
     home_cur = CUR if active == "index" else ""
     home = base if base else "index.html"
@@ -104,7 +118,11 @@ def header(active, base=""):
 
 
 def footer(base="", scripts=""):
-    nav_items = "".join('<li><a href="%s%s">%s</a></li>' % (base, h, t) for h, t in NAV)
+    nav_items = "".join(
+        '<li><a href="%s%s"%s>%s</a></li>'
+        % (base, h, ' target="_blank" rel="noopener"' if b else "", t)
+        for h, t, b in NAV
+    )
     return f"""<footer class="footer">
   <div class="container">
     <div class="footer__grid">
@@ -149,10 +167,11 @@ def footer(base="", scripts=""):
 """
 
 
-def pagehead(eyebrow, title, intro, bg):
+def pagehead(eyebrow, title, intro, bg=None):
     intro_html = "<p>%s</p>" % intro if intro else ""
+    bg_html = ("""<div class="pagehead__bg" style="background-image:url('%s')"></div>""" % bg) if bg else ""
     return f"""<section class="pagehead">
-  <div class="pagehead__bg" style="background-image:url('{bg}')"></div>
+  {bg_html}
   <p class="eyebrow">{eyebrow}</p>
   <h1>{title}</h1>
   {intro_html}

@@ -33,10 +33,9 @@ def prices(items):
 
 
 modules = ""
-for i, (title, level, dates, pr) in enumerate(MODULES, 1):
+for (title, level, dates, pr) in MODULES:
     lignes = "".join('<li><span>%s</span><b>%s</b></li>' % (lbl, p) for lbl, p in pr)
     modules += f"""      <article class="step reveal">
-        <p class="step__num">{i:02d}</p>
         <div>
           <h3 class="step__title">{title}</h3>
           <p class="step__level">{level}</p>
@@ -65,13 +64,13 @@ html = c.head(
     "Basque. Modules Matwork, Petit matériel, Swiss Ball et Wall Unit, finançables par l’État.",
     "https://www.les2ailes.fr/le-centre-de-formation/",
     "../",
+    "theme-navy",
 )
 html += c.header("le-centre-de-formation/", "../")
 html += c.pagehead(
-    "Devenir instructeur Pilates",
     "Le Centre de Formation",
+    "Formation Instructeur Pilates",
     "Une structure unique dans le Pays Basque, les Landes et le Béarn.",
-    "../assets/img/formation/salle.jpg",
 )
 html += f"""
 <main id="main">
@@ -108,7 +107,6 @@ html += f"""
                width="1400" height="1012" loading="lazy" decoding="async">
         </div>
         <div class="split__body reveal" data-delay="1">
-          <p class="eyebrow">Le cursus</p>
           <h2 class="title">Les modules de formation sont évolutifs&nbsp;:</h2>
           <div class="rule rule--left"><span></span></div>
           <ul>
@@ -186,9 +184,9 @@ html += f"""
           <h3>Les pré-requis</h3>
           <ul>
             <li>Être âgé de 18 ans minimum</li>
-            <li>Être titulaire de l’un des diplômes suivants : CQP, CQP ALS AGEE, BP JEPS, APT, licence
-            STAPS, kinésithérapeute, ostéopathe, de danse (classique, contemporain ou jazz), professeur
-            de danse ou professeur de yoga</li>
+            <li>Être titulaire de l’un des diplômes suivants : CQP, CQP ALS AGEE, BPJEPS, APT, licence
+            STAPS, kinésithérapeute, ostéopathe, sage-femme, de danse (classique, contemporain ou jazz),
+            professeur de danse ou professeur de yoga</li>
             <li>Justifier d’une pratique préalable de 20 heures minimum de cours de Pilates Mat au
             moment de l’entrée en formation → Ces heures peuvent être réalisées en présentiel ou en
             visio au sein de la structure LES2L, en amont de la formation choisie</li>
@@ -235,9 +233,11 @@ html += f"""
 
   <section class="section section--tight center">
     <div class="container">
-      <img src="../assets/img/formation/qualiopi.jpg"
-           alt="Qualiopi, processus certifié, République Française"
-           width="900" height="480" loading="lazy" style="width:min(320px,80%);margin-inline:auto">
+      <span class="logo-card">
+        <img src="../assets/img/formation/qualiopi.jpg"
+             alt="Qualiopi, processus certifié, République Française"
+             width="900" height="480" loading="lazy" style="width:min(280px,70vw)">
+      </span>
       <p style="margin-top:28px">
         <a class="btn" href="../contact/">Demander des informations</a>
       </p>

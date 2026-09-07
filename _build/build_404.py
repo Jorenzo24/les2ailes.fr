@@ -3,7 +3,7 @@ import common as c
 
 html = c.head("Page introuvable | LES 2 L", "Cette page n’existe pas ou a été déplacée.", "")
 html += c.header("")
-html += """
+html += f"""
 <main id="main">
   <section class="section center">
     <div class="container container--narrow">
@@ -13,7 +13,7 @@ html += """
       <p class="lead">Le lien est peut-être erroné ou la page a été déplacée.</p>
       <p style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:26px">
         <a class="btn" href="index.html">Retour à l’accueil</a>
-        <a class="btn btn--ghost" href="planning/">Voir le planning</a>
+        <a class="btn btn--ghost" href="{c.PLANNING_PDF}" target="_blank" rel="noopener">Voir le planning</a>
       </p>
     </div>
   </section>

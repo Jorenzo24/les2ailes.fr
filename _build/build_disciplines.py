@@ -152,8 +152,8 @@ html += f"""
         Consultez le planning de la saison, découvrez les tarifs ou venez rencontrer l’équipe.
       </p>
       <p style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:26px">
-        <a class="btn" href="../planning/">Le planning</a>
-        <a class="btn btn--ghost" href="../tarifs/">Les tarifs</a>
+        <a class="btn" href="../{c.PLANNING_PDF}" target="_blank" rel="noopener">Le planning</a>
+        <a class="btn btn--ghost" href="../{c.TARIFS_PDF}" target="_blank" rel="noopener">Les tarifs</a>
       </p>
     </div>
   </section>

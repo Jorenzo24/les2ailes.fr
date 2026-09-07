@@ -20,10 +20,10 @@ GALLERY_ALT = [
 ]
 
 DISCOVER = [
-    ("Les tarifs", "tarifs/"),
-    ("Le planning", "planning/"),
-    ("L’équipe", "les-professionnels/"),
-    ("Les disciplines", "les-disciplines/"),
+    ("Le planning", c.PLANNING_PDF, True),
+    ("Les disciplines", "les-disciplines/", False),
+    ("L’équipe", "les-professionnels/", False),
+    ("Les tarifs", c.TARIFS_PDF, True),
 ]
 
 def review_card(name, text):
@@ -51,10 +51,10 @@ discover = "".join(
         <p class="eyebrow">Découvrez</p>
         <h3>{title}</h3>
         <div class="rule"><span></span></div>
-        <a class="btn btn--sm" href="{href}">Découvrir</a>
+        <a class="btn btn--sm" href="{href}"{' target="_blank" rel="noopener"' if blank else ''}>Découvrir</a>
       </article>
 """
-    for i, (title, href) in enumerate(DISCOVER)
+    for i, (title, href, blank) in enumerate(DISCOVER)
 )
 
 reviews = "".join(review_card(n, t) for n, t in REVIEWS)
@@ -82,7 +82,7 @@ SCHEMA = """<script type="application/ld+json">
 """
 
 html = c.head(
-    "LES 2 L | Pilates, Yoga et Ballet à Mouguerre, Pays Basque",
+    "LES 2 L | Pilates, Yoga et Ballet au Pays Basque",
     "Studio Les2L à Mouguerre, Pays Basque : 17 disciplines de Pilates, Yoga et Ballet, "
     "8 professeures qualifiées, à quelques minutes de Bayonne, Biarritz et Hossegor.",
     "https://www.les2ailes.fr/",
@@ -96,29 +96,28 @@ html += f"""
 
   <!-- Bandeau d'ouverture -->
   <section class="hero">
-    <div class="hero__bg" style="background-image:url('assets/img/hero.jpg')"></div>
     <div class="hero__inner">
       <img class="hero__logo" src="assets/img/logo-blanc.png" alt="" width="516" height="580">
       <p class="hero__brand">Les<em>2</em>L</p>
       <h1 class="hero__tagline">Pilates - Yoga - Ballet</h1>
-      <h2 class="hero__place">Mouguerre - Pays Basque</h2>
+      <h2 class="hero__place">Pays Basque</h2>
       <div class="hero__socials">
         <a href="{c.FACEBOOK}" target="_blank" rel="noopener" aria-label="Facebook">{c.IC_FB}</a>
         <a href="{c.INSTAGRAM}" target="_blank" rel="noopener" aria-label="Instagram">{c.IC_IG}</a>
-      </div>
-      <div class="hero__actions">
-        <a class="btn" href="planning/">Voir le planning</a>
-        <a class="btn btn--light" href="les-disciplines/">Les disciplines</a>
       </div>
     </div>
   </section>
 
   <!-- Le lieu -->
-  <section class="feature" style="background-image:url('assets/img/gallery/g05.jpg')">
-    <div class="container">
-      <div class="feature__card reveal">
-        <h2>Le lieu</h2>
-        <div class="rule rule--left rule--light"><span></span></div>
+  <figure class="photoband">
+    <img src="assets/img/hero.jpg" alt="La salle du studio Les2L, ouverte sur la forêt"
+         width="1920" height="1080" fetchpriority="high" decoding="async">
+  </figure>
+  <section class="section">
+    <div class="container container--narrow center">
+      <h2 class="title">Le lieu</h2>
+      <div class="rule"><span></span></div>
+      <div class="reveal" style="text-align:left">
         <p>Bienvenue dans Les2L où l'expérience et les qualités professionnelles vous feront découvrir
         17 disciplines pour prendre soin de votre corps, de votre santé et de votre vie.</p>
         <p>Les2L est un établissement convivial avec une superbe salle élégante et confortable au cœur
@@ -170,7 +169,7 @@ html += f"""
           <p>Les2L c’est aussi un Event un dimanche par mois: Ateliers, Masterclass, stages, cours
           exceptionnels pendant les vacances.</p>
           <p><strong>Rejoignez-nous !</strong></p>
-          <p><a class="btn" href="contact/">Organiser un cours privé</a></p>
+          <p><a class="btn" href="{c.EVENT_PDF}">Les prochains évènements</a></p>
         </div>
       </div>
     </div>

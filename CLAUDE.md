@@ -50,8 +50,12 @@ avec seulement des améliorations visuelles et d'UX.
    explicite de la cliente (mail « Précision site internet »). Les fichiers de
    `assets/img/equipe/` sont déjà convertis en niveaux de gris, ET un
    `filter:grayscale(100%)` est appliqué en CSS (double sécurité).
-3. **Les couleurs de la charte ne changent pas** : bleu marine `#062c5a`,
-   prune `#864c80`, blanc. Reprises de l'ancien site.
+3. **Bleu marine `#062c5a` + blanc**, repris de l'ancien site. En revanche le
+   violet a changé : le `#864c80` d'origine était jugé trop rose par la cliente,
+   qui craignait de faire fuir la clientèle masculine. Remplacé le 7 septembre
+   2026 par **`#6e4b87`** (violet-indigo), avec `--plum-light:#a08cc4` et
+   `--plum-dark:#5a3d70`. Contraste de la teinte claire sur le bleu marine :
+   4,65:1 contre 3,75:1 avant. Ne pas revenir vers le magenta.
 4. **Les sections et l'ordre du menu sont conservés** tels que sur l'ancien site :
    Disciplines, L'équipe, Planning, Tarifs, Event, Contact,
    Centre de formation professionnelle.
@@ -62,6 +66,10 @@ avec seulement des améliorations visuelles et d'UX.
    Conséquence : dans les scripts de `_build/`, les pages en sous-dossier passent
    `base="../"` à `c.head()`, `c.header()` et `c.footer()`, et tous leurs chemins
    d'assets sont préfixés `../`.
+   **Exception (7 septembre 2026)** : les pages `/planning/` et `/tarifs/` ont été
+   supprimées à la demande de la cliente. Les onglets du menu ouvrent directement
+   les PDF, comme sur le site d'origine. Générateurs conservés dans
+   `_build/_inactif/` si elle change d'avis.
 4 ter. **Pas de marqueurs d'écriture IA.** Interdits dans les textes rédigés par
    Claude : cadratins `—`, points médians `·`, tirets décoratifs en guise de
    ponctuation. Utiliser virgules, deux-points ou `|` dans les balises title.
@@ -188,6 +196,24 @@ valeurs d'origine sans revoir l'ensemble.
 
 ---
 
+## 7 ter. Le centre de formation est en couleurs inversées
+
+À la demande de la cliente, `/le-centre-de-formation/` est **entièrement sur
+fond bleu marine** pour le distinguer du reste du site. C'est le rôle de
+`<body class="theme-navy">` : toutes les surcharges sont regroupées dans
+`style.css` sous « Page inversée (centre de formation) ».
+
+Points d'attention si on ajoute un bloc à cette page :
+- les cartes deviennent `rgba(255,255,255,.055)` avec bordure translucide ;
+- la carte mise en avant (`.pack--highlight`) s'inverse à son tour, en blanc ;
+- les pictogrammes noirs passent en `filter:brightness(0) invert(1)` ;
+- un logo sur fond blanc opaque (Qualiopi) doit être posé dans `.logo-card`,
+  sinon il forme un bloc blanc disgracieux ;
+- les boutons pleins passent en `--plum-light` sur texte bleu marine, sinon ils
+  ne ressortent pas.
+
+---
+
 ## 8. État d'avancement (maj 2026-09-07)
 
 **Fait :** les 8 pages + 404, URL identiques au site actuel, charte,
@@ -195,8 +221,8 @@ accessibilité (skip-link, `aria-current`, focus visibles,
 `prefers-reduced-motion`), SEO (meta, canonical, Open Graph, JSON-LD
 `SportsActivityLocation`), images optimisées, aperçu en ligne sur GitHub Pages.
 
-**Responsive vérifié** : 0 débordement horizontal sur les 9 pages à 500, 768 et
-1024 px (`scrollWidth == clientWidth`). Les grilles utilisent
+**Responsive vérifié** : 0 débordement horizontal sur les 7 pages à 500, 900 et
+1300 px (`scrollWidth == clientWidth`). Les grilles utilisent
 `minmax(min(Xpx,100%),1fr)` pour tenir jusqu'à 320 px. Seul le tableau du
 planning dépasse volontairement, dans un conteneur `.table-scroll`
 (`overflow-x:auto`). ⚠️ Chrome headless refusant de descendre sous 500 px, les
@@ -216,9 +242,8 @@ page.save('assets/docs/planning.pdf', 'PDF', resolution=150.0)
 Le `tarifs.pdf` provient toujours de l'ancien site
 (`wp-content/uploads/2025/07/Tarifs.pdf`) : **millésime à faire confirmer**.
 
-**Page planning** : le tableau HTML + le bouton de téléchargement suffisent.
-La section « version imprimable » qui réaffichait le visuel a été retirée
-(doublon), ainsi que `assets/img/planning-2026-2027.jpg`.
+**Page planning** : supprimée le 7 septembre 2026, l'onglet ouvre le PDF.
+Le tableau HTML responsive reste disponible dans `_build/_inactif/`.
 
 **Les 12 pièces jointes « disciplines »** du mail sont des **cartes de texte**
 (75 à 90 % de blanc pur, saturation quasi nulle), pas des photos. Leur contenu
@@ -234,6 +259,10 @@ texte en image serait illisible pour Google et les lecteurs d'écran.
 | 3 | **Numéro de téléphone** du studio | Introuvable sur l'ancien site et dans les mails ; seul l'e-mail est affiché |
 | 4 | Fiches des disciplines manquantes | La cliente a fourni 12 fiches ; l'accueil en cite d'autres (Yoga Kundalini, Yoga Nidra, Bain Sonore, Pilates Reformer, coaching danseur préprofessionnel) |
 | 5 | Confirmation de la **grille tarifaire** | Le PDF vient de l'ancien site (déposé en 07/2025), comme le planning périmé qui s'y trouvait |
+| 6 | **PDF « évènements »** | `common.py` : `EVENT_PDF = "event/"` est un provisoire. À remplacer par `assets/docs/events.pdf`. Cible du bouton « Les prochains évènements » de l'accueil, et du bouton « Être informé » de `/event/` (qui pointe pour l'instant sur `/contact/` pour éviter un auto-lien) |
+| 7 | **Nouveaux PDF planning et tarifs** | Remplacer les fichiers dans `assets/docs/`, les liens du menu ne bougent pas |
+| 8 | **2 photos pour la page Events** | Une pour les ateliers, une pour les groupes privés. Provisoirement `g05.jpg` et `g18.jpg`, repérées par un commentaire `TODO cliente` dans `build_event_contact.py` |
+| 9 | **Couleurs de « Les formations complètes »** | La cliente veut les revoir. Actuellement : deux cartes translucides + une carte blanche mise en avant |
 
 **Décisions techniques en attente :**
 

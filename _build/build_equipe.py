@@ -2,6 +2,8 @@
 import common as c
 
 # Textes repris mot pour mot du mail « Onglet EQUIPE ».
+# Ordre imposé par la cliente : Laurence (à venir) / Helen / Laureen / Caroline
+# / Alexandra / Emilie / Lénie / Sarah.
 T = [
  ("HELEN WATKINS", "Yoga", "helen-watkins.jpg", "@lnwatkins", "https://www.instagram.com/lnwatkins/", [
   "HELEN WATKINS @lnwatkins est enseignante et formatrice de Yoga.",
@@ -9,11 +11,10 @@ T = [
   "Ses cours sont une vraie expérience holistique, pensés en fonction des saisons, des méridiens de la médecine chinoise et parfois accompagnés de sono thérapie.",
   "Si vous aimez les voyages introspectifs, la voix douce d’Helen saura apaiser votre cœur, votre corps, et votre esprit.",
  ]),
- ("EMILIE LANGLET", "Pilates", "emilie-langlet.jpg", None, None, [
-  "Diplômé d’État dans les métiers de la remise en forme et titulaire d’une licence Staps, Emilie a découvert le Pilates lors de son cursus universitaire.",
-  "Après de graves blessures et de longs mois de rééducation, la méthode Pilates est devenue comme une évidence dans la prise de conscience de soi, de se réapproprier son corps et dans le développement personnel.",
-  "Le mouvement c’est la vie. Le corps en mouvement la fascine et soucieuse de l’intégrité physique de la personne, son objectif dans son enseignement et sa pédagogie est que chaque pratiquant puisse se découvrir ou se redécouvrir.",
-  "Formée à la méthode Pilates en Mat et sur Reformer /Cadillac depuis plus de 10 ans ainsi qu’à la méthode PSM ( Pilates en suspension), Emilie intervient depuis début septembre 2025 au sein du studio Les2L.",
+ ("LAUREEN ELISABETH", "Stott Pilates® & Danse", "laureen-elisabeth.jpg", "@laureen_pilates_danse", "https://www.instagram.com/laureen_pilates_danse/", [
+  "LAUREEN ELISABETH @laureen_pilates_danse est Chorégraphe, Professeure de danse technique Martha Graham et Professeure de Pilates certifiée STOTT Pilates.",
+  "Elle se forme à la danse à Paris puis à New York à la Martha Graham School of Contemporary Dance. C’est là qu’elle découvre le Pilates.",
+  "Pendant sa carrière de danseuse elle se forme au Pilates méthode STOTT et l’enseigne depuis.",
  ]),
  ("CAROLINE ROBERT", "Danse classique", "caroline-robert.jpg", None, None, [
   "CAROLINE ROBERT débute sa formation à l’École de l’Opéra national de Paris en 1992 avant d’intégrer le Corps de Ballet en 1998. Nommée Coryphée en 2008 puis Sujet en 2012, elle construit un parcours riche et exigeant au sein de la compagnie.",
@@ -26,14 +27,15 @@ T = [
   "Son credo est un corps souple, fort et endurant pour maintenir une bonne santé physique et émotionnelle avec joie, légèreté et bonne humeur.",
   "Son mantra : prends soin de ton corps pour que ton âme ait envie d’y rester. Elle accompagne chacun à apprivoiser son corps pour trouver l’équilibre, l’harmonie et tenir la posture juste.",
  ]),
+ ("EMILIE LANGLET", "Pilates", "emilie-langlet.jpg", None, None, [
+  "Diplômé d’État dans les métiers de la remise en forme et titulaire d’une licence Staps, Emilie a découvert le Pilates lors de son cursus universitaire.",
+  "Après de graves blessures et de longs mois de rééducation, la méthode Pilates est devenue comme une évidence dans la prise de conscience de soi, de se réapproprier son corps et dans le développement personnel.",
+  "Le mouvement c’est la vie. Le corps en mouvement la fascine et soucieuse de l’intégrité physique de la personne, son objectif dans son enseignement et sa pédagogie est que chaque pratiquant puisse se découvrir ou se redécouvrir.",
+  "Formée à la méthode Pilates en Mat et sur Reformer /Cadillac depuis plus de 10 ans ainsi qu’à la méthode PSM ( Pilates en suspension), Emilie intervient depuis début septembre 2025 au sein du studio Les2L.",
+ ]),
  ("LÉNIE CHERINO", "Munz Floor® & Yoga Vinyasa", "lenie-cherino.jpg", None, None, [
   "Lénie Cherino, coach certifiée en MUNZ FLOOR®, enseignante de Yoga Vinyasa et praticienne en massage traditionnel Thaïlandais et Amma assis.",
   "Du théâtre à la danse contemporaine et jazz, le long d'une carrière de vingt ans d'artiste interprète, du yoga au massage, en passant par diverses approches somatiques, Lenie est fascinée par l’alchimie subtile qui relie geste, voix, souffle, toucher et émotion. Depuis qu'elle est jeune adulte, le yoga est pour elle un allié précieux, un chemin d’introspection qui ne cesse de lui ouvrir de nouvelles perspectives.",
- ]),
- ("LAUREEN ELISABETH", "Stott Pilates® & Danse", "laureen-elisabeth.jpg", "@laureen_pilates_danse", "https://www.instagram.com/laureen_pilates_danse/", [
-  "LAUREEN ELISABETH @laureen_pilates_danse est Chorégraphe, Professeure de danse technique Martha Graham et Professeure de Pilates certifiée STOTT Pilates.",
-  "Elle se forme à la danse à Paris puis à New York à la Martha Graham School of Contemporary Dance. C’est là qu’elle découvre le Pilates.",
-  "Pendant sa carrière de danseuse elle se forme au Pilates méthode STOTT et l’enseigne depuis.",
  ]),
  ("SARAH ACHTE", "Pilates & Bodyflow", "sarah-achte.jpg", "@sarohnoixdecoco", "https://www.instagram.com/sarohnoixdecoco/", [
   "SARAH ACHTE @sarohnoixdecoco est diplômée d'un BTS Diététique d'abord puis d'un BPJEPS AF. Elle a complété sa formation initiale avec plusieurs modules de ka méthode Pilates avec et sans matériel. Elle aime approfondir et décliner les mouvements fondamentaux de la méthode Pilates en les rendant accessibles à tous les niveaux de pratique. Sarah est aussi certifiée en Hypnose Ericksonienne et en massage Suédois/Deep Tissue.",
@@ -93,7 +95,7 @@ html += f"""
       <h2 class="title">Venez seul ou accompagné&nbsp;!</h2>
       <div class="rule"><span></span></div>
       <p style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:6px">
-        <a class="btn" href="../planning/">Voir le planning</a>
+        <a class="btn" href="../{c.PLANNING_PDF}" target="_blank" rel="noopener">Voir le planning</a>
         <a class="btn btn--ghost" href="../contact/">Nous contacter</a>
       </p>
     </div>
