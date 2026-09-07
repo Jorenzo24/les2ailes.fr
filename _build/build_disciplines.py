@@ -125,7 +125,6 @@ html = c.head(
     "Stott Pilates, Yin Yoga, Vinyasa, Yoga Aérien, Munz Floor, Danse Classique, Total Barre et Ballet Sculpt.",
     "https://www.les2ailes.fr/les-disciplines/",
     "../",
-    "script-dancing",
 )
 html += c.header("les-disciplines/", "../")
 html += c.pagehead(

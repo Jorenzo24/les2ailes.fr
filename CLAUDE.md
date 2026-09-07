@@ -28,7 +28,7 @@ avec seulement des améliorations visuelles et d'UX.
 | Front | **HTML statique pur** — 1 fichier par page, aucun framework | ✅ |
 | CSS | **1 seule feuille** : `assets/css/style.css`, variables CSS, aucun build | ✅ |
 | JS | **1 seul fichier** : `assets/js/main.js`, vanilla ES5, aucune dépendance | ✅ |
-| Polices | Google Fonts (EB Garamond, Alex Brush, Dancing Script) | ✅ |
+| Polices | Google Fonts (EB Garamond + Dancing Script) | ✅ |
 | Génération | Scripts **Python 3** dans `_build/` (stdlib uniquement) | ✅ |
 | Hébergement | **GitHub Pages** (aperçu) — cible finale à décider avec la cliente | ✅ aperçu |
 
@@ -88,7 +88,7 @@ Tout le reste vient donc des documents de la cliente.
 | Centre de formation | Textes de `les2ailes.fr/le-centre-de-formation/` (scrapés) |
 | Disciplines | **12 visuels** du mail « SITE INTERNET » (`mails.zip`), transcrits en texte réel |
 | L'équipe | Mail « Onglet EQUIPE » (7 bios) + mails « Photo N&B … » (7 portraits) |
-| Planning | `PLANNING 2026-2027.png` du mail « Planning », retranscrit en tableau HTML |
+| Planning | `PLANNING 2026-2027.png` du mail « Planning », retranscrit en tableau HTML, et converti en PDF pour le téléchargement |
 | Tarifs | `Tarifs.pdf` du site officiel, retranscrit en cartes HTML |
 | Avis | Widget Trustindex/Google de l'ancien site, figés en HTML statique |
 
@@ -171,21 +171,20 @@ les2ailes.fr/
 
 ---
 
-## 7 bis. Typographie manuscrite (en cours d'arbitrage)
+## 7 bis. Typographie
 
-Le site utilise **Alex Brush** (comme l'ancien) pour les accents manuscrits :
-`.eyebrow`, `.hero__place`, `.discipline__name`, `.member__role`.
+| Usage | Police |
+|---|---|
+| Titres et textes courants | **EB Garamond** |
+| Accents manuscrits (`.eyebrow`, `.hero__place`, `.discipline__name`, `.discipline__cta`, `.member__role`) | **Dancing Script** |
 
-Joseph la trouve peu lisible. Une variante **Dancing Script** est en test via
-`<body class="script-dancing">`, appliquée **uniquement sur l'accueil et
-`/les-disciplines/`**. Les surcharges de taille et de graisse sont regroupées
-dans `style.css` sous le commentaire « Variante de typographie manuscrite ».
+Décision du 7 septembre 2026 : **Alex Brush est abandonnée** (police de l'ancien
+site, jugée illisible par Joseph) et remplacée partout par Dancing Script, plus
+lisible. Elle n'est plus chargée depuis Google Fonts.
 
-- **Si validée** : passer `--script` à Dancing Script dans `:root`, retirer le
-  bloc `body.script-dancing` en reportant ses ajustements de taille, et retirer
-  `"script-dancing"` des appels `c.head()` dans `build_index.py` et
-  `build_disciplines.py`.
-- **Si refusée** : retirer le bloc CSS et les deux `body_class`.
+Dancing Script ayant une hauteur d'x plus grande, les tailles des éléments
+manuscrits ont été réduites et passées en graisse 600. Ne pas les remonter aux
+valeurs d'origine sans revoir l'ensemble.
 
 ---
 
@@ -205,9 +204,26 @@ largeurs 320-390 px n'ont pas pu être testées automatiquement.
 
 **Documents PDF** : le lien « planning » de l'ancien site pointait sur le
 **Planning 2025/2026** (`wp-content/uploads/2025/10/Planing.pdf`). Le PDF du
-site refait est régénéré à partir du visuel **2026-2027** envoyé par la cliente.
+site refait est régénéré à partir du visuel **2026-2027** envoyé par la cliente :
+
+```python
+from PIL import Image
+im = Image.open('_mails/extracted/Planning/PLANNING 2026-2027.png').convert('RGB')
+# ... centrage sur une page A4 150 dpi (1240x1754) ...
+page.save('assets/docs/planning.pdf', 'PDF', resolution=150.0)
+```
+
 Le `tarifs.pdf` provient toujours de l'ancien site
 (`wp-content/uploads/2025/07/Tarifs.pdf`) : **millésime à faire confirmer**.
+
+**Page planning** : le tableau HTML + le bouton de téléchargement suffisent.
+La section « version imprimable » qui réaffichait le visuel a été retirée
+(doublon), ainsi que `assets/img/planning-2026-2027.jpg`.
+
+**Les 12 pièces jointes « disciplines »** du mail sont des **cartes de texte**
+(75 à 90 % de blanc pur, saturation quasi nulle), pas des photos. Leur contenu
+est intégralement retranscrit en HTML : les republier ferait doublon, et du
+texte en image serait illisible pour Google et les lecteurs d'écran.
 
 **En attente de la cliente :**
 

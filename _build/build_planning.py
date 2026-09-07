@@ -90,21 +90,6 @@ html += f"""
     </div>
   </section>
 
-  <section class="section section--paper">
-    <div class="container container--narrow">
-      <div class="center" style="margin-bottom:clamp(26px,3vw,38px)">
-        <p class="eyebrow">Version imprimable</p>
-        <h2 class="title">Planning 2026-2027</h2>
-        <div class="rule"><span></span></div>
-      </div>
-      <figure class="planning-figure reveal">
-        <img src="../assets/img/planning-2026-2027.jpg"
-             alt="Planning des cours 2026-2027 du studio Les2L Mouguerre, du lundi au samedi"
-             width="1600" height="2000" loading="lazy" decoding="async">
-      </figure>
-    </div>
-  </section>
-
   <section class="section section--tight center">
     <div class="container">
       <p class="lead" style="max-width:640px;margin-inline:auto">

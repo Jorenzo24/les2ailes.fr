@@ -19,7 +19,7 @@
   --paper-alt:#f3f1ee;
 
   --serif:'EB Garamond',"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
-  --script:'Alex Brush',"Snell Roundhand","Brush Script MT",cursive;
+  --script:'Dancing Script',"Segoe Script","Bradley Hand",cursive;
 
   --container:1200px;
   --gutter:clamp(20px,5vw,48px);
@@ -69,10 +69,11 @@ li{margin-bottom:.35em}
 .center{text-align:center}
 
 /* --- Typographie -------------------------------------------------------- */
-.script{font-family:var(--script);font-weight:400;color:var(--plum);line-height:1.1}
+.script{font-family:var(--script);font-weight:600;color:var(--plum);line-height:1.15}
 .eyebrow{
   font-family:var(--script);
-  font-size:clamp(1.55rem,1.2rem + 1.2vw,2.1rem);
+  font-size:clamp(1.3rem,1.08rem + .8vw,1.7rem);
+  font-weight:600;
   color:var(--plum);
   margin:0 0 .1em;
 }
@@ -92,21 +93,6 @@ li{margin-bottom:.35em}
 .rule--left{justify-content:flex-start}
 .rule--light::before,.rule--light::after{background:#fff;opacity:.5}
 .rule--light span{background:#fff}
-
-/* Variante de typographie manuscrite : Dancing Script.
-   Appliquée via <body class="script-dancing"> sur les pages en test. */
-body.script-dancing{--script:'Dancing Script',"Segoe Script","Bradley Hand",cursive}
-body.script-dancing .script,
-body.script-dancing .eyebrow,
-body.script-dancing .hero__place,
-body.script-dancing .discipline__name,
-body.script-dancing .discipline__cta,
-body.script-dancing .member__role{font-weight:600}
-body.script-dancing .eyebrow{font-size:clamp(1.3rem,1.08rem + .8vw,1.7rem)}
-body.script-dancing .hero__place{font-size:clamp(1.25rem,1rem + 1.15vw,1.95rem)}
-body.script-dancing .discipline__name{font-size:clamp(1.5rem,1.25rem + .95vw,2rem);line-height:1.15}
-body.script-dancing .discipline__cta{font-size:1.1rem;line-height:1.5}
-body.script-dancing .member__role{font-size:1.2rem}
 
 /* --- Boutons ------------------------------------------------------------ */
 .btn{
@@ -240,7 +226,8 @@ body.no-scroll{overflow:hidden}
 }
 .hero__place{
   font-family:var(--script);
-  font-size:clamp(1.6rem,1.2rem + 1.8vw,2.6rem);
+  font-size:clamp(1.25rem,1rem + 1.15vw,1.95rem);
+  font-weight:600;
   color:var(--plum-light);margin:0;
 }
 .hero__socials{display:flex;justify-content:center;gap:14px;margin-top:26px}
@@ -378,8 +365,9 @@ body.no-scroll{overflow:hidden}
 .discipline:hover{transform:translateY(-5px);box-shadow:var(--shadow-md)}
 .discipline__name{
   font-family:var(--script);
-  font-size:clamp(1.8rem,1.4rem + 1.4vw,2.5rem);
-  color:var(--navy);margin:0 0 .25em;line-height:1.05;
+  font-size:clamp(1.5rem,1.25rem + .95vw,2rem);
+  font-weight:600;
+  color:var(--navy);margin:0 0 .3em;line-height:1.15;
 }
 .discipline__body{font-size:.99rem}
 .discipline__body p:last-of-type{margin-bottom:0}
@@ -388,7 +376,7 @@ body.no-scroll{overflow:hidden}
 .discipline__cta{
   margin:1.1em 0 0;padding-top:1.1em;
   border-top:1px solid var(--line);
-  font-family:var(--script);font-size:1.35rem;line-height:1.3;color:var(--plum);
+  font-family:var(--script);font-size:1.1rem;font-weight:600;line-height:1.5;color:var(--plum);
 }
 .checks{list-style:none;padding:0}
 .checks li{position:relative;padding-left:1.5em}
@@ -412,7 +400,7 @@ body.no-scroll{overflow:hidden}
 .member:hover .member__photo img{transform:scale(1.05)}
 .member__body{padding:clamp(22px,2.4vw,30px);display:flex;flex-direction:column;flex:1}
 .member__name{font-size:1.3rem;color:var(--navy);margin:0 0 .1em;letter-spacing:.06em;text-transform:uppercase}
-.member__role{font-family:var(--script);font-size:1.45rem;color:var(--plum);margin:0 0 .6em;line-height:1.1}
+.member__role{font-family:var(--script);font-size:1.2rem;font-weight:600;color:var(--plum);margin:0 0 .7em;line-height:1.2}
 .member__handle{
   display:inline-flex;align-items:center;gap:6px;
   margin-top:auto;padding-top:1em;

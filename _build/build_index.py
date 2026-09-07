@@ -87,7 +87,7 @@ html = c.head(
     "8 professeures qualifiées, à quelques minutes de Bayonne, Biarritz et Hossegor.",
     "https://www.les2ailes.fr/",
     "",
-    "script-dancing",
+    "",
     SCHEMA,
 )
 html += c.header("index")

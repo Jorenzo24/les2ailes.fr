@@ -53,7 +53,7 @@ Modifier un texte : éditer le script correspondant dans `_build/`, puis relance
 | Bleu marine | `#062c5a` |
 | Prune | `#864c80` |
 | Titres et textes | EB Garamond |
-| Accents manuscrits | Alex Brush (Dancing Script en test sur l'accueil et les disciplines) |
+| Accents manuscrits | Dancing Script |
 
 ## Avant la mise en ligne sur le domaine définitif
 
