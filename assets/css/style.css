@@ -239,7 +239,12 @@ body.no-scroll{overflow:hidden}
 }
 .pagehead__bg{position:absolute;inset:0;z-index:-2;background:center/cover no-repeat;opacity:.32}
 .pagehead::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(4,25,52,.74),rgba(6,44,90,.9))}
-.pagehead h1{font-size:clamp(2rem,1.5rem + 2.6vw,3.4rem);margin:0 0 .25em}
+.pagehead h1:not(.eyebrow),
+.pagehead__display{
+  font-size:clamp(2rem,1.5rem + 2.6vw,3.4rem);
+  font-weight:600;line-height:1.18;
+  margin:0 0 .25em;
+}
 .pagehead p{max-width:660px;margin:0 auto;color:rgba(255,255,255,.85)}
 .pagehead .eyebrow{color:var(--plum-light)}
 

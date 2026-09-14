@@ -68,9 +68,10 @@ html = c.head(
 )
 html += c.header("le-centre-de-formation/", "../")
 html += c.pagehead(
-    "Le Centre de Formation",
     "Formation Instructeur Pilates",
+    "Le Centre de Formation",
     "Une structure unique dans le Pays Basque, les Landes et le Béarn.",
+    h1="eyebrow",
 )
 html += f"""
 <main id="main">

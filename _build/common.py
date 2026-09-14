@@ -167,13 +167,24 @@ def footer(base="", scripts=""):
 """
 
 
-def pagehead(eyebrow, title, intro, bg=None):
+def pagehead(eyebrow, title, intro, bg=None, h1="title"):
+    """h1="title"   : le gros titre porte le <h1> (cas général).
+       h1="eyebrow" : le <h1> est le petit sur-titre violet, le gros titre
+                      n'est plus qu'un élément d'affichage. Utilisé sur le
+                      centre de formation, pour que « Formation Instructeur
+                      Pilates » soit le h1 sans occuper la place du titre."""
     intro_html = "<p>%s</p>" % intro if intro else ""
     bg_html = ("""<div class="pagehead__bg" style="background-image:url('%s')"></div>""" % bg) if bg else ""
+    if h1 == "eyebrow":
+        eyebrow_html = '<h1 class="eyebrow">%s</h1>' % eyebrow
+        title_html = '<p class="pagehead__display">%s</p>' % title
+    else:
+        eyebrow_html = '<p class="eyebrow">%s</p>' % eyebrow
+        title_html = "<h1>%s</h1>" % title
     return f"""<section class="pagehead">
   {bg_html}
-  <p class="eyebrow">{eyebrow}</p>
-  <h1>{title}</h1>
+  {eyebrow_html}
+  {title_html}
   {intro_html}
 </section>
 """

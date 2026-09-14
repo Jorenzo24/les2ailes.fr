@@ -203,6 +203,12 @@ fond bleu marine** pour le distinguer du reste du site. C'est le rôle de
 `<body class="theme-navy">` : toutes les surcharges sont regroupées dans
 `style.css` sous « Page inversée (centre de formation) ».
 
+Son bandeau de page est un cas particulier : `c.pagehead(..., h1="eyebrow")`.
+Le `<h1>` est le **petit sur-titre violet** « Formation Instructeur Pilates »,
+pour le mot-clé, et le gros titre « Le Centre de Formation » n'est plus qu'un
+`<p class="pagehead__display">`. Une seule balise h1 sur la page, et le visuel
+reste celui d'origine.
+
 Points d'attention si on ajoute un bloc à cette page :
 - les cartes deviennent `rgba(255,255,255,.055)` avec bordure translucide ;
 - la carte mise en avant (`.pack--highlight`) s'inverse à son tour, en blanc ;
