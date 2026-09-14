@@ -270,7 +270,7 @@ texte en image serait illisible pour Google et les lecteurs d'écran.
 | 4 | Fiches des disciplines manquantes | La cliente a fourni 12 fiches ; l'accueil en cite d'autres (Yoga Kundalini, Yoga Nidra, Bain Sonore, Pilates Reformer, coaching danseur préprofessionnel) |
 | 5 | Confirmation de la **grille tarifaire** | Le PDF vient de l'ancien site (déposé en 07/2025), comme le planning périmé qui s'y trouvait |
 | 6 | **PDF « évènements »** + **liste des events** | `common.py` : `EVENT_PDF = "event/"` est un provisoire. À remplacer par `assets/docs/events.pdf`. Cible du bouton « Les prochains évènements » de l'accueil, et du bouton « Être informé » de `/event/` (qui pointe pour l'instant sur `/contact/` pour éviter un auto-lien) |
-| 7 | **1 photo pour la page Events** | Celle des ateliers. Provisoirement `g05.jpg`, repérée par un commentaire `TODO cliente` dans `build_event_contact.py`. Celle des groupes privés a été reçue le 14/09/2026 |
+| 7 | **1 photo pour la page Events** | Celle des « Ateliers, masterclass & stages ». La cliente préfère garder en attendant le visuel de yoga aérien `g02.jpg` (la femme à l'envers), repéré par un commentaire `TODO cliente` dans `build_event_contact.py`. Celle des groupes privés a été reçue le 14/09/2026 (`cours-prive.jpg`) |
 | 8 | **Couleurs de « Les formations complètes »** | La cliente veut les revoir. Actuellement : deux cartes translucides + une carte blanche mise en avant |
 | 9 | **Téléphone** du studio | Toujours absent |
 
