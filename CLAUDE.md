@@ -203,6 +203,32 @@ fond bleu marine** pour le distinguer du reste du site. C'est le rôle de
 `<body class="theme-navy">` : toutes les surcharges sont regroupées dans
 `style.css` sous « Page inversée (centre de formation) ».
 
+### Les couleurs viennent des PDF de la cliente
+
+Le 14 septembre 2026, la cliente a autorisé à piocher dans les couleurs de ses
+PDF. Palette relevée automatiquement sur `assets/docs/tarifs.pdf` et
+`assets/docs/planning.pdf`, avec le contraste sur le bleu marine `#062c5a` :
+
+| Hex | Où, dans ses documents | Contraste |
+|---|---|---|
+| `#e5dae3` | lilas pâle du planning | 10,21:1 |
+| `#ddd7d0` | blocs Zoom / Carte / Modalités du PDF tarifs | 9,70:1 |
+| `#acb7d8` | lavande du planning | 6,94:1 |
+| `#bea4bb` | mauve clair du planning | 6,08:1 |
+| `#7f8ec0` | bloc Solaire du PDF tarifs | 4,31:1 |
+| `#967297` | bloc Galaxie du PDF tarifs | 3,40:1 |
+| `#54305a`, `#361d3b`, `#293c77`, `#03053b` | teintes foncées | < 1,5:1, **inutilisables sur le bleu marine** |
+
+« Les formations complètes » utilise le **beige `#ddd7d0`** : le meilleur
+contraste de la palette avec le blanc exclu, chaud face au bleu froid, et la
+seule teinte claire qui ne tire pas vers le rose (la cliente y est attentive).
+Le cursus complet se distingue par un filet supérieur et un titre en aubergine
+`#361d3b`.
+
+Pour refaire l'extraction après une mise à jour des PDF :
+`sips -s format png assets/docs/tarifs.pdf --out /tmp/t.png`, puis un comptage
+de couleurs avec Pillow en écartant le blanc.
+
 Son bandeau de page est un cas particulier : `c.pagehead(..., h1="eyebrow")`.
 Le `<h1>` est le **petit sur-titre violet** « Formation Instructeur Pilates »,
 pour le mot-clé, et le gros titre « Le Centre de Formation » n'est plus qu'un
@@ -277,8 +303,7 @@ texte en image serait illisible pour Google et les lecteurs d'écran.
 | 5 | Confirmation de la **grille tarifaire** | Le PDF vient de l'ancien site (déposé en 07/2025), comme le planning périmé qui s'y trouvait |
 | 6 | **PDF « évènements »** + **liste des events** | `common.py` : `EVENT_PDF = "event/"` est un provisoire. À remplacer par `assets/docs/events.pdf`. Cible du bouton « Les prochains évènements » de l'accueil, et du bouton « Être informé » de `/event/` (qui pointe pour l'instant sur `/contact/` pour éviter un auto-lien) |
 | 7 | **1 photo pour la page Events** | Celle des « Ateliers, masterclass & stages ». La cliente préfère garder en attendant le visuel de yoga aérien `g02.jpg` (la femme à l'envers), repéré par un commentaire `TODO cliente` dans `build_event_contact.py`. Celle des groupes privés a été reçue le 14/09/2026 (`cours-prive.jpg`) |
-| 8 | **Couleurs de « Les formations complètes »** | La cliente veut les revoir. Actuellement : deux cartes translucides + une carte blanche mise en avant |
-| 9 | **Téléphone** du studio | Toujours absent |
+| 8 | **Téléphone** du studio | Toujours absent |
 
 **Décisions techniques en attente :**
 

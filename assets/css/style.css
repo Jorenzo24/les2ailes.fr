@@ -11,6 +11,10 @@
   --plum:#6e4b87;
   --plum-dark:#5a3d70;
   --plum-light:#a08cc4;
+
+  /* Teintes relevées sur les PDF « Planning » et « Tarifs » de la cliente */
+  --sand:#ddd7d0;        /* blocs Zoom / Carte / Modalités du PDF tarifs */
+  --aubergine:#361d3b;   /* bloc Lunaire du PDF tarifs */
   --ink:#16233a;
   --muted:#5d6779;
   --line:#e3e2df;
@@ -644,7 +648,6 @@ body.theme-navy ul li::marker{color:var(--plum-light)}
 
 body.theme-navy .info-card,
 body.theme-navy .step,
-body.theme-navy .pack,
 body.theme-navy .cta-band{
   background:rgba(255,255,255,.055);
   border:1px solid rgba(255,255,255,.16);
@@ -655,28 +658,34 @@ body.theme-navy .step{border-left:3px solid var(--plum-light)}
 body.theme-navy .step:hover{border-left-color:#fff;background:rgba(255,255,255,.09)}
 body.theme-navy .step__num{color:var(--plum-light)}
 body.theme-navy .step__title,
-body.theme-navy .step__prices b,
-body.theme-navy .pack__title{color:#fff}
+body.theme-navy .step__prices b{color:#fff}
 body.theme-navy .step__level,
-body.theme-navy .step__prices span,
-body.theme-navy .pack__detail,
-body.theme-navy .pack__prices span{color:rgba(255,255,255,.72)}
+body.theme-navy .step__prices span{color:rgba(255,255,255,.72)}
 body.theme-navy .step__dates{color:#fff}
 body.theme-navy .step__dates svg{fill:var(--plum-light)}
 body.theme-navy .step__prices{border-color:rgba(255,255,255,.16)}
-body.theme-navy .pack__prices{border-top-color:rgba(255,255,255,.2)}
-body.theme-navy .pack__prices b{color:#fff}
 body.theme-navy .info-card img{filter:brightness(0) invert(1);opacity:.9}
-body.theme-navy .pack__icon{filter:brightness(0) invert(1);opacity:.95}
 
-/* La carte mise en avant s'inverse à son tour : blanche sur fond bleu */
-body.theme-navy .pack--highlight{background:#fff;border-color:#fff;color:var(--ink)}
-body.theme-navy .pack--highlight .pack__title,
-body.theme-navy .pack--highlight .pack__prices b{color:var(--navy)}
-body.theme-navy .pack--highlight .pack__detail,
-body.theme-navy .pack--highlight .pack__prices span{color:var(--muted)}
-body.theme-navy .pack--highlight .pack__prices{border-top-color:var(--line)}
-body.theme-navy .pack--highlight .pack__icon{filter:none;opacity:1}
+/* Les formations complètes : blocs beige, comme sur le PDF de tarifs.
+   C'est la teinte de sa palette qui ressort le mieux sur le bleu marine
+   (contraste 9,7:1) et la seule qui ne tire pas vers le rose. */
+body.theme-navy .pack{
+  background:var(--sand);
+  border:1px solid var(--sand);
+  color:var(--ink);
+  box-shadow:0 14px 34px rgba(0,0,0,.22);
+}
+body.theme-navy .pack:hover{box-shadow:0 22px 48px rgba(0,0,0,.3)}
+body.theme-navy .pack__title,
+body.theme-navy .pack__prices b{color:var(--navy)}
+body.theme-navy .pack__detail,
+body.theme-navy .pack__prices span{color:#6b6a66}
+body.theme-navy .pack__prices{border-top-color:rgba(6,44,90,.18)}
+body.theme-navy .pack__icon{filter:none;opacity:1}
+
+/* Le cursus complet reste identifiable, par un filet aubergine du PDF */
+body.theme-navy .pack--highlight{border-top:3px solid var(--aubergine)}
+body.theme-navy .pack--highlight .pack__title{color:var(--aubergine)}
 
 body.theme-navy .btn:not(.btn--ghost):not(.btn--light){
   background:var(--plum-light);border-color:var(--plum-light);color:var(--navy);
