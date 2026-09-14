@@ -5,6 +5,13 @@ import common as c
 # Ordre imposé par la cliente : Laurence (à venir) / Helen / Laureen / Caroline
 # / Alexandra / Emilie / Lénie / Sarah.
 T = [
+  # TODO cliente : Laurence dit « tu as déjà mon texte », mais le mail
+  # « Onglet EQUIPE » ne la mentionne pas. Le texte ci-dessous est extrait, sans
+  # aucun ajout, de sa propre phrase de la page /le-centre-de-formation/.
+  # À faire confirmer, ou à remplacer par une vraie bio.
+ ("LAURENCE LANTÉ", "Pilates, Yoga & Danse classique", "laurence-lante.jpg", None, None, [
+  "Laurence Lanté, ancienne danseuse professionnelle, enseignant le Pilates depuis 12ans, professeure de Yoga et ayant formé plusieurs élèves préprofessionnels en danse classique.",
+ ]),
  ("HELEN WATKINS", "Yoga", "helen-watkins.jpg", "@lnwatkins", "https://www.instagram.com/lnwatkins/", [
   "HELEN WATKINS @lnwatkins est enseignante et formatrice de Yoga.",
   "Son approche tout en douceur saura séduire les élèves en quête de reconnection à eux-même.",

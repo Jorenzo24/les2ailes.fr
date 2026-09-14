@@ -45,9 +45,9 @@ html += f"""
     <div class="container">
       <div class="split split--reverse">
         <div class="split__media reveal">
-          <!-- TODO cliente : photo dédiée aux groupes privés à recevoir -->
-          <img src="../assets/img/gallery/g18.jpg" alt="Cours à la barre au studio Les2L"
-               width="1100" height="733" loading="lazy" decoding="async">
+          <img src="../assets/img/cours-prive.jpg"
+               alt="La salle du studio Les2L, prête pour un cours en groupe privé"
+               width="1400" height="933" loading="lazy" decoding="async">
         </div>
         <div class="split__body reveal" data-delay="1">
           <p class="eyebrow">Sur réservation</p>

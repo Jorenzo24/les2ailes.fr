@@ -239,8 +239,18 @@ im = Image.open('_mails/extracted/Planning/PLANNING 2026-2027.png').convert('RGB
 page.save('assets/docs/planning.pdf', 'PDF', resolution=150.0)
 ```
 
-Le `tarifs.pdf` provient toujours de l'ancien site
-(`wp-content/uploads/2025/07/Tarifs.pdf`) : **millésime à faire confirmer**.
+**Mise à jour du 14 septembre 2026** : la cliente a fourni les deux PDF
+officiels **2026-2027**, qui remplacent les fichiers de `assets/docs/`
+(le PDF de planning généré depuis le PNG n'a donc plus lieu d'être).
+
+⚠️ La **grille tarifaire a entièrement changé** pour 2026-2027. L'ancienne
+(Liberté / Challenge / Zoom, cours à l'unité 25 €, inscription 50 €) est
+caduque. La nouvelle est construite en formules **Solaire, Lunaire, Étoile,
+Galaxie**, plus des **Constellations** (combinaisons), Zoom, Kids Yoga Aérien,
+Cours Privés, Carte et Modalités. Comme l'onglet Tarifs ouvre directement le
+PDF, aucune page n'a eu à être retouchée — mais **si une page de tarifs HTML
+est un jour réactivée depuis `_build/_inactif/`, tout son contenu est à
+refaire**.
 
 **Page planning** : supprimée le 7 septembre 2026, l'onglet ouvre le PDF.
 Le tableau HTML responsive reste disponible dans `_build/_inactif/`.
@@ -254,15 +264,15 @@ texte en image serait illisible pour Google et les lecteurs d'écran.
 
 | # | Manque | Impact |
 |---|---|---|
-| 1 | Photo + bio de **Laurence Lanté** | Le site annonce « 8 Professeures », il n'y en a que 7 sur la page Équipe |
+| 1 | **Bio de Laurence Lanté** | Photo reçue le 14/09/2026 et passée en N&B. Mais la cliente écrit « tu as déjà mon texte » alors que le mail « Onglet EQUIPE » ne la mentionne pas (vérifié : 0 occurrence). Sa fiche reprend donc, **sans aucun ajout**, la phrase la concernant sur `/le-centre-de-formation/`. Résultat : sa bio fait une ligne quand les autres en font quatre. À faire confirmer ou remplacer |
 | 2 | Contenu réel de la page **Event** | Page construite avec les textes events de l'accueil, faute de mieux |
-| 3 | **Numéro de téléphone** du studio | Introuvable sur l'ancien site et dans les mails ; seul l'e-mail est affiché |
+| 3 | *(réglé)* Photo de Laurence, photo des cours privés, PDF planning et tarifs | Reçus le 14 septembre 2026 |
 | 4 | Fiches des disciplines manquantes | La cliente a fourni 12 fiches ; l'accueil en cite d'autres (Yoga Kundalini, Yoga Nidra, Bain Sonore, Pilates Reformer, coaching danseur préprofessionnel) |
 | 5 | Confirmation de la **grille tarifaire** | Le PDF vient de l'ancien site (déposé en 07/2025), comme le planning périmé qui s'y trouvait |
-| 6 | **PDF « évènements »** | `common.py` : `EVENT_PDF = "event/"` est un provisoire. À remplacer par `assets/docs/events.pdf`. Cible du bouton « Les prochains évènements » de l'accueil, et du bouton « Être informé » de `/event/` (qui pointe pour l'instant sur `/contact/` pour éviter un auto-lien) |
-| 7 | **Nouveaux PDF planning et tarifs** | Remplacer les fichiers dans `assets/docs/`, les liens du menu ne bougent pas |
-| 8 | **2 photos pour la page Events** | Une pour les ateliers, une pour les groupes privés. Provisoirement `g05.jpg` et `g18.jpg`, repérées par un commentaire `TODO cliente` dans `build_event_contact.py` |
-| 9 | **Couleurs de « Les formations complètes »** | La cliente veut les revoir. Actuellement : deux cartes translucides + une carte blanche mise en avant |
+| 6 | **PDF « évènements »** + **liste des events** | `common.py` : `EVENT_PDF = "event/"` est un provisoire. À remplacer par `assets/docs/events.pdf`. Cible du bouton « Les prochains évènements » de l'accueil, et du bouton « Être informé » de `/event/` (qui pointe pour l'instant sur `/contact/` pour éviter un auto-lien) |
+| 7 | **1 photo pour la page Events** | Celle des ateliers. Provisoirement `g05.jpg`, repérée par un commentaire `TODO cliente` dans `build_event_contact.py`. Celle des groupes privés a été reçue le 14/09/2026 |
+| 8 | **Couleurs de « Les formations complètes »** | La cliente veut les revoir. Actuellement : deux cartes translucides + une carte blanche mise en avant |
+| 9 | **Téléphone** du studio | Toujours absent |
 
 **Décisions techniques en attente :**
 
