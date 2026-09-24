@@ -220,6 +220,13 @@ sur la photo. La première personne y devient cohérente, on lit une parole de
 fondatrice. Les 7 professeures suivent dans la grille `.team`, sous un intitulé
 `.section-label`, sur fond `--paper-warm`.
 
+Les deux colonnes du bloc fondatrice font **exactement la même hauteur** :
+`align-items:stretch` sur la grille, puis `height:100%` + `object-fit:cover`
+sur la photo, qui se recadre donc à la volée sur la hauteur du texte. Le ratio
+de colonnes `.88fr / 1.12fr` est calé pour qu'à largeur confortable le
+recadrage soit quasi nul. En dessous de **1000 px** on empile et la photo
+retrouve son ratio naturel : plus bas, l'étirement la réduirait à une bande.
+
 Deux structures différentes qui se suivent, c'est voulu : le bloc fondatrice
 est horizontal et pleine largeur, les fiches sont des cartes verticales en
 3 colonnes (`max-width:1180px`). Ne pas passer la grille en 4 colonnes, les
