@@ -4,14 +4,21 @@ import common as c
 # Textes repris mot pour mot du mail « Onglet EQUIPE ».
 # Ordre imposé par la cliente : Laurence (à venir) / Helen / Laureen / Caroline
 # / Alexandra / Emilie / Lénie / Sarah.
+# Texte de Laurence Lanté, repris mot pour mot de sa publication Instagram.
+# Il est à la première personne, contrairement aux fiches de ses professeures :
+# c'est pour cela qu'il est présenté comme un bloc « fondatrice » à part.
+LAURENCE = [
+ "Après une carrière de ballerine en France et en Allemagne, je me consacre pleinement à la pédagogie, titulaire du Diplôme d'Etat puis du graal, le Certificat d'Aptitude en Danse Classique.",
+ "Professeure titulaire d'Enseignement Artistique dans la fonction publique territoriale en Conservatoires à Rayonnement Régional, j'y enseigne la Danse Classique ainsi que l'anatomie et le Pilates.",
+ "Responsable du Département des Arts de la Scène en Lorraine, je suis membre de jurys, j'enseigne également en Université et en stages internationaux.",
+ "Je suis également Professeure des classes préprofessionnelles à l'Ecole de Ballet- les studios de danse de Biarritz, faisant participer certains élèves à des concours internationaux (TanzOlymp, YAGP), jusqu'à ce que mon entreprise @les2l déploie ses ailes.",
+ "J'ai préparé pendant ma carrière de pédagogue 27 élèves qui ont intégré une École de Danse Supérieure en France et à l'étranger. Ma dernière élève est un de mes trois enfants.",
+ "Je suis certifiée en la méthode The Original Pilates (mat et toutes les machines), par Yoga Alliance (YTT 250), en la technique PBT (Progressing Ballet Technique), formée en Yin Yoga, en Yoga Nidra, titulaire du Certificat en Yoga Aérien (FlyYoga), complétée par la technique Aerial Vinyasa Yoga, je suis aussi énergeticienne Reiki.",
+ "Fondatrice de Les2L Centre de Formation, je développe Les2L en formant de futurs professeurs de Pilates dès la rentrée 2026.",
+]
+
+
 T = [
-  # TODO cliente : Laurence dit « tu as déjà mon texte », mais le mail
-  # « Onglet EQUIPE » ne la mentionne pas. Le texte ci-dessous est extrait, sans
-  # aucun ajout, de sa propre phrase de la page /le-centre-de-formation/.
-  # À faire confirmer, ou à remplacer par une vraie bio.
- ("LAURENCE LANTÉ", "Pilates, Yoga & Danse classique", "laurence-lante.jpg", None, None, [
-  "Laurence Lanté, ancienne danseuse professionnelle, enseignant le Pilates depuis 12ans, professeure de Yoga et ayant formé plusieurs élèves préprofessionnels en danse classique.",
- ]),
  ("HELEN WATKINS", "Yoga", "helen-watkins.jpg", "@lnwatkins", "https://www.instagram.com/lnwatkins/", [
   "HELEN WATKINS @lnwatkins est enseignante et formatrice de Yoga.",
   "Son approche tout en douceur saura séduire les élèves en quête de reconnection à eux-même.",
@@ -48,6 +55,25 @@ T = [
   "SARAH ACHTE @sarohnoixdecoco est diplômée d'un BTS Diététique d'abord puis d'un BPJEPS AF. Elle a complété sa formation initiale avec plusieurs modules de ka méthode Pilates avec et sans matériel. Elle aime approfondir et décliner les mouvements fondamentaux de la méthode Pilates en les rendant accessibles à tous les niveaux de pratique. Sarah est aussi certifiée en Hypnose Ericksonienne et en massage Suédois/Deep Tissue.",
  ]),
 ]
+
+
+paras_l = "\n            ".join("<p>%s</p>" % p for p in LAURENCE)
+founder = f"""      <article class="founder reveal">
+        <figure class="founder__media">
+          <img src="../assets/img/equipe/laurence-lante.jpg"
+               alt="Laurence Lanté, fondatrice du studio Les2L"
+               width="900" height="1200" fetchpriority="high" decoding="async">
+        </figure>
+        <div class="founder__body">
+          <p class="founder__label">Fondatrice</p>
+          <h2 class="founder__name">Laurence Lanté</h2>
+          <p class="founder__role">Danse classique, Pilates &amp; Yoga</p>
+          <div class="founder__bio">
+            {paras_l}
+          </div>
+        </div>
+      </article>
+"""
 
 cards = ""
 for i, (name, role, photo, handle, handle_url, bio) in enumerate(T):
@@ -89,14 +115,21 @@ html += c.pagehead(
 )
 html += f"""
 <main id="main">
+
   <section class="section">
     <div class="container container--wide">
+{founder}    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="container container--wide">
+      <p class="section-label">Les professeures</p>
       <div class="team">
 {cards}      </div>
     </div>
   </section>
 
-  <section class="section section--paper section--tight">
+  <section class="section section--tight">
     <div class="container center">
       <p class="eyebrow">Envie d’essayer&nbsp;?</p>
       <h2 class="title">Venez seul ou accompagné&nbsp;!</h2>

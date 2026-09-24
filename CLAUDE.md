@@ -203,6 +203,30 @@ fond bleu marine** pour le distinguer du reste du site. C'est le rôle de
 `<body class="theme-navy">` : toutes les surcharges sont regroupées dans
 `style.css` sous « Page inversée (centre de formation) ».
 
+### Le bloc « fondatrice » de la page équipe
+
+La bio de Laurence Lanté, reçue le 24 septembre 2026, vient de sa publication
+Instagram. Elle pose deux problèmes que la mise en page résout :
+
+- elle est **à la première personne** (« Après une carrière de ballerine… je me
+  consacre… »), alors que les 7 fiches du mail « Onglet EQUIPE » sont à la
+  troisième (« HELEN WATKINS est enseignante… ») ;
+- elle fait **7 paragraphes** contre 3 ou 4 pour les autres.
+
+Plutôt que de la réécrire (règle du mot pour mot) ou de la comprimer dans une
+carte, elle a son propre bloc `.founder` en tête de `/les-professionnels/` :
+grille asymétrique photo / texte, label « Fondatrice », filet 1px, cadre décalé
+sur la photo. La première personne y devient cohérente, on lit une parole de
+fondatrice. Les 7 professeures suivent dans la grille `.team`, sous un intitulé
+`.section-label`, sur fond `--paper-warm`.
+
+Deux structures différentes qui se suivent, c'est voulu : le bloc fondatrice
+est horizontal et pleine largeur, les fiches sont des cartes verticales en
+3 colonnes (`max-width:1180px`). Ne pas passer la grille en 4 colonnes, les
+fiches deviennent des colonnes de texte trop étroites.
+
+---
+
 ### Les couleurs viennent des PDF de la cliente
 
 Le 14 septembre 2026, la cliente a autorisé à piocher dans les couleurs de ses
@@ -296,7 +320,7 @@ texte en image serait illisible pour Google et les lecteurs d'écran.
 
 | # | Manque | Impact |
 |---|---|---|
-| 1 | **Bio de Laurence Lanté** | Photo reçue le 14/09/2026 et passée en N&B. Mais la cliente écrit « tu as déjà mon texte » alors que le mail « Onglet EQUIPE » ne la mentionne pas (vérifié : 0 occurrence). Sa fiche reprend donc, **sans aucun ajout**, la phrase la concernant sur `/le-centre-de-formation/`. Résultat : sa bio fait une ligne quand les autres en font quatre. À faire confirmer ou remplacer |
+| 1 | *(réglé)* Bio de Laurence Lanté | Reçue le 24/09/2026, depuis sa publication Instagram. Voir §7 quater |
 | 2 | Contenu réel de la page **Event** | Page construite avec les textes events de l'accueil, faute de mieux |
 | 3 | *(réglé)* Photo de Laurence, photo des cours privés, PDF planning et tarifs | Reçus le 14 septembre 2026 |
 | 4 | Fiches des disciplines manquantes | La cliente a fourni 12 fiches ; l'accueil en cite d'autres (Yoga Kundalini, Yoga Nidra, Bain Sonore, Pilates Reformer, coaching danseur préprofessionnel) |
