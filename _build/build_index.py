@@ -8,15 +8,35 @@ REVIEWS = [
     ("Valérie Hellin", "Un studio exceptionnel avec une propriétaire ex danseuse professionnelle accompagnée de différents intervenants qui vous font travailler tt en longueur et en douceur dans un cadre idyllique"),
     ("Sandrine AGUERRE", "Un lieu magique où on prend soin de soi grâce à Laurence, une professeure à l'écoute de ses élèves, très bienveillante et qui nous permet de progresser, d'apprendre à mieux se connaitre grâce à ses cours très complets !! Une très belle découverte à tous points de vue me concernant !!"),
     ("Mathias rosandic", "Un lieu exceptionnel avec des cours géniaux. Bon pour le corps mais aussi avec de l'humour. La maîtresse des lieux donne envie que l'on revienne. Merci à Laurence pour ce qu'elle nous partage et enseigne."),
+    ("Gaelle Llanos Vieillard", "Des cours exceptionnels avec une prof exceptionnelle (Laurence).Je recommande fortement aux adeptes de yoga et pilâtes."),
+    ("Elise CUISSET", "Lieu magique, au cœur de la nature. Laurence est très professionnelle et bienveillante. Les cours sont variés et efficaces."),
+    ("Karine Locatelli", "Les cours de yoga et de pilates de Laurence sont tout simplement magiques. Une professeure de qualité qui œuvre pour le bien être de ses élèves. Résultats assurés !!!"),
 ]
 
-GALLERY_ALT = [
-    "Cours de Pilates au studio Les2L", "Yoga aérien en hamac", "Le studio Les2L à Mouguerre",
-    "Séance de Pilates au Pays Basque", "Pilates sur machines", "Danse et yoga au Pays Basque",
-    "Yoga au Pays Basque", "Yoga au studio de Mouguerre", "Danse classique à Mouguerre",
-    "Pilates au sol", "Cours de Pilates et de yoga", "Pilates et yoga à Bayonne",
-    "Cours débutant de yoga et Pilates", "Danse classique au studio Les2L", "Danse au Pays Basque",
-    "Pilates, yoga et danse classique", "Yoga et Pilates au Pays Basque", "Pilates entre Bayonne et Biarritz",
+IC_GOOGLE = ('<svg viewBox="0 0 24 24" aria-hidden="true">'
+ '<path fill="#4285F4" d="M23.5 12.27c0-.79-.07-1.54-.2-2.27H12v4.51h6.47a5.53 5.53 0 0 1-2.4 3.63v3h3.87c2.27-2.09 3.56-5.17 3.56-8.87Z"/>'
+ '<path fill="#34A853" d="M12 24c3.24 0 5.96-1.08 7.94-2.91l-3.87-3c-1.08.72-2.45 1.16-4.07 1.16-3.13 0-5.78-2.11-6.73-4.96H1.29v3.09A12 12 0 0 0 12 24Z"/>'
+ '<path fill="#FBBC05" d="M5.27 14.29a7.2 7.2 0 0 1 0-4.58V6.62H1.29a12 12 0 0 0 0 10.76l3.98-3.09Z"/>'
+ '<path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.43-3.43C17.95 1.18 15.24 0 12 0A12 12 0 0 0 1.29 6.62l3.98 3.09C6.22 6.86 8.87 4.75 12 4.75Z"/></svg>')
+
+# Retirées le 26/09/2026 à la demande de la cliente : le doublon de piscine,
+# le poêle à granules et le sauna au panneau « l'endroit idéal ».
+GALLERY = [
+    ("g01.jpg", "Cours de Pilates au studio Les2L"),
+    ("g02.jpg", "Yoga aérien en hamac"),
+    ("g03.jpg", "Le studio Les2L à Mouguerre"),
+    ("g04.jpg", "La salle et ses barres de danse"),
+    ("g05.jpg", "La salle ouverte sur la forêt"),
+    ("g06.jpg", "L'espace d'accueil du studio"),
+    ("g08.jpg", "La carte cadeau Les2L"),
+    ("g09.jpg", "Les agrès de yoga aérien"),
+    ("g11.jpg", "Le sauna du studio"),
+    ("g12.jpg", "La piscine au coucher du soleil"),
+    ("g13.jpg", "Yoga aérien au studio Les2L"),
+    ("g14.jpg", "La piscine et la terrasse"),
+    ("g16.jpg", "Vue sur la nature depuis la salle"),
+    ("g17.jpg", "Le jacuzzi face à la vallée"),
+    ("g18.jpg", "Cours à la barre au studio Les2L"),
 ]
 
 DISCOVER = [
@@ -28,22 +48,23 @@ DISCOVER = [
 
 def review_card(name, text):
     initial = name.strip()[0].upper()
-    return f"""      <figure class="review">
-        <div class="review__head">
-          <div class="review__avatar" aria-hidden="true">{initial}</div>
-          <div>
-            <div class="review__name">{name}</div>
-            <div class="review__stars" aria-label="5 étoiles sur 5">★★★★★</div>
+    return f"""        <figure class="review">
+          <div class="review__head">
+            <div class="review__avatar" aria-hidden="true">{initial}</div>
+            <div>
+              <div class="review__name">{name}</div>
+              <div class="review__stars" aria-label="5 étoiles sur 5">★★★★★</div>
+            </div>
           </div>
-        </div>
-        <blockquote class="review__text">{text}</blockquote>
-      </figure>
+          <blockquote class="review__text">{text}</blockquote>
+          <p class="review__source">{IC_GOOGLE}Avis publié sur Google</p>
+        </figure>
 """
 
 gallery = "".join(
-    f'      <a class="gallery__item" href="assets/img/gallery/g{i:02d}.jpg" aria-label="Agrandir : {alt}">'
-    f'<img src="assets/img/gallery/g{i:02d}.jpg" alt="{alt}" loading="lazy" decoding="async"></a>\n'
-    for i, alt in enumerate(GALLERY_ALT, 1)
+    f'      <a class="gallery__item" href="assets/img/gallery/{f}" aria-label="Agrandir : {alt}">'
+    f'<img src="assets/img/gallery/{f}" alt="{alt}" loading="lazy" decoding="async"></a>\n'
+    for f, alt in GALLERY
 )
 
 discover = "".join(
@@ -72,6 +93,7 @@ SCHEMA = """<script type="application/ld+json">
     "addressLocality": "Mouguerre",
     "addressCountry": "FR"
   },
+  "telephone": "+33609148456",
   "email": "les2ailespy@gmail.com",
   "sameAs": [
     "https://www.facebook.com/profile.php?id=100070696928721",
@@ -109,15 +131,15 @@ html += f"""
   </section>
 
   <!-- Le lieu -->
-  <figure class="photoband">
-    <img src="assets/img/hero.jpg" alt="La salle du studio Les2L, ouverte sur la forêt"
-         width="1920" height="1080" fetchpriority="high" decoding="async">
-  </figure>
-  <section class="section">
-    <div class="container container--narrow center">
-      <h2 class="title">Le lieu</h2>
-      <div class="rule"><span></span></div>
-      <div class="reveal" style="text-align:left">
+  <section class="feature">
+    <figure class="feature__bg">
+      <img src="assets/img/hero.jpg" alt="La salle du studio Les2L, ouverte sur la forêt"
+           width="1920" height="1080" fetchpriority="high" decoding="async">
+    </figure>
+    <div class="container">
+      <div class="feature__card reveal">
+        <h2>Le lieu</h2>
+        <div class="rule rule--left rule--light"><span></span></div>
         <p>Bienvenue dans Les2L où l'expérience et les qualités professionnelles vous feront découvrir
         17 disciplines pour prendre soin de votre corps, de votre santé et de votre vie.</p>
         <p>Les2L est un établissement convivial avec une superbe salle élégante et confortable au cœur
@@ -202,7 +224,19 @@ html += f"""
         <div class="rule rule--light"><span></span></div>
       </div>
       <div class="reviews">
-{reviews}      </div>
+        <div class="reviews__track" id="reviews-track" tabindex="0"
+             role="group" aria-label="Avis de nos élèves, faites défiler pour en voir plus">
+{reviews}        </div>
+        <div class="reviews__nav">
+          <button class="reviews__btn" type="button" data-rev="prev" aria-label="Avis précédents">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4 7 12l8 8 1.4-1.4L9.8 12l6.6-6.6z"/></svg>
+          </button>
+          <div class="reviews__dots" id="reviews-dots"></div>
+          <button class="reviews__btn" type="button" data-rev="next" aria-label="Avis suivants">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 4 8 8-8 8-1.4-1.4 6.6-6.6-6.6-6.6z"/></svg>
+          </button>
+        </div>
+      </div>
     </div>
   </section>
 

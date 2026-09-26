@@ -160,7 +160,12 @@ html += f"""
         <img src="../assets/img/formation/logo-formation-blanc.png" alt="LES2L Centre de formation"
              width="500" height="500" loading="lazy">
         <p>Pour faciliter l’accès à ces formations, en cursus complet ou partiel, LES2L centre de
-        formation est habilité au financement et à la prise en charge par l’État.</p>
+        formation est habilité au financement et à la prise en charge par les OPCO.</p>
+        <span class="logo-card cta-band__qualiopi">
+          <img src="../assets/img/formation/qualiopi.jpg"
+               alt="Qualiopi, processus certifié, République Française"
+               width="900" height="480" loading="lazy">
+        </span>
       </div>
     </div>
   </section>
@@ -203,11 +208,12 @@ html += f"""
 
         <article class="info-card reveal" data-delay="2">
           <img src="../assets/img/formation/ico-evaluation.png" alt="" width="112" height="112" loading="lazy">
-          <h3>Les évalutations</h3>
+          <h3>Les évaluations</h3>
           <p>Un contrôle continu est mis en place pendant toute la formation.</p>
           <p>A la fin de chaque module, les stagiaires donneront une séance de 30mn de cours afin
           d’être évalués dans les meilleures conditions.</p>
           <p>Une évaluation écrite précède cette mise en situation.</p>
+          <p>Une attestation de formation sera transmise au stagiaire.</p>
         </article>
       </div>
     </div>
@@ -234,12 +240,12 @@ html += f"""
 
   <section class="section section--tight center">
     <div class="container">
-      <span class="logo-card">
-        <img src="../assets/img/formation/qualiopi.jpg"
-             alt="Qualiopi, processus certifié, République Française"
-             width="900" height="480" loading="lazy" style="width:min(280px,70vw)">
-      </span>
-      <p style="margin-top:28px">
+      <p class="eyebrow">Suivez le centre</p>
+      <div class="footer__socials" style="justify-content:center;margin:0 auto 30px">
+        <a href="{c.FACEBOOK_FORMATION}" target="_blank" rel="noopener" aria-label="Facebook du centre de formation">{c.IC_FB}</a>
+        <a href="{c.INSTAGRAM_FORMATION}" target="_blank" rel="noopener" aria-label="Instagram du centre de formation">{c.IC_IG}</a>
+      </div>
+      <p style="margin:0">
         <a class="btn" href="../contact/">Demander des informations</a>
       </p>
     </div>

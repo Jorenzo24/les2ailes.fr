@@ -90,8 +90,8 @@ MAP = ("https://www.google.com/maps?q=228+Chemin+de+Pagadoy,+64990+Mouguerre&out
 
 html = c.head(
     "Contact | Studio Les2L à Mouguerre, Pilates, Yoga, Ballet",
-    "Contactez le studio Les2L, 228 Chemin de Pagadoy à Mouguerre (64990), à quelques minutes de "
-    "Bayonne, Biarritz et Hossegor. Parking gratuit sur place.",
+    "Contactez le studio Les2L au +33 6 09 14 84 56, 228 Chemin de Pagadoy à Mouguerre (64990), "
+    "à quelques minutes de Bayonne, Biarritz et Hossegor. Parking gratuit sur place.",
     "https://www.les2ailes.fr/contact/",
     "../",
 )
@@ -139,6 +139,7 @@ html += f"""
           <div class="rule rule--left"><span></span></div>
           <ul class="contact-list">
             <li>{c.IC_PIN}<div><b>Adresse</b>228 Chemin de Pagadoy<br>Mouguerre 64990</div></li>
+            <li>{c.IC_TEL}<div><b>Téléphone</b><a href="tel:{c.PHONE_HREF}">{c.PHONE}</a></div></li>
             <li>{c.IC_MAIL}<div><b>E-mail</b><a href="mailto:{c.EMAIL}">{c.EMAIL}</a></div></li>
             <li>{c.IC_CAL}<div><b>Horaires</b>Voir <a href="../{c.PLANNING_PDF}" target="_blank" rel="noopener">le planning des cours</a></div></li>
           </ul>

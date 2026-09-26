@@ -11,6 +11,13 @@ ADDRESS = "228 Chemin de Pagadoy, 64990 Mouguerre"
 FACEBOOK = "https://www.facebook.com/profile.php?id=100070696928721"
 INSTAGRAM = "https://www.instagram.com/_les2l_/"
 EMAIL = "les2ailespy@gmail.com"
+PHONE = "+33 6 09 14 84 56"
+PHONE_HREF = "+33609148456"
+
+# Réseaux du centre de formation. TODO cliente : confirmer le compte Instagram,
+# repéré sur sa publication (« _les2l_ et les2l.centre.de.formation »).
+FACEBOOK_FORMATION = "https://www.facebook.com/profile.php?id=100070696928721"
+INSTAGRAM_FORMATION = "https://www.instagram.com/les2l.centre.de.formation/"
 
 # TODO cliente : PDF « évènements » à recevoir, puis remplacer par
 #   EVENT_PDF = "assets/docs/events.pdf"
@@ -39,6 +46,7 @@ IC_IG = ('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.16c3.2 0 3.
 IC_PIN = ('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>')
 IC_MAIL = ('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4.24-8 4.76-8-4.76V6l8 4.76L20 6v2.24Z"/></svg>')
 IC_CAL = ('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2V2h-2v2H9V2H7Zm12 8v10H5V10h14Z"/></svg>')
+IC_TEL = ('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1l-2.3 2.2Z"/></svg>')
 IC_PDF = ('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16 7 11h3V4h4v7h3l-5 5Zm-7 2h14v2H5v-2Z"/></svg>')
 IC_UP = ('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 6 8 8-1.4 1.4L12 8.8l-6.6 6.6L4 14l8-8Z"/></svg>')
 

@@ -115,6 +115,70 @@
     if (e.key === 'Escape' && drawer && drawer.classList.contains('is-open')) closeDrawer();
   });
 
+  /* ---- Carrousel d'avis -------------------------------------------------- */
+  var track = document.getElementById('reviews-track');
+  if (track) {
+    var dotsBox = document.getElementById('reviews-dots');
+    var slides = Array.prototype.slice.call(track.children);
+    var timer = null;
+
+    function perView() {
+      if (!slides.length) return 1;
+      return Math.max(1, Math.round(track.clientWidth / slides[0].offsetWidth));
+    }
+    function pages() {
+      return Math.max(1, Math.ceil(slides.length / perView()));
+    }
+    function current() {
+      var page = track.clientWidth;
+      return Math.min(pages() - 1, Math.round(track.scrollLeft / page));
+    }
+    function goTo(i) {
+      var n = pages();
+      track.scrollLeft = ((i % n) + n) % n * track.clientWidth;
+    }
+    function buildDots() {
+      dotsBox.innerHTML = '';
+      for (var i = 0; i < pages(); i++) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.setAttribute('aria-label', 'Page d\u2019avis ' + (i + 1));
+        (function (k) { b.addEventListener('click', function () { stop(); goTo(k); }); })(i);
+        dotsBox.appendChild(b);
+      }
+      syncDots();
+    }
+    function syncDots() {
+      var c = current();
+      Array.prototype.forEach.call(dotsBox.children, function (b, i) {
+        b.setAttribute('aria-current', i === c ? 'true' : 'false');
+      });
+    }
+
+    document.querySelectorAll('[data-rev]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        stop();
+        goTo(current() + (btn.dataset.rev === 'next' ? 1 : -1));
+      });
+    });
+
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function start() { if (!reduce && !timer) timer = setInterval(function () { goTo(current() + 1); }, 6000); }
+    function stop() { clearInterval(timer); timer = null; }
+
+    track.addEventListener('scroll', function () {
+      window.requestAnimationFrame(syncDots);
+    }, { passive: true });
+    ['mouseenter', 'focusin', 'touchstart'].forEach(function (e) {
+      track.addEventListener(e, stop, { passive: true });
+    });
+    track.addEventListener('mouseleave', start);
+    window.addEventListener('resize', buildDots);
+
+    buildDots();
+    start();
+  }
+
   /* ---- Bandeau cookies -------------------------------------------------- */
   var cookie = document.getElementById('cookie');
   if (cookie) {

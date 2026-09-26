@@ -203,6 +203,24 @@ fond bleu marine** pour le distinguer du reste du site. C'est le rôle de
 `<body class="theme-navy">` : toutes les surcharges sont regroupées dans
 `style.css` sous « Page inversée (centre de formation) ».
 
+### L'ornement vient de ses PDF
+
+`assets/img/ornement.png` est l'arabesque de ses documents, extraite du PDF de
+planning puis détourée :
+
+```bash
+sips -s format png --resampleHeightWidthMax 3000 assets/docs/planning.pdf --out /tmp/plan.png
+# puis crop + blanc rendu transparent avec Pillow
+```
+
+Elle coiffe chaque encadré de `/les-disciplines/`, refaits le 26 septembre 2026
+d'après le feed Instagram de la cliente : double filet (bordure extérieure plus
+`::before` en retrait de 8px), angles droits, pas d'ombre, ornement centré,
+titre manuscrit et filet de séparation. Le corps du texte reste aligné à gauche,
+ses visuels ne portent que deux lignes quand nos fiches en portent quinze.
+
+---
+
 ### Le bloc « fondatrice » de la page équipe
 
 La bio de Laurence Lanté, reçue le 24 septembre 2026, vient de sa publication
@@ -249,6 +267,12 @@ PDF. Palette relevée automatiquement sur `assets/docs/tarifs.pdf` et
 | `#7f8ec0` | bloc Solaire du PDF tarifs | 4,31:1 |
 | `#967297` | bloc Galaxie du PDF tarifs | 3,40:1 |
 | `#54305a`, `#361d3b`, `#293c77`, `#03053b` | teintes foncées | < 1,5:1, **inutilisables sur le bleu marine** |
+
+Trois teintes sont désormais en service sur `/le-centre-de-formation/` :
+`--sand:#ddd7d0` pour les formations complètes et les cartes Le lieu /
+Pré-requis / Évaluations, `--prune:#54305a` pour les modules, `--aubergine:#361d3b`
+pour le filet du cursus complet. Le prune a un contraste faible sur le bleu
+marine (1,28:1) mais s'en détache par la teinte, comme les blocs de ses PDF.
 
 « Les formations complètes » utilise le **beige `#ddd7d0`** : le meilleur
 contraste de la palette avec le blanc exclu, chaud face au bleu froid, et la
@@ -330,11 +354,14 @@ texte en image serait illisible pour Google et les lecteurs d'écran.
 | 1 | *(réglé)* Bio de Laurence Lanté | Reçue le 24/09/2026, depuis sa publication Instagram. Voir §7 quater |
 | 2 | Contenu réel de la page **Event** | Page construite avec les textes events de l'accueil, faute de mieux |
 | 3 | *(réglé)* Photo de Laurence, photo des cours privés, PDF planning et tarifs | Reçus le 14 septembre 2026 |
+| 3 bis | *(réglé)* Téléphone | +33 6 09 14 84 56, reçu le 26 septembre 2026 |
 | 4 | Fiches des disciplines manquantes | La cliente a fourni 12 fiches ; l'accueil en cite d'autres (Yoga Kundalini, Yoga Nidra, Bain Sonore, Pilates Reformer, coaching danseur préprofessionnel) |
 | 5 | Confirmation de la **grille tarifaire** | Le PDF vient de l'ancien site (déposé en 07/2025), comme le planning périmé qui s'y trouvait |
 | 6 | **PDF « évènements »** + **liste des events** | `common.py` : `EVENT_PDF = "event/"` est un provisoire. À remplacer par `assets/docs/events.pdf`. Cible du bouton « Les prochains évènements » de l'accueil, et du bouton « Être informé » de `/event/` (qui pointe pour l'instant sur `/contact/` pour éviter un auto-lien) |
 | 7 | **1 photo pour la page Events** | Celle des « Ateliers, masterclass & stages ». La cliente préfère garder en attendant le visuel de yoga aérien `g02.jpg` (la femme à l'envers), repéré par un commentaire `TODO cliente` dans `build_event_contact.py`. Celle des groupes privés a été reçue le 14/09/2026 (`cours-prive.jpg`) |
-| 8 | **Téléphone** du studio | Toujours absent |
+| 8 | **Dates des modules de formation** | La cliente annonce de nouvelles dates le 26/09/2026. Celles en ligne (`MODULES` dans `build_formation.py`) sont encore les anciennes |
+| 9 | **Compte Instagram du centre de formation** | J'ai utilisé `instagram.com/les2l.centre.de.formation/`, repéré sur sa publication et qui répond en 200. À confirmer, la cliente disait envoyer les liens |
+| 10 | **« finançables par l'état »** dans la carte « Le lieu » | Elle a demandé « l'État » → « les OPCO » pour le bandeau de financement. La carte « Le lieu » garde « finançables par l'état (FIFPL, AFDAS, France travail, Conseil régional) », qui liste des financeurs précis. À trancher |
 
 **Décisions techniques en attente :**
 

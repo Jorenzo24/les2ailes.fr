@@ -112,7 +112,10 @@ for i, (name, body, cta) in enumerate(D):
     inner = "\n          ".join(block(b) for b in body)
     cta_html = '\n          <p class="discipline__cta">%s</p>' % cta if cta else ""
     cards += f"""      <article class="discipline reveal" data-delay="{i % 3}">
+        <img class="discipline__orn" src="../assets/img/ornement.png" alt=""
+             width="560" height="128" loading="lazy" decoding="async">
         <h2 class="discipline__name">{name}</h2>
+        <span class="discipline__sep" aria-hidden="true"></span>
         <div class="discipline__body">
           {inner}{cta_html}
         </div>
