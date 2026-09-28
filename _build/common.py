@@ -14,9 +14,9 @@ EMAIL = "les2ailespy@gmail.com"
 PHONE = "+33 6 09 14 84 56"
 PHONE_HREF = "+33609148456"
 
-# Réseaux du centre de formation. TODO cliente : confirmer le compte Instagram,
-# repéré sur sa publication (« _les2l_ et les2l.centre.de.formation »).
-FACEBOOK_FORMATION = "https://www.facebook.com/profile.php?id=100070696928721"
+# Réseaux propres au centre de formation, distincts de ceux du studio.
+# Transmis par la cliente le 28/09/2026.
+FACEBOOK_FORMATION = "https://www.facebook.com/profile.php?id=61572158867367"
 INSTAGRAM_FORMATION = "https://www.instagram.com/les2l.centre.de.formation/"
 
 # TODO cliente : PDF « évènements » à recevoir, puis remplacer par
