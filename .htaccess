@@ -94,6 +94,10 @@ RewriteRule ^(_build|_mails)(/.*)?$ - [F,L]
     Require all denied
 </FilesMatch>
 
+# Ceinture et bretelles : aucun fichier ou dossier caché n'est servi.
+# Protège notamment .git/ si le dépôt se retrouvait un jour dans public_html.
+RewriteRule (^|/)\. - [F,L]
+
 # ----- Page d'erreur personnalisée -----
 ErrorDocument 404 /404.html
 
