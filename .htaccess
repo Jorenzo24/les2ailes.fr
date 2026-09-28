@@ -16,7 +16,11 @@ AddType text/html .html .htm
 RewriteEngine On
 
 # ----- Forcer HTTPS -----
+# Le X-Forwarded-Proto évite la boucle de redirection derrière le proxy
+# Cloudflare : en mode Flexible, Cloudflare interroge l'origine en HTTP,
+# %{HTTPS} vaut donc « off » alors que le visiteur est bien en HTTPS.
 RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 # ----- Canonique : sans-www vers www -----
@@ -96,6 +100,9 @@ RewriteRule ^(_build|_mails)(/.*)?$ - [F,L]
 
 # Ceinture et bretelles : aucun fichier ou dossier caché n'est servi.
 # Protège notamment .git/ si le dépôt se retrouvait un jour dans public_html.
+# .well-known est explicitement épargné : c'est par là que passe la validation
+# Let's Encrypt d'AutoSSL, au premier certificat comme à chaque renouvellement.
+RewriteCond %{REQUEST_URI} !^/\.well-known/
 RewriteRule (^|/)\. - [F,L]
 
 # ----- Page d'erreur personnalisée -----
