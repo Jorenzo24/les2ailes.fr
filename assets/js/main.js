@@ -115,6 +115,32 @@
     if (e.key === 'Escape' && drawer && drawer.classList.contains('is-open')) closeDrawer();
   });
 
+  /* ---- Avis : dates relatives et « Lire la suite » ----------------------- */
+  function dateRelative(ts) {
+    var j = Math.floor((Date.now() / 1000 - ts) / 86400);
+    if (j < 1) return "aujourd'hui";
+    if (j < 7) return 'il y a ' + j + (j > 1 ? ' jours' : ' jour');
+    if (j < 30) { var sem = Math.floor(j / 7); return 'il y a ' + sem + (sem > 1 ? ' semaines' : ' semaine'); }
+    if (j < 365) { var m = Math.floor(j / 30); return 'il y a ' + m + ' mois'; }
+    var an = Math.floor(j / 365);
+    return 'il y a ' + an + (an > 1 ? ' ans' : ' an');
+  }
+  document.querySelectorAll('.rv__date[data-ts]').forEach(function (el) {
+    el.textContent = dateRelative(parseInt(el.dataset.ts, 10));
+  });
+  document.querySelectorAll('.rv__text').forEach(function (txt) {
+    if (txt.scrollHeight - txt.clientHeight < 4) return;   // rien à déplier
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'rv__more';
+    b.textContent = 'Lire la suite';
+    b.addEventListener('click', function () {
+      var ouvert = txt.classList.toggle('is-open');
+      b.textContent = ouvert ? 'Réduire' : 'Lire la suite';
+    });
+    txt.parentNode.appendChild(b);
+  });
+
   /* ---- Carrousel d'avis -------------------------------------------------- */
   var track = document.getElementById('reviews-track');
   if (track) {
@@ -122,22 +148,20 @@
     var slides = Array.prototype.slice.call(track.children);
     var timer = null;
 
-    function perView() {
-      if (!slides.length) return 1;
-      return Math.max(1, Math.round(track.clientWidth / slides[0].offsetWidth));
-    }
     function pages() {
-      return Math.max(1, Math.ceil(slides.length / perView()));
+      if (!slides.length) return 1;
+      var parPage = Math.max(1, Math.round(track.clientWidth / slides[0].offsetWidth));
+      return Math.max(1, Math.ceil(slides.length / parPage));
     }
     function current() {
-      var page = track.clientWidth;
-      return Math.min(pages() - 1, Math.round(track.scrollLeft / page));
+      return Math.min(pages() - 1, Math.round(track.scrollLeft / track.clientWidth));
     }
     function goTo(i) {
       var n = pages();
       track.scrollLeft = ((i % n) + n) % n * track.clientWidth;
     }
     function buildDots() {
+      if (!dotsBox) return;
       dotsBox.innerHTML = '';
       for (var i = 0; i < pages(); i++) {
         var b = document.createElement('button');
@@ -149,6 +173,7 @@
       syncDots();
     }
     function syncDots() {
+      if (!dotsBox) return;
       var c = current();
       Array.prototype.forEach.call(dotsBox.children, function (b, i) {
         b.setAttribute('aria-current', i === c ? 'true' : 'false');
@@ -166,9 +191,7 @@
     function start() { if (!reduce && !timer) timer = setInterval(function () { goTo(current() + 1); }, 6000); }
     function stop() { clearInterval(timer); timer = null; }
 
-    track.addEventListener('scroll', function () {
-      window.requestAnimationFrame(syncDots);
-    }, { passive: true });
+    track.addEventListener('scroll', function () { window.requestAnimationFrame(syncDots); }, { passive: true });
     ['mouseenter', 'focusin', 'touchstart'].forEach(function (e) {
       track.addEventListener(e, stop, { passive: true });
     });

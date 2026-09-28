@@ -203,6 +203,33 @@ fond bleu marine** pour le distinguer du reste du site. C'est le rôle de
 `<body class="theme-navy">` : toutes les surcharges sont regroupées dans
 `style.css` sous « Page inversée (centre de formation) ».
 
+### Le module d'avis est dans le pied de page
+
+Depuis le 28 septembre 2026, le carrousel d'avis Google est produit par
+`c.reviews_band()` dans `common.py` et injecté **en tête du pied de page**,
+donc sur **toutes les pages**. Il n'y a plus de section d'avis sur l'accueil.
+
+Il reproduit le widget Trustindex de l'ancien site : cartes blanches
+arrondies, avatar rond qui déborde en haut avec la pastille Google, nom, date
+relative, étoiles dorées et badge vérifié bleu, texte centré, « Lire la suite »,
+flèches sur les côtés et pastilles.
+
+Deux partis pris :
+
+- **Pas de photos de profil.** Le widget d'origine affichait les photos Google
+  des auteurs, hébergées sur `lh3.googleusercontent.com`. Les réhéberger poserait
+  un problème de données personnelles et les URL expirent. Les avatars sont donc
+  des initiales sur un rond de la charte (5 teintes en rotation via `data-i`).
+- **Les dates sont calculées en JS** à partir de l'horodatage Unix de chaque
+  avis (`data-ts`), relevé dans le widget de l'ancien site. « il y a 9 mois »
+  reste donc juste avec le temps, sans rien à maintenir.
+
+Les 9 avis sont figés dans `REVIEWS` (`common.py`). Il n'y a **aucun appel à
+l'API Google** : si la cliente en obtient de nouveaux, il faut les ajouter à la
+main dans cette liste.
+
+---
+
 ### L'ornement vient de ses PDF
 
 `assets/img/ornement.png` est l'arabesque de ses documents, extraite du PDF de

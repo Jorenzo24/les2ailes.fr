@@ -351,68 +351,101 @@ body.no-scroll{overflow:hidden}
   color:rgba(255,255,255,.8);font-size:.9rem;letter-spacing:.08em;
 }
 
-/* --- Avis Google : carrousel ------------------------------------------- */
+/* --- Avis Google : bandeau de pied de page ------------------------------- */
+.reviews-band{
+  background:var(--navy);
+  padding-block:clamp(48px,6vw,84px) clamp(40px,5vw,64px);
+}
+.reviews-band__title{
+  text-align:center;color:#fff;
+  font-size:clamp(1.45rem,1.2rem + 1.1vw,2.1rem);
+  margin:0 0 clamp(34px,4vw,52px);
+}
 .reviews{position:relative}
 .reviews__track{
   display:grid;grid-auto-flow:column;
-  grid-auto-columns:calc((100% - 2 * clamp(16px,2.2vw,26px)) / 3);
-  gap:clamp(16px,2.2vw,26px);
-  overflow-x:auto;scroll-snap-type:x mandatory;
-  scroll-behavior:smooth;
-  padding-bottom:4px;
+  grid-auto-columns:calc((100% - 2 * 22px) / 3);
+  gap:22px;
+  overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;
+  padding:38px 2px 6px;          /* place pour l'avatar débordant */
   scrollbar-width:none;-ms-overflow-style:none;
 }
 .reviews__track::-webkit-scrollbar{display:none}
-.review{
-  scroll-snap-align:start;
-  display:flex;flex-direction:column;
-  padding:28px 28px 26px;
-  background:#fff;color:var(--ink);
-  border-radius:var(--radius);
-}
-.review__head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
-.review__avatar{
-  flex:none;width:42px;height:42px;border-radius:50%;
-  display:grid;place-items:center;
-  background:var(--navy);color:#fff;font-size:1.05rem;font-weight:600;
-}
-.review__name{font-weight:600;color:var(--navy);line-height:1.3}
-.review__stars{color:#f2a71b;letter-spacing:2px;font-size:.9rem}
-.review__text{margin:0;font-size:.98rem;line-height:1.65}
-.review__source{
-  display:flex;align-items:center;gap:7px;
-  margin-top:auto;padding-top:1.1em;
-  font-size:.8rem;letter-spacing:.06em;color:var(--muted);
-}
-.review__source svg{width:15px;height:15px;flex:none}
 
-.reviews__nav{
-  display:flex;align-items:center;justify-content:center;gap:14px;
-  margin-top:clamp(22px,2.6vw,32px);
+.rv{
+  position:relative;scroll-snap-align:start;
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+  margin:0;padding:44px 26px 26px;
+  background:#fff;border-radius:10px;
+  box-shadow:0 6px 24px rgba(0,0,0,.18);
 }
-.reviews__btn{
-  width:44px;height:44px;flex:none;
+.rv__avatar{
+  position:absolute;top:-34px;left:50%;translate:-50% 0;
+  width:68px;height:68px;border-radius:50%;
   display:grid;place-items:center;
-  background:transparent;color:#fff;
-  border:1px solid rgba(255,255,255,.4);border-radius:50%;
-  cursor:pointer;
-  transition:background .25s var(--ease),border-color .25s var(--ease),color .25s var(--ease);
+  font-size:1.6rem;font-weight:600;color:#fff;line-height:1;
+  border:3px solid #fff;
+  background:var(--navy);
 }
-.reviews__btn:hover{background:#fff;border-color:#fff;color:var(--navy)}
+.rv__avatar[data-i="1"]{background:var(--plum)}
+.rv__avatar[data-i="2"]{background:var(--prune)}
+.rv__avatar[data-i="3"]{background:#7f8ec0}
+.rv__avatar[data-i="4"]{background:var(--aubergine)}
+.rv__badge{
+  position:absolute;right:-2px;bottom:-2px;
+  width:24px;height:24px;border-radius:50%;
+  background:#fff;border:1px solid rgba(0,0,0,.08);
+  display:grid;place-items:center;
+}
+.rv__badge svg{width:14px;height:14px}
+.rv__name{font-weight:600;color:var(--ink);font-size:1.02rem;margin:0}
+.rv__date{margin:.25em 0 .6em;font-size:.88rem;color:var(--muted)}
+.rv__stars{display:flex;align-items:center;gap:2px;margin:0 0 1em}
+.rv__star{color:#fbbc05;font-size:1.05rem;line-height:1}
+.rv__stars svg{width:15px;height:15px;margin-left:5px}
+.rv__text{
+  margin:0;font-size:.97rem;line-height:1.6;color:var(--ink);
+  display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;
+  overflow:hidden;
+}
+.rv__text.is-open{-webkit-line-clamp:unset;overflow:visible}
+.rv__more{
+  margin-top:.9em;padding:0;
+  background:none;border:0;cursor:pointer;
+  font-family:var(--serif);font-size:.92rem;color:var(--muted);
+  text-decoration:underline;text-underline-offset:3px;
+}
+.rv__more:hover{color:var(--plum)}
+
+.reviews__btn{
+  position:absolute;top:50%;translate:0 -50%;z-index:2;
+  width:42px;height:42px;
+  display:grid;place-items:center;
+  background:#fff;color:var(--navy);
+  border:0;border-radius:50%;
+  box-shadow:0 4px 16px rgba(0,0,0,.24);
+  cursor:pointer;
+  transition:background .25s var(--ease),color .25s var(--ease),transform .25s var(--ease);
+}
+.reviews__btn:hover{background:var(--plum);color:#fff}
 .reviews__btn svg{width:15px;height:15px;fill:currentColor}
-.reviews__dots{display:flex;gap:9px}
+.reviews__btn--prev{left:-14px;transform:scaleX(-1)}
+.reviews__btn--next{right:-14px}
+.reviews__dots{display:flex;justify-content:center;gap:9px;margin-top:26px}
 .reviews__dots button{
   width:8px;height:8px;padding:0;
   background:rgba(255,255,255,.34);border:0;border-radius:50%;
   cursor:pointer;transition:background .25s var(--ease),transform .25s var(--ease);
 }
-.reviews__dots button[aria-current="true"]{background:#fff;transform:scale(1.25)}
+.reviews__dots button[aria-current="true"]{background:#fff;transform:scale(1.3)}
 
 @media (max-width:1000px){
-  .reviews__track{grid-auto-columns:calc((100% - clamp(16px,2.2vw,26px)) / 2)}
+  .reviews__track{grid-auto-columns:calc((100% - 22px) / 2)}
 }
 @media (max-width:680px){
-  .reviews__track{grid-auto-columns:88%}
+  .reviews__track{grid-auto-columns:86%}
+  .reviews__btn--prev{left:-6px}
+  .reviews__btn--next{right:-6px}
 }
 
 /* --- Disciplines : encadrés inspirés du feed Instagram ------------------- */
@@ -734,7 +767,8 @@ body.no-scroll{overflow:hidden}
 .map{border:0;width:100%;aspect-ratio:16/10;border-radius:var(--radius);box-shadow:var(--shadow-sm);display:block}
 
 /* --- Pied de page ------------------------------------------------------- */
-.footer{background:var(--navy);color:rgba(255,255,255,.8);padding-top:clamp(48px,6vw,76px)}
+.footer{background:var(--navy);color:rgba(255,255,255,.8);padding-top:clamp(40px,5vw,64px)}
+.reviews-band + .footer{border-top:1px solid rgba(255,255,255,.14)}
 .footer__grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:clamp(28px,4vw,56px);padding-bottom:clamp(36px,4vw,54px)}
 .footer__logo{width:78px;margin-bottom:16px}
 .footer h4{color:#fff;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:1.2em}

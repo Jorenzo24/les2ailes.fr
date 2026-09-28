@@ -1,23 +1,6 @@
 # -*- coding: utf-8 -*-
 import common as c
 
-REVIEWS = [
-    ("nathalie craspail", "Laurence est une professionnelle hors pair, alliant bienveillance, rigueur et humour. Le tout dans un lieu magique et une très chaleureuse ambiance."),
-    ("Nath Ledev", "Un lieu magique, des cours exceptionnels où Laurence, par ses qualités professionnelles, sa créativité et sa grande bienveillance, permet à chacun de découvrir et d'entretenir son corps. Un moment d'apaisement précieux."),
-    ("Gerard Zenoni", "Incroyable d’avoir ce niveau de professionnalisme et d'équipements, à Mouguerre, France ! En deux ans, je suis progressivement passé d'un cours par semaine… à deux… puis trois… et je sens que le quatre n'est pas loin ! Et plus de maux de dos 👍"),
-    ("Valérie Hellin", "Un studio exceptionnel avec une propriétaire ex danseuse professionnelle accompagnée de différents intervenants qui vous font travailler tt en longueur et en douceur dans un cadre idyllique"),
-    ("Sandrine AGUERRE", "Un lieu magique où on prend soin de soi grâce à Laurence, une professeure à l'écoute de ses élèves, très bienveillante et qui nous permet de progresser, d'apprendre à mieux se connaitre grâce à ses cours très complets !! Une très belle découverte à tous points de vue me concernant !!"),
-    ("Mathias rosandic", "Un lieu exceptionnel avec des cours géniaux. Bon pour le corps mais aussi avec de l'humour. La maîtresse des lieux donne envie que l'on revienne. Merci à Laurence pour ce qu'elle nous partage et enseigne."),
-    ("Gaelle Llanos Vieillard", "Des cours exceptionnels avec une prof exceptionnelle (Laurence).Je recommande fortement aux adeptes de yoga et pilâtes."),
-    ("Elise CUISSET", "Lieu magique, au cœur de la nature. Laurence est très professionnelle et bienveillante. Les cours sont variés et efficaces."),
-    ("Karine Locatelli", "Les cours de yoga et de pilates de Laurence sont tout simplement magiques. Une professeure de qualité qui œuvre pour le bien être de ses élèves. Résultats assurés !!!"),
-]
-
-IC_GOOGLE = ('<svg viewBox="0 0 24 24" aria-hidden="true">'
- '<path fill="#4285F4" d="M23.5 12.27c0-.79-.07-1.54-.2-2.27H12v4.51h6.47a5.53 5.53 0 0 1-2.4 3.63v3h3.87c2.27-2.09 3.56-5.17 3.56-8.87Z"/>'
- '<path fill="#34A853" d="M12 24c3.24 0 5.96-1.08 7.94-2.91l-3.87-3c-1.08.72-2.45 1.16-4.07 1.16-3.13 0-5.78-2.11-6.73-4.96H1.29v3.09A12 12 0 0 0 12 24Z"/>'
- '<path fill="#FBBC05" d="M5.27 14.29a7.2 7.2 0 0 1 0-4.58V6.62H1.29a12 12 0 0 0 0 10.76l3.98-3.09Z"/>'
- '<path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.43-3.43C17.95 1.18 15.24 0 12 0A12 12 0 0 0 1.29 6.62l3.98 3.09C6.22 6.86 8.87 4.75 12 4.75Z"/></svg>')
 
 # Retirées le 26/09/2026 à la demande de la cliente : le doublon de piscine,
 # le poêle à granules et le sauna au panneau « l'endroit idéal ».
@@ -46,21 +29,6 @@ DISCOVER = [
     ("Les tarifs", c.TARIFS_PDF, True),
 ]
 
-def review_card(name, text):
-    initial = name.strip()[0].upper()
-    return f"""        <figure class="review">
-          <div class="review__head">
-            <div class="review__avatar" aria-hidden="true">{initial}</div>
-            <div>
-              <div class="review__name">{name}</div>
-              <div class="review__stars" aria-label="5 étoiles sur 5">★★★★★</div>
-            </div>
-          </div>
-          <blockquote class="review__text">{text}</blockquote>
-          <p class="review__source">{IC_GOOGLE}Avis publié sur Google</p>
-        </figure>
-"""
-
 gallery = "".join(
     f'      <a class="gallery__item" href="assets/img/gallery/{f}" aria-label="Agrandir : {alt}">'
     f'<img src="assets/img/gallery/{f}" alt="{alt}" loading="lazy" decoding="async"></a>\n'
@@ -78,7 +46,6 @@ discover = "".join(
     for i, (title, href, blank) in enumerate(DISCOVER)
 )
 
-reviews = "".join(review_card(n, t) for n, t in REVIEWS)
 
 SCHEMA = """<script type="application/ld+json">
 {
@@ -212,31 +179,6 @@ html += f"""
     <div class="container container--wide">
       <div class="gallery">
 {gallery}      </div>
-    </div>
-  </section>
-
-  <!-- Avis -->
-  <section class="section section--navy">
-    <div class="container">
-      <div class="center" style="margin-bottom:clamp(30px,4vw,48px)">
-        <p class="eyebrow" style="color:var(--plum-light)">Ils en parlent</p>
-        <h2 class="title">Les avis de nos élèves</h2>
-        <div class="rule rule--light"><span></span></div>
-      </div>
-      <div class="reviews">
-        <div class="reviews__track" id="reviews-track" tabindex="0"
-             role="group" aria-label="Avis de nos élèves, faites défiler pour en voir plus">
-{reviews}        </div>
-        <div class="reviews__nav">
-          <button class="reviews__btn" type="button" data-rev="prev" aria-label="Avis précédents">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4 7 12l8 8 1.4-1.4L9.8 12l6.6-6.6z"/></svg>
-          </button>
-          <div class="reviews__dots" id="reviews-dots"></div>
-          <button class="reviews__btn" type="button" data-rev="next" aria-label="Avis suivants">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 4 8 8-8 8-1.4-1.4 6.6-6.6-6.6-6.6z"/></svg>
-          </button>
-        </div>
-      </div>
     </div>
   </section>
 
