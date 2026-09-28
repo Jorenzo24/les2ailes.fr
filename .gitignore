@@ -5,3 +5,7 @@ mails.zip
 .DS_Store
 Thumbs.db
 *.log
+
+# Secrets : jamais dans le dépôt (il est public)
+.env
+.env.local

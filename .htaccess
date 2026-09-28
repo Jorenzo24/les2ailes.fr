@@ -93,7 +93,12 @@ RewriteCond %{REQUEST_URI} !/$
 RewriteRule ^(.*)$ /$1/ [L,R=301]
 
 # ----- Bloque l'accès aux sources du site -----
-RewriteRule ^(_build|_mails)(/.*)?$ - [F,L]
+RewriteRule ^(_build|_mails|lib)(/.*)?$ - [F,L]
+
+# Le .env vit normalement hors de public_html, mais on le bloque au cas où.
+<FilesMatch "^\.env">
+    Require all denied
+</FilesMatch>
 <FilesMatch "\.(py|md|yml|json|eml|zip)$">
     Require all denied
 </FilesMatch>

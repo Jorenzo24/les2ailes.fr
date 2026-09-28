@@ -112,7 +112,7 @@ html += f"""
         <div class="reveal">
           <h2 class="subtitle">Envoyer un message</h2>
           <div class="rule rule--left"><span></span></div>
-          <form class="form" id="contact-form" data-mailto="{c.EMAIL}" novalidate>
+          <form class="form" id="contact-form" action="envoi.php" method="post" novalidate>
             <div class="field">
               <label for="nom">Nom</label>
               <input type="text" id="nom" name="nom" autocomplete="name" required>
@@ -125,9 +125,14 @@ html += f"""
               <label for="message">Message</label>
               <textarea id="message" name="message" required></textarea>
             </div>
+            <div class="field field--pot" aria-hidden="true">
+              <label for="website">Ne pas remplir ce champ</label>
+              <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+            </div>
             <div>
               <button class="btn" type="submit">Envoyer</button>
             </div>
+            <p class="form__status" id="form-status" role="status" hidden></p>
             <p class="form__note">
               Vos informations ne servent qu’à répondre à votre demande.
             </p>

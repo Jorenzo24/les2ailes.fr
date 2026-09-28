@@ -6,6 +6,7 @@ deployment:
   tasks:
     - export DEPLOYPATH=/home/les2ailes/public_html/
     - /bin/cp -R assets $DEPLOYPATH
+    - /bin/cp -R lib $DEPLOYPATH
     - /bin/cp -R les-disciplines $DEPLOYPATH
     - /bin/cp -R les-professionnels $DEPLOYPATH
     - /bin/cp -R event $DEPLOYPATH

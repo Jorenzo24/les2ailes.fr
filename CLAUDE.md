@@ -344,6 +344,34 @@ Points d'attention si on ajoute un bloc à cette page :
 
 ---
 
+## 7 quater. Le formulaire de contact
+
+Envoi par **SMTP authentifié**, via PHPMailer embarqué dans `lib/PHPMailer/`
+(3 fichiers, pas de Composer). Le traitement est dans `contact/envoi.php`.
+
+**Les identifiants ne sont jamais dans le dépôt : il est public.** Ils vivent
+dans un `.env` que `envoi.php` cherche dans cet ordre :
+
+1. `/home/les2ailes/.env` — **hors de `public_html`**, c'est l'emplacement voulu
+2. la racine du site, en secours
+
+`.env` est dans `.gitignore`, `.env.example` sert de modèle, et le `.htaccess`
+le bloque en plus (ceinture et bretelles).
+
+Le formulaire marche **avec et sans JavaScript** : `main.js` intercepte l'envoi
+et fait un `fetch`, mais l'attribut `action` du formulaire suffit à lui seul,
+`envoi.php` renvoyant alors sur `/contact/?envoi=ok` ou `?envoi=erreur`.
+
+Protections : pot de miel (`name="website"`, masqué en CSS), validation
+serveur, refus des retours à la ligne dans les en-têtes, et une limite d'un
+envoi toutes les 30 secondes par IP.
+
+Le destinataire est `les2ailespy@gmail.com`, l'expéditeur technique
+`noreply@startmailapp.com`, et le `Reply-To` est l'adresse du visiteur : la
+cliente répond directement depuis Gmail.
+
+---
+
 ## 8. État d'avancement (maj 2026-09-28)
 
 **Fait :** les 8 pages + 404, URL identiques au site actuel, charte,

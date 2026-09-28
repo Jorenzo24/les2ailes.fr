@@ -217,20 +217,57 @@
     }
   }
 
-  /* ---- Formulaire de contact (sans back-end pour l'instant) ------------- */
+  /* ---- Formulaire de contact -------------------------------------------- */
   var form = document.getElementById('contact-form');
   if (form) {
+    var statut = document.getElementById('form-status');
+    var bouton = form.querySelector('button[type="submit"]');
+
+    function afficher(ok, texte) {
+      if (!statut) return;
+      statut.hidden = false;
+      statut.className = 'form__status ' + (ok ? 'is-ok' : 'is-error');
+      statut.textContent = texte;
+    }
+
+    // Retour d'un envoi sans JavaScript : /contact/?envoi=ok
+    var envoi = new URLSearchParams(window.location.search).get('envoi');
+    if (envoi === 'ok') {
+      afficher(true, 'Merci, votre message est bien parti. Nous vous répondons rapidement.');
+    } else if (envoi === 'erreur') {
+      afficher(false, "L'envoi a échoué. Écrivez-nous directement à les2ailespy@gmail.com.");
+    }
+
     form.addEventListener('submit', function (e) {
-      if (form.getAttribute('action')) return; // un service d'envoi est configuré
+      if (!form.getAttribute('action')) return;   // pas de back-end configuré
       e.preventDefault();
-      var to = form.dataset.mailto;
-      var subject = encodeURIComponent('Message depuis le site — ' + (form.elements.nom.value || ''));
-      var body = encodeURIComponent(
-        'Nom : ' + form.elements.nom.value + '\n' +
-        'E-mail : ' + form.elements.email.value + '\n\n' +
-        form.elements.message.value
-      );
-      window.location.href = 'mailto:' + to + '?subject=' + subject + '&body=' + body;
+
+      if (!form.checkValidity()) {
+        afficher(false, 'Merci de remplir tous les champs.');
+        return;
+      }
+
+      bouton.disabled = true;
+      var libelle = bouton.textContent;
+      bouton.textContent = 'Envoi…';
+
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json', 'X-Requested-With': 'fetch' }
+      })
+        .then(function (r) { return r.json().catch(function () { return { ok: r.ok, message: '' }; }); })
+        .then(function (d) {
+          afficher(d.ok, d.message || (d.ok ? 'Message envoyé.' : "L'envoi a échoué."));
+          if (d.ok) form.reset();
+        })
+        .catch(function () {
+          afficher(false, "L'envoi a échoué. Écrivez-nous directement à les2ailespy@gmail.com.");
+        })
+        .then(function () {
+          bouton.disabled = false;
+          bouton.textContent = libelle;
+        });
     });
   }
 })();
