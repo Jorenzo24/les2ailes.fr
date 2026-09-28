@@ -84,6 +84,23 @@ REVIEWS = [
     ("Mathias rosandic", 1679011200, 5, "Un lieu exceptionnel avec des cours géniaux. Bon pour le corps mais aussi avec de l'humour. La maîtresse des lieux donne envie que l'on revienne. Merci à Laurence pour ce qu'elle nous partage et enseigne."),
 ]
 
+def _version(fichier):
+    """Empreinte courte du fichier, pour casser les caches à chaque déploiement.
+
+    Sans ça, Cloudflare et les navigateurs gardent l'ancien CSS jusqu'à un mois
+    (max-age du .htaccess) et les modifications restent invisibles."""
+    import hashlib, os
+    chemin = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), fichier)
+    try:
+        with open(chemin, "rb") as f:
+            return hashlib.md5(f.read()).hexdigest()[:8]
+    except OSError:
+        return "0"
+
+
+V_CSS = _version("assets/css/style.css")
+V_JS = _version("assets/js/main.js")
+
 CUR = ' aria-current="page"'
 
 
@@ -113,7 +130,7 @@ def head(title, description, canonical, base="", body_class="", extra=""):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap">
-<link rel="stylesheet" href="{base}assets/css/style.css">
+<link rel="stylesheet" href="{base}assets/css/style.css?v={V_CSS}">
 {extra}</head>
 <body{cls}>
 <a class="skip-link" href="#main">Aller au contenu</a>
@@ -238,7 +255,7 @@ def footer(base="", scripts=""):
   <button class="btn btn--sm" type="button">OK</button>
 </div>
 
-<script src="{base}assets/js/main.js" defer></script>
+<script src="{base}assets/js/main.js?v={V_JS}" defer></script>
 {scripts}</body>
 </html>
 """
