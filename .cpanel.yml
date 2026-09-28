@@ -1,10 +1,10 @@
 ---
 # Déploiement cPanel : déclenché à chaque « Update from Remote » puis
 # « Deploy HEAD Commit » dans Git Version Control.
-# ATTENTION : remplacer <UTILISATEUR_CPANEL> par l'utilisateur réel du compte.
+# Compte cPanel : les2ailes — serveur 65.21.136.233 (Hetzner).
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/<UTILISATEUR_CPANEL>/public_html/
+    - export DEPLOYPATH=/home/les2ailes/public_html/
     - /bin/cp -R assets $DEPLOYPATH
     - /bin/cp -R les-disciplines $DEPLOYPATH
     - /bin/cp -R les-professionnels $DEPLOYPATH
