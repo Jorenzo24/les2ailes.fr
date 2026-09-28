@@ -1,7 +1,3 @@
-# Aperçu GitHub Pages — indexation désactivée.
-# À remplacer lors de la mise en ligne sur le domaine définitif par :
-#   User-agent: *
-#   Allow: /
-#   Sitemap: https://www.les2ailes.fr/sitemap.xml
+# Aperçu : indexation désactivée (PROD=False dans _build/common.py).
 User-agent: *
 Disallow: /

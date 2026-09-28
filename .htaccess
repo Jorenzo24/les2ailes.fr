@@ -1,0 +1,146 @@
+# =======================================================
+# Configuration .htaccess - les2ailes.fr
+# Site statique (HTML/CSS/JS) remplaçant un WordPress.
+# =======================================================
+
+# ----- Page d'index par défaut -----
+DirectoryIndex index.html
+
+# ----- Servir les pages HTML en statique -----
+<FilesMatch "\.(html|htm)$">
+    SetHandler default-handler
+</FilesMatch>
+RemoveHandler .html .htm
+AddType text/html .html .htm
+
+RewriteEngine On
+
+# ----- Forcer HTTPS -----
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# ----- Canonique : sans-www vers www -----
+# ATTENTION : l'ancien site était canonique sur www, tous les liens et
+# l'indexation Google pointent là. On ne change pas, sous peine de faire
+# transiter chaque URL par une redirection supplémentaire.
+RewriteCond %{HTTP_HOST} ^les2ailes\.fr$ [NC]
+RewriteRule ^(.*)$ https://www.les2ailes.fr/$1 [L,R=301]
+
+# =======================================================
+# REDIRECTIONS DEPUIS L'ANCIEN WORDPRESS
+# =======================================================
+# Les 6 autres pages du sitemap WordPress (/, /les-disciplines/,
+# /les-professionnels/, /le-centre-de-formation/, /event/, /contact/)
+# gardent exactement la même URL : aucune règle n'est nécessaire.
+
+# ----- Les 2 pages supprimées pointent vers leur PDF -----
+RewriteRule ^planning/?$ /assets/docs/planning.pdf [L,R=301]
+RewriteRule ^tarifs/?$   /assets/docs/tarifs.pdf   [L,R=301]
+
+# ----- Anciens PDF servis depuis wp-content -----
+RewriteRule ^wp-content/uploads/2025/10/Planing\.pdf$ /assets/docs/planning.pdf [NC,L,R=301]
+RewriteRule ^wp-content/uploads/2025/07/Tarifs\.pdf$  /assets/docs/tarifs.pdf   [NC,L,R=301]
+
+# ----- Anciennes images de la galerie -----
+# WordPress générait aussi des variantes -300x200, -1024x768, -scaled, etc.
+# Le motif les attrape toutes.
+RewriteRule ^wp-content/uploads/.*/yoga-pilate-ballet-les2l.*\.jpe?g$        /assets/img/gallery/g01.jpg [NC,L,R=301]
+RewriteRule ^wp-content/uploads/.*/yoga-aerien-pays-basque.*\.jpe?g$         /assets/img/gallery/g02.jpg [NC,L,R=301]
+RewriteRule ^wp-content/uploads/.*/les2l-mouguerre-pilate-yoga.*\.jpe?g$     /assets/img/gallery/g03.jpg [NC,L,R=301]
+RewriteRule ^wp-content/uploads/.*/pilate-yoga-pays-basque.*\.jpe?g$         /assets/img/gallery/g04.jpg [NC,L,R=301]
+RewriteRule ^wp-content/uploads/.*/pays-basque-pilate-yoga.*\.jpe?g$         /assets/img/gallery/g05.jpg [NC,L,R=301]
+RewriteRule ^wp-content/uploads/.*/yoga-danse-pays-basque.*\.jpe?g$          /assets/img/gallery/g06.jpg [NC,L,R=301]
+RewriteRule ^wp-content/uploads/.*/mouguerre-yoga-les2l.*\.jpe?g$            /assets/img/gallery/g08.jpg [NC,L,R=301]
+RewriteRule ^wp-content/uploads/.*/danse-classique-mouguerre.*\.jpe?g$       /assets/img/gallery/g09.jpg [NC,L,R=301]
+RewriteRule ^wp-content/uploads/.*/cours-pilate-yoga-pays-basque.*\.jpe?g$   /assets/img/gallery/g11.jpg [NC,L,R=301]
+RewriteRule ^wp-content/uploads/.*/pilate-yoga-bayonne.*\.jpe?g$             /assets/img/gallery/g12.jpg [NC,L,R=301]
+RewriteRule ^wp-content/uploads/.*/debutant-yoga-pilate-bayonne.*\.jpe?g$    /assets/img/gallery/g13.jpg [NC,L,R=301]
+RewriteRule ^wp-content/uploads/.*/danse-classique-les2l.*\.jpe?g$           /assets/img/gallery/g14.jpg [NC,L,R=301]
+RewriteRule ^wp-content/uploads/.*/pilate-yoga-danse-classique-hossegor.*\.jpe?g$ /assets/img/gallery/g16.jpg [NC,L,R=301]
+RewriteRule ^wp-content/uploads/.*/yoga-pilate-pays-basque.*\.jpe?g$         /assets/img/gallery/g17.jpg [NC,L,R=301]
+RewriteRule ^wp-content/uploads/.*/bayonne-biarritz-pilates.*\.jpe?g$        /assets/img/gallery/g18.jpg [NC,L,R=301]
+
+# Photos retirées du site à la demande de la cliente : on renvoie l'accueil
+# plutôt qu'un 404 sec.
+RewriteRule ^wp-content/uploads/.*/(pays-basque-yoga|pilate-au-sol-bayonne|Danse-pays-basque-mouguerre).*\.jpe?g$ / [NC,L,R=301]
+
+# ----- Autres visuels WordPress encore référencés -----
+RewriteRule ^wp-content/uploads/.*/les2l-pilate-yoga-1.*\.jpe?g$   /assets/img/formation/batiment.jpg   [NC,L,R=301]
+RewriteRule ^wp-content/uploads/.*/les2l-pilate-yoga.*\.jpe?g$     /assets/img/lieu-exterieur.jpg       [NC,L,R=301]
+RewriteRule ^wp-content/uploads/.*/yin-yoga-pilate-pays-basque.*\.jpe?g$ /assets/img/barre-ballet.jpg    [NC,L,R=301]
+RewriteRule ^wp-content/uploads/.*/LES2L-pilate-yoga-ballet.*\.jpe?g$    /assets/img/hero.jpg            [NC,L,R=301]
+RewriteRule ^wp-content/uploads/.*/Centre-Formation-Pilate.*\.jpe?g$     /assets/img/formation/salle.jpg [NC,L,R=301]
+RewriteRule ^wp-content/uploads/.*/Pays-basque-pilate-formation.*\.jpe?g$ /assets/img/formation/swissball.jpg [NC,L,R=301]
+RewriteRule ^wp-content/uploads/.*/(logo|logo-blanc)\.png$         /assets/img/logo.png                 [NC,L,R=301]
+
+# ----- Page auteur WordPress -----
+RewriteRule ^author(/.*)?$ / [L,R=301]
+
+# ----- Reliquats WordPress : plus rien derrière, on l'assume -----
+# 410 plutôt que 404 : Google désindexe plus vite et arrête de repasser.
+RewriteRule ^(wp-admin|wp-includes|wp-json)(/.*)?$ - [G,L]
+RewriteRule ^(wp-login\.php|xmlrpc\.php|wp-cron\.php|wp-signup\.php)$ - [G,L]
+RewriteRule ^(feed|comments/feed)/?$ - [G,L]
+RewriteRule ^(category|tag)(/.*)?$ - [G,L]
+
+# ----- Normalisation : ajoute le slash final sur les dossiers -----
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteCond %{REQUEST_URI} !/$
+RewriteRule ^(.*)$ /$1/ [L,R=301]
+
+# ----- Bloque l'accès aux sources du site -----
+RewriteRule ^(_build|_mails)(/.*)?$ - [F,L]
+<FilesMatch "\.(py|md|yml|json|eml|zip)$">
+    Require all denied
+</FilesMatch>
+
+# ----- Page d'erreur personnalisée -----
+ErrorDocument 404 /404.html
+
+# ----- Compression Gzip -----
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE text/javascript
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+    AddOutputFilterByType DEFLATE application/json
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE image/svg+xml
+    AddOutputFilterByType DEFLATE font/ttf
+    AddOutputFilterByType DEFLATE font/otf
+    AddOutputFilterByType DEFLATE font/woff
+    AddOutputFilterByType DEFLATE font/woff2
+</IfModule>
+
+# ----- Cache navigateur -----
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/html "access plus 1 hour"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType text/javascript "access plus 1 month"
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+    ExpiresByType application/pdf "access plus 1 month"
+    ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>
+
+# ----- En-têtes de sécurité -----
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+    Header unset X-Powered-By
+</IfModule>
+
+# ----- Empêche le listage des dossiers -----
+Options -Indexes

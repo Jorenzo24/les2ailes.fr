@@ -6,6 +6,16 @@
    "../" pour les pages en sous-dossier (/planning/, /tarifs/, ...)
 """
 
+# ---------------------------------------------------------------------------
+# PROD = False : aperçu GitHub Pages, les pages portent un noindex et
+#                robots.txt interdit tout.
+# PROD = True  : mise en ligne sur www.les2ailes.fr, indexation autorisée.
+# Après changement : cd _build && python3 build_all.py
+# ---------------------------------------------------------------------------
+PROD = False
+
+BASE_URL = "https://www.les2ailes.fr"
+
 SITE = "LES 2 L"
 ADDRESS = "228 Chemin de Pagadoy, 64990 Mouguerre"
 FACEBOOK = "https://www.facebook.com/profile.php?id=100070696928721"
@@ -80,6 +90,10 @@ CUR = ' aria-current="page"'
 def head(title, description, canonical, base="", body_class="", extra=""):
     cls = ' class="%s"' % body_class if body_class else ""
     canon = '<link rel="canonical" href="%s">' % canonical if canonical else ""
+    robots = "" if PROD else (
+        "<!-- APERÇU : PROD=False dans _build/common.py. "
+        "Passer à True puis relancer build_all.py pour la mise en ligne. -->\n"
+        '<meta name="robots" content="noindex, nofollow">\n')
     return f"""<!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -88,9 +102,7 @@ def head(title, description, canonical, base="", body_class="", extra=""):
 <title>{title}</title>
 <meta name="description" content="{description}">
 <meta name="theme-color" content="#062c5a">
-<!-- APERÇU GitHub Pages : retirer cette ligne + ajuster robots.txt lors de la mise en ligne sur le domaine définitif -->
-<meta name="robots" content="noindex, nofollow">
-{canon}
+{robots}{canon}
 <meta property="og:type" content="website">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{description}">

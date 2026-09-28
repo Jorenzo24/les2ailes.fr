@@ -167,6 +167,22 @@ les2ailes.fr/
 
 ## 7. Git & déploiement
 
+**Mise en ligne** : la procédure complète est dans [MIGRATION.md](MIGRATION.md).
+Points à retenir :
+
+- `PROD` dans `_build/common.py` pilote le `noindex`, `robots.txt` et le
+  sitemap. `False` = aperçu, `True` = production. Après changement :
+  `cd _build && python3 build_all.py`.
+- `build_all.py` régénère **tout** (pages + robots + sitemap). C'est la
+  commande à utiliser, pas les `build_*.py` un par un.
+- Le serveur cible est un **cPanel** (Git Version Control + `.cpanel.yml`),
+  pas l'OVH mutualisé où tourne encore le WordPress.
+- Le domaine reste canonique sur **www**, contrairement aux autres projets :
+  c'est ce que Google a indexé.
+- ⚠️ Le domaine porte des **MX OVH actifs**. On ne modifie que les
+  enregistrements A. Ne jamais toucher aux NS, MX ou SPF.
+
+
 - Branche unique : `main`. Push direct, pas de PR sur ce projet.
 - GitHub Pages est branché sur `main` / racine — **chaque push redéploie**
   automatiquement en ~1 min.
@@ -328,7 +344,7 @@ Points d'attention si on ajoute un bloc à cette page :
 
 ---
 
-## 8. État d'avancement (maj 2026-09-07)
+## 8. État d'avancement (maj 2026-09-28)
 
 **Fait :** les 8 pages + 404, URL identiques au site actuel, charte,
 accessibilité (skip-link, `aria-current`, focus visibles,
