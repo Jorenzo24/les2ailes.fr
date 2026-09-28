@@ -12,7 +12,7 @@
 # PROD = True  : mise en ligne sur www.les2ailes.fr, indexation autorisée.
 # Après changement : cd _build && python3 build_all.py
 # ---------------------------------------------------------------------------
-PROD = False
+PROD = True
 
 BASE_URL = "https://www.les2ailes.fr"
 

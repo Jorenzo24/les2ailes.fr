@@ -1,3 +1,6 @@
-# Aperçu : indexation désactivée (PROD=False dans _build/common.py).
 User-agent: *
-Disallow: /
+Allow: /
+
+Disallow: /_build/
+
+Sitemap: https://www.les2ailes.fr/sitemap.xml
