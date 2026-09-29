@@ -279,6 +279,20 @@ main dans cette liste.
 
 ---
 
+### « Le lieu » : pas de calque sur la photo
+
+Décision de la cliente le 29 septembre 2026, après essai dans les deux sens.
+Elle a d'abord demandé le texte **sur** la photo, comme sur l'ancien site, puis
+a tranché l'inverse : « c'est beaucoup trop sombre, il ne faut pas de calque sur
+la photo », et « autant mieux remettre le texte à part car c'est la plus belle
+photo ».
+
+Le bloc est donc un `.photoband` pleine largeur, **sans aucun voile**, suivi du
+titre et du texte en dessous. Ne pas y remettre de calque : c'est un arbitrage
+tranché, pas un oubli.
+
+---
+
 ### L'ornement vient de ses PDF
 
 `assets/img/ornement.png` est l'arabesque de ses documents, extraite du PDF de

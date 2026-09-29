@@ -103,15 +103,15 @@ html += f"""
   </section>
 
   <!-- Le lieu -->
-  <section class="feature">
-    <figure class="feature__bg">
-      <img src="assets/img/hero.jpg" alt="La salle du studio Les2L, ouverte sur la forêt"
-           width="1920" height="1080" fetchpriority="high" decoding="async">
-    </figure>
-    <div class="container">
-      <div class="feature__card reveal">
-        <h2>Le lieu</h2>
-        <div class="rule rule--left rule--light"><span></span></div>
+  <figure class="photoband">
+    <img src="assets/img/hero.jpg" alt="La salle du studio Les2L, ouverte sur la forêt"
+         width="1920" height="1080" fetchpriority="high" decoding="async">
+  </figure>
+  <section class="section">
+    <div class="container container--narrow center">
+      <h2 class="title">Le lieu</h2>
+      <div class="rule"><span></span></div>
+      <div class="reveal" style="text-align:left">
         <p>Bienvenue dans Les2L où l'expérience et les qualités professionnelles vous feront découvrir
         17 disciplines pour prendre soin de votre corps, de votre santé et de votre vie.</p>
         <p>Les2L est un établissement convivial avec une superbe salle élégante et confortable au cœur

@@ -258,36 +258,11 @@ body.no-scroll{overflow:hidden}
 .pagehead p{max-width:660px;margin:0 auto;color:rgba(255,255,255,.85)}
 .pagehead .eyebrow{color:var(--plum-light)}
 
-/* --- « Le lieu » : texte posé sur la photo ------------------------------- */
-.feature{
-  position:relative;isolation:isolate;
-  display:grid;align-items:center;
-  min-height:clamp(440px,54vw,660px);
-  padding-block:clamp(56px,7vw,104px);
-  color:#fff;overflow:hidden;
-}
-.feature__bg{position:absolute;inset:0;z-index:-2;margin:0}
-.feature__bg img{width:100%;height:100%;object-fit:cover;object-position:50% 55%}
-/* Le voile ne couvre que la moitié gauche : le texte reste lisible,
-   la photo reste nette là où il n'y a rien d'écrit. */
-.feature::after{
-  content:"";position:absolute;inset:0;z-index:-1;
-  background:linear-gradient(100deg,
-    rgba(4,25,52,.95) 0%,rgba(5,35,72,.88) 34%,
-    rgba(6,44,90,.42) 64%,rgba(6,44,90,.1) 100%);
-}
-.feature__card{max-width:640px}
-.feature__card h2{
-  font-size:clamp(1.9rem,1.4rem + 2.2vw,3rem);
-  color:#fff;margin-bottom:.3em;
-}
-.feature__card p:last-child{margin-bottom:0}
-@media (max-width:860px){
-  .feature::after{
-    background:linear-gradient(180deg,rgba(4,25,52,.86) 0%,rgba(6,44,90,.9) 100%);
-  }
-  .feature__card{max-width:none}
-}
+/* --- « Le lieu » : la photo sans aucun calque, le texte en dessous -------
+   La cliente a tranché le 29/09/2026 : pas de voile sur la photo, quitte à
+   sortir le texte. C'est sa plus belle image, elle doit rester nette. */
+.photoband{margin:0;width:100%;overflow:hidden;background:var(--paper-alt)}
+.photoband img{width:100%;height:clamp(300px,44vw,620px);object-fit:cover;object-position:50% 55%}
 
 /* --- Blocs alternés texte / image --------------------------------------- */
 .split{display:grid;grid-template-columns:repeat(2,1fr);align-items:center;gap:clamp(28px,5vw,72px)}

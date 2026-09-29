@@ -5,6 +5,12 @@ import common as c
 # (intitulé, public, dates, tarifs, mention)
 # Un tarif vide affiche « Nous consulter » : c'est le cas des sessions
 # intensives, dont la cliente n'a pas communiqué les prix (28/09/2026).
+# Sessions listées dans l'ordre chronologique, tous modules confondus.
+# (intitulé, public, dates, tarifs, mention)
+# Tarifs des intensives confirmés par la cliente le 29/09/2026 :
+#   Matwork 1+2+3 = prix du package (2470/2770), Matwork 1&2 = 1650/1850.
+# Pour les intensives d'un seul module (Matwork 3, Petit matériel, Swiss Ball),
+# on applique le tarif du module correspondant : à confirmer.
 MODULES = [
  ("MATWORK 1", "[pour public niveau débutant]", "26 &amp; 27 Septembre + 3 &amp; 4 octobre 2026",
   [("financement personnel", "890€"), ("avec prise en charge", "1090€")], ""),
@@ -16,7 +22,7 @@ MODULES = [
   [("financement personnel", "890€"), ("avec prise en charge", "1090€")], ""),
 
  ("MATWORK 1 + 2 + 3", "[formation intensive]", "du 13 au 19 février 2027",
-  [], "Possibilité d’hébergement"),
+  [("financement personnel", "2470€"), ("avec prise en charge", "2770€")], "Possibilité d’hébergement"),
 
  ("Petit matériel (magic circle, foam roller, élastique, balles, ballon paille.)", "[pour tous niveaux]",
   "4 &amp; 11 mars 2027",
@@ -25,19 +31,24 @@ MODULES = [
  ("SWISS BALL", "[pour tous niveaux]", "18 &amp; 25 mars 2027",
   [("financement personnel", "490€"), ("avec prise en charge", "590€")], ""),
 
+ ("MATWORK 1 + 2 + 3", "[formation intensive]", "du 10 au 16 avril 2027",
+  [("financement personnel", "2470€"), ("avec prise en charge", "2770€")], "Possibilité d’hébergement"),
+
  ("MATWORK 1 &amp; 2", "[formation intensive]", "du 6 au 9 mai 2027, pont de l’Ascension",
-  [], "Possibilité d’hébergement"),
+  [("financement personnel", "1650€"), ("avec prise en charge", "1850€")], "Possibilité d’hébergement"),
 
  ("MATWORK 3", "[formation intensive]", "du samedi 15 au 17 mai 2027, pont de Pentecôte",
-  [], "Possibilité d’hébergement"),
+  [("financement personnel", "890€"), ("avec prise en charge", "1090€")], "Possibilité d’hébergement"),
 
  ("WALL UNIT [Machine]", "[pour public niveau débutant, intermédiaire et avancé]",
   "29 &amp; 30 mai 2027 + 5 &amp; 6 juin 2027",
   [("financement personnel", "1090€"), ("avec prise en charge", "1290€")], ""),
 
- ("Petit matériel", "[formation intensive]", "19 &amp; 20 juin 2027", [], ""),
+ ("Petit matériel", "[formation intensive]", "19 &amp; 20 juin 2027",
+  [("financement personnel", "490€"), ("avec prise en charge", "590€")], ""),
 
- ("SWISS BALL", "[formation intensive]", "27 juin 2027", [], ""),
+ ("SWISS BALL", "[formation intensive]", "27 juin 2027",
+  [("financement personnel", "490€"), ("avec prise en charge", "590€")], ""),
 ]
 
 CURSUS = [
