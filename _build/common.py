@@ -22,6 +22,8 @@ FACEBOOK = "https://www.facebook.com/profile.php?id=100070696928721"
 INSTAGRAM = "https://www.instagram.com/_les2l_/"
 EMAIL = "les2ailespy@gmail.com"
 PHONE = "+33 6 09 14 84 56"
+# Lien de paiement Stripe pour un cours à l'unité (1 h), transmis le 28/09/2026
+STRIPE_COURS_1H = "https://buy.stripe.com/dRm3co4V6aBj2iV4Sc2Fa00"
 PHONE_HREF = "+33609148456"
 
 # Réseaux propres au centre de formation, distincts de ceux du studio.

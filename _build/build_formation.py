@@ -1,21 +1,43 @@
 # -*- coding: utf-8 -*-
 import common as c
 
+# Sessions listées dans l'ordre chronologique, tous modules confondus.
+# (intitulé, public, dates, tarifs, mention)
+# Un tarif vide affiche « Nous consulter » : c'est le cas des sessions
+# intensives, dont la cliente n'a pas communiqué les prix (28/09/2026).
 MODULES = [
  ("MATWORK 1", "[pour public niveau débutant]", "26 &amp; 27 Septembre + 3 &amp; 4 octobre 2026",
-  [("financement personnel", "890€"), ("avec prise en charge", "1090€")]),
- ("MATWORK 2", "[pour public niveau intermédiaire]", "28 &amp; 29 novembre 2026 + 5 &amp; 6 décembre",
-  [("financement personnel", "890€"), ("avec prise en charge", "1090€")]),
- ("MATWORK 3", "[pour public niveau avancé]", "30 &amp; 31 janvier 2027 + 6 &amp; 7 février 2027",
-  [("financement personnel", "890€"), ("avec prise en charge", "1090€")]),
+  [("financement personnel", "890€"), ("avec prise en charge", "1090€")], ""),
+
+ ("MATWORK 2", "[pour public niveau intermédiaire]", "28 &amp; 29 novembre 2026 + 3 &amp; 5 décembre",
+  [("financement personnel", "890€"), ("avec prise en charge", "1090€")], ""),
+
+ ("MATWORK 3", "[pour public niveau avancé]", "9 &amp; 10 janvier 2027 + 14 &amp; 16 janvier 2027",
+  [("financement personnel", "890€"), ("avec prise en charge", "1090€")], ""),
+
+ ("MATWORK 1 + 2 + 3", "[formation intensive]", "du 13 au 19 février 2027",
+  [], "Possibilité d’hébergement"),
+
  ("Petit matériel (magic circle, foam roller, élastique, balles, ballon paille.)", "[pour tous niveaux]",
-  "6 &amp; 7 mars 2027",
-  [("financement personnel", "490€"), ("avec prise en charge", "590€")]),
- ("SWISS BALL", "[pour tous niveaux]", "3 &amp; 4 avril 2027",
-  [("financement personnel", "490€"), ("avec prise en charge", "590€")]),
+  "4 &amp; 11 mars 2027",
+  [("financement personnel", "490€"), ("avec prise en charge", "590€")], ""),
+
+ ("SWISS BALL", "[pour tous niveaux]", "18 &amp; 25 mars 2027",
+  [("financement personnel", "490€"), ("avec prise en charge", "590€")], ""),
+
+ ("MATWORK 1 &amp; 2", "[formation intensive]", "du 6 au 9 mai 2027, pont de l’Ascension",
+  [], "Possibilité d’hébergement"),
+
+ ("MATWORK 3", "[formation intensive]", "du samedi 15 au 17 mai 2027, pont de Pentecôte",
+  [], "Possibilité d’hébergement"),
+
  ("WALL UNIT [Machine]", "[pour public niveau débutant, intermédiaire et avancé]",
   "29 &amp; 30 mai 2027 + 5 &amp; 6 juin 2027",
-  [("financement personnel", "1090€"), ("avec prise en charge", "1290€")]),
+  [("financement personnel", "1090€"), ("avec prise en charge", "1290€")], ""),
+
+ ("Petit matériel", "[formation intensive]", "19 &amp; 20 juin 2027", [], ""),
+
+ ("SWISS BALL", "[formation intensive]", "27 juin 2027", [], ""),
 ]
 
 CURSUS = [
@@ -33,13 +55,17 @@ def prices(items):
 
 
 modules = ""
-for (title, level, dates, pr) in MODULES:
-    lignes = "".join('<li><span>%s</span><b>%s</b></li>' % (lbl, p) for lbl, p in pr)
+for (title, level, dates, pr, mention) in MODULES:
+    if pr:
+        lignes = "".join('<li><span>%s</span><b>%s</b></li>' % (lbl, p) for lbl, p in pr)
+    else:
+        lignes = '<li><span>tarif</span><b>Nous consulter</b></li>'
+    badge = ('<span class="step__mention">%s</span>' % mention) if mention else ""
     modules += f"""      <article class="step reveal">
         <div>
           <h3 class="step__title">{title}</h3>
           <p class="step__level">{level}</p>
-          <p class="step__dates">{c.IC_CAL}<span>{dates}</span></p>
+          <p class="step__dates">{c.IC_CAL}<span>{dates}</span>{badge}</p>
         </div>
         <ul class="step__prices">{lignes}</ul>
       </article>

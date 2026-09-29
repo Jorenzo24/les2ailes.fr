@@ -225,6 +225,11 @@ body.no-scroll{overflow:hidden}
   font-weight:600;
   color:var(--plum-light);margin:0;
 }
+.hero__lead{
+  margin:1.1em auto 0;max-width:30ch;
+  font-size:clamp(1rem,.92rem + .35vw,1.18rem);
+  letter-spacing:.02em;color:rgba(255,255,255,.88);
+}
 .hero__socials{display:flex;justify-content:center;gap:14px;margin-top:26px}
 .hero__socials a{
   display:grid;place-items:center;width:42px;height:42px;
@@ -294,6 +299,19 @@ body.no-scroll{overflow:hidden}
   width:60%;height:60%;border:1px solid var(--plum);opacity:.35;
   border-radius:var(--radius);z-index:-1;
 }
+
+/* --- Bande « cours à l'unité » ------------------------------------------- */
+.dropin{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
+  gap:clamp(20px,3vw,44px);
+  padding:clamp(26px,3vw,40px) clamp(24px,3.4vw,48px);
+  background:var(--paper-warm);
+  border:1px solid var(--line);border-left:3px solid var(--plum);
+}
+.dropin > div{flex:1 1 380px}
+.dropin__title{font-size:clamp(1.35rem,1.1rem + 1vw,1.9rem);color:var(--navy);margin:0 0 .35em}
+.dropin__text{margin:0;color:var(--muted);max-width:52ch}
+.dropin .btn{flex:none}
 
 /* --- Cartes « Découvrez » ----------------------------------------------- */
 .discover{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:clamp(18px,2.6vw,32px)}
@@ -670,10 +688,16 @@ body.no-scroll{overflow:hidden}
 }
 .step__level{margin:0 0 .6em;font-size:.95rem;color:var(--muted)}
 .step__dates{
-  display:flex;align-items:center;gap:8px;
+  display:flex;align-items:center;flex-wrap:wrap;gap:6px 8px;
   margin:0;font-size:.95rem;color:var(--ink);
 }
 .step__dates svg{width:15px;height:15px;fill:var(--plum);flex:none}
+.step__mention{
+  margin-left:12px;padding:3px 10px;
+  font-size:.74rem;letter-spacing:.09em;text-transform:uppercase;
+  border:1px solid currentColor;border-radius:999px;
+  opacity:.75;white-space:nowrap;
+}
 .step__prices{list-style:none;margin:0;padding:0;text-align:right;min-width:225px}
 .step__prices li{
   display:flex;align-items:baseline;justify-content:flex-end;gap:10px;

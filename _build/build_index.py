@@ -90,6 +90,11 @@ html += f"""
       <p class="hero__brand">Les<em>2</em>L</p>
       <h1 class="hero__tagline">Pilates - Yoga - Ballet</h1>
       <h2 class="hero__place">Pays Basque</h2>
+      <p class="hero__lead">Les Cours &amp; Le Centre de Formation Professionnelle</p>
+      <div class="hero__actions">
+        <a class="btn" href="les-disciplines/">Les cours</a>
+        <a class="btn btn--light" href="le-centre-de-formation/">Le centre de formation</a>
+      </div>
       <div class="hero__socials">
         <a href="{c.FACEBOOK}" target="_blank" rel="noopener" aria-label="Facebook">{c.IC_FB}</a>
         <a href="{c.INSTAGRAM}" target="_blank" rel="noopener" aria-label="Instagram">{c.IC_IG}</a>
@@ -160,6 +165,23 @@ html += f"""
           <p><strong>Rejoignez-nous !</strong></p>
           <p><a class="btn" href="{c.EVENT_PDF}">Les prochains évènements</a></p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cours à l'unité -->
+  <section class="section section--tight">
+    <div class="container">
+      <div class="dropin reveal">
+        <div>
+          <p class="eyebrow">De passage au Pays Basque&nbsp;?</p>
+          <h2 class="dropin__title">Venez pour un seul cours</h2>
+          <p class="dropin__text">Pas d’abonnement, pas d’inscription&nbsp;: réservez une séance
+          d’une heure dans la discipline de votre choix et venez essayer.</p>
+        </div>
+        <a class="btn" href="{c.STRIPE_COURS_1H}" target="_blank" rel="noopener">
+          Réserver un cours d’une heure
+        </a>
       </div>
     </div>
   </section>

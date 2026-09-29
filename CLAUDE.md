@@ -219,6 +219,21 @@ fond bleu marine** pour le distinguer du reste du site. C'est le rôle de
 `<body class="theme-navy">` : toutes les surcharges sont regroupées dans
 `style.css` sous « Page inversée (centre de formation) ».
 
+### Sessions de formation : la source de vérité
+
+`MODULES` dans `_build/build_formation.py` liste **les sessions**, pas les
+modules : plusieurs sessions peuvent porter le même intitulé (une session
+classique et une session intensive de MATWORK 3, par exemple). Elles sont
+rangées dans **l'ordre chronologique du tout**, comme la cliente l'a demandé
+le 28/09/2026.
+
+Chaque entrée est `(intitulé, public, dates, tarifs, mention)`. Un `tarifs`
+vide affiche « Nous consulter » : c'est le cas des 5 sessions intensives, dont
+**les prix n'ont pas été communiqués**. La `mention` sert au badge
+« Possibilité d'hébergement ».
+
+---
+
 ### Le module d'avis est dans le pied de page
 
 Depuis le 28 septembre 2026, le carrousel d'avis Google est produit par
@@ -429,7 +444,7 @@ texte en image serait illisible pour Google et les lecteurs d'écran.
 | 3 ter | *(réglé)* Réseaux du centre de formation | Reçus le 28 septembre 2026. Ce sont bien des comptes **distincts** de ceux du studio : `facebook.com/profile.php?id=61572158867367` et `instagram.com/les2l.centre.de.formation/`. Le pied de page garde ceux du studio, c'est voulu |
 | 4 | Fiches des disciplines manquantes | La cliente a fourni 12 fiches ; l'accueil en cite d'autres (Yoga Kundalini, Yoga Nidra, Bain Sonore, Pilates Reformer, coaching danseur préprofessionnel) |
 | 5 | Confirmation de la **grille tarifaire** | Le PDF vient de l'ancien site (déposé en 07/2025), comme le planning périmé qui s'y trouvait |
-| 6 | **PDF « évènements »** + **liste des events** | `common.py` : `EVENT_PDF = "event/"` est un provisoire. À remplacer par `assets/docs/events.pdf`. Cible du bouton « Les prochains évènements » de l'accueil, et du bouton « Être informé » de `/event/` (qui pointe pour l'instant sur `/contact/` pour éviter un auto-lien) |
+| 6 | **PDF « évènements » et nouveau PDF planning** | Annoncés le 28/09/2026, pas encore déposés dans le projet. L'ancien EVENT_PDF + **liste des events** | `common.py` : `EVENT_PDF = "event/"` est un provisoire. À remplacer par `assets/docs/events.pdf`. Cible du bouton « Les prochains évènements » de l'accueil, et du bouton « Être informé » de `/event/` (qui pointe pour l'instant sur `/contact/` pour éviter un auto-lien) |
 | 7 | **1 photo pour la page Events** | Celle des « Ateliers, masterclass & stages ». La cliente préfère garder en attendant le visuel de yoga aérien `g02.jpg` (la femme à l'envers), repéré par un commentaire `TODO cliente` dans `build_event_contact.py`. Celle des groupes privés a été reçue le 14/09/2026 (`cours-prive.jpg`) |
 | 8 | **Dates des modules de formation** | La cliente annonce de nouvelles dates le 26/09/2026. Celles en ligne (`MODULES` dans `build_formation.py`) sont encore les anciennes |
 | 9 | **« finançables par l'état »** dans la carte « Le lieu » | Elle a demandé « l'État » → « les OPCO » pour le bandeau de financement. La carte « Le lieu » garde « finançables par l'état (FIFPL, AFDAS, France travail, Conseil régional) », qui liste des financeurs précis. À trancher |
