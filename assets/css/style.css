@@ -769,6 +769,38 @@ body.no-scroll{overflow:hidden}
 }
 .banner p{margin:0}
 
+/* --- Ateliers (page Events) ---------------------------------------------- */
+.ateliers{display:grid;gap:0;border-top:1px solid var(--line)}
+.atelier{
+  display:grid;
+  grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) auto;
+  align-items:center;gap:clamp(18px,3vw,40px);
+  padding:clamp(22px,2.6vw,30px) clamp(4px,1vw,12px);
+  border-bottom:1px solid var(--line);
+  transition:background .3s var(--ease);
+}
+.atelier:hover{background:var(--paper-warm)}
+.atelier__titre{
+  margin:0 0 .15em;
+  font-size:clamp(1.12rem,1rem + .55vw,1.4rem);
+  color:var(--navy);letter-spacing:.03em;text-transform:uppercase;
+}
+.atelier__qui{margin:0;font-style:italic;color:var(--muted);font-size:.98rem}
+.atelier__date{margin:0 0 .25em;font-weight:600;color:var(--navy);font-size:.98rem}
+.atelier__horaires{list-style:none;margin:0;padding:0;font-size:.95rem;color:var(--muted)}
+.atelier__horaires li{margin:0}
+.atelier__action{display:flex;align-items:center;gap:16px;justify-content:flex-end}
+.atelier__duree{
+  padding:4px 12px;flex:none;
+  font-size:.78rem;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--plum);border:1px solid var(--plum);border-radius:999px;
+}
+
+@media (max-width:820px){
+  .atelier{grid-template-columns:1fr;gap:12px;padding-block:24px}
+  .atelier__action{justify-content:flex-start}
+}
+
 /* --- Contact ------------------------------------------------------------ */
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4vw,60px);align-items:start}
 .form{display:grid;gap:18px}

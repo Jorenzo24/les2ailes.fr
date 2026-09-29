@@ -219,6 +219,24 @@ fond bleu marine** pour le distinguer du reste du site. C'est le rôle de
 `<body class="theme-navy">` : toutes les surcharges sont regroupées dans
 `style.css` sous « Page inversée (centre de formation) ».
 
+### Les ateliers de la page Events
+
+`ATELIERS` dans `_build/build_event_contact.py` reprend mot pour mot le PDF
+« ATELIERS 2026-2027 ». Les six dates ont été vérifiées : elles tombent toutes
+un dimanche.
+
+Chaque atelier dure 1 h 30, sauf la Danse aérienne qui dure 2 h. Le dictionnaire
+`LIENS` associe une durée à un lien de paiement Stripe. **Tant qu'un lien est
+vide, le bouton « Réserver » ne s'affiche pas** : il suffit de renseigner
+`STRIPE_ATELIER_1H30` et `STRIPE_ATELIER_2H` dans `common.py` pour que les six
+boutons apparaissent.
+
+La cliente voulait mettre les liens de paiement dans le PDF. On a fait
+l'inverse : le PDF reste un document d'affichage, et la page porte les boutons.
+Un lien dans un PDF ne se met pas à jour et se clique mal sur mobile.
+
+---
+
 ### Sessions de formation : la source de vérité
 
 `MODULES` dans `_build/build_formation.py` liste **les sessions**, pas les

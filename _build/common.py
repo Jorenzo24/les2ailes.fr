@@ -31,9 +31,13 @@ PHONE_HREF = "+33609148456"
 FACEBOOK_FORMATION = "https://www.facebook.com/profile.php?id=61572158867367"
 INSTAGRAM_FORMATION = "https://www.instagram.com/les2l.centre.de.formation/"
 
-# TODO cliente : PDF « évènements » à recevoir, puis remplacer par
-#   EVENT_PDF = "assets/docs/events.pdf"
-EVENT_PDF = "event/"
+EVENT_PDF = "assets/docs/events.pdf"
+
+# TODO cliente : deux liens de paiement Stripe à recevoir, un pour les ateliers
+# d'1 h 30, un pour celui de 2 h. Renseignés ici, les boutons apparaissent seuls
+# sur chaque atelier de /event/.
+STRIPE_ATELIER_1H30 = ""
+STRIPE_ATELIER_2H = ""
 
 # TODO cliente : nouveaux PDF planning et tarifs à recevoir ; il suffira de
 # remplacer les fichiers dans assets/docs/, les liens ne bougent pas.

@@ -1,6 +1,51 @@
 # -*- coding: utf-8 -*-
 import common as c
 
+
+# Ateliers repris mot pour mot du PDF « ATELIERS 2026-2027 » de la cliente.
+# (titre, intervenant, date, créneaux, durée en minutes)
+# Les six dates ont été vérifiées : elles tombent toutes un dimanche.
+ATELIERS = [
+ ("Technique Martha Graham", "Laureen Elisabeth", "Dimanche 18 octobre 2026",
+  ["10h à 11h30"], 90),
+ ("Danse aérienne", "Melissa Delattre", "Dimanche 6 décembre 2026",
+  ["10h à 12h"], 120),
+ ("Yoga Inversions &amp; Wheel", "Sabine Sandri", "Dimanche 24 janvier 2027",
+  ["Débutant 9h30 à 11h", "Avancé 11h30 à 13h"], 90),
+ ("Bain sonore hypnotique", "Benjamin, « une voie pour soi »", "Dimanche 21 mars 2027",
+  ["10h à 11h30"], 90),
+ ("Yoga en famille", "Alexandra Strzempa", "Dimanche 23 mai 2027",
+  ["10h à 11h30"], 90),
+ ("Danses basques", "Itziar Mendivil", "Dimanche 27 juin 2027",
+  ["Débutant 9h30 à 11h", "Inter. 11h30 à 13h"], 90),
+]
+
+# Un lien vide masque simplement le bouton : les deux liens Stripe sont en
+# attente de la cliente (un pour 1 h 30, un pour 2 h).
+LIENS = {90: c.STRIPE_ATELIER_1H30, 120: c.STRIPE_ATELIER_2H}
+DUREES = {90: "1 h 30", 120: "2 h"}
+
+ateliers_html = ""
+for titre, qui, date, creneaux, duree in ATELIERS:
+    horaires = "".join('<li>%s</li>' % h for h in creneaux)
+    lien = LIENS.get(duree, "")
+    bouton = ('<a class="btn btn--sm" href="%s" target="_blank" rel="noopener">Réserver</a>' % lien) if lien else ""
+    ateliers_html += f"""        <article class="atelier reveal">
+          <div class="atelier__tete">
+            <h3 class="atelier__titre">{titre}</h3>
+            <p class="atelier__qui">avec {qui}</p>
+          </div>
+          <div class="atelier__quand">
+            <p class="atelier__date">{date}</p>
+            <ul class="atelier__horaires">{horaires}</ul>
+          </div>
+          <div class="atelier__action">
+            <span class="atelier__duree">{DUREES[duree]}</span>
+            {bouton}
+          </div>
+        </article>
+"""
+
 # ---------------------------------------------------------------- EVENT ----
 html = c.head(
     "Events, ateliers, masterclass et stages | LES 2 L Pays Basque",
@@ -35,8 +80,7 @@ html += f"""
           <p>Les2L c’est aussi un Event un dimanche par mois: Ateliers, Masterclass, stages, cours
           exceptionnels pendant les vacances.</p>
           <p><strong>Rejoignez-nous !</strong></p>
-          <p><!-- TODO cliente : remplacer par le PDF évènements (c.EVENT_PDF) -->
-          <a class="btn" href="../contact/">Être informé des prochains events</a></p>
+          <p><a class="btn" href="#ateliers">Voir les ateliers de la saison</a></p>
         </div>
       </div>
     </div>
@@ -61,6 +105,23 @@ html += f"""
           <p><a class="btn btn--ghost" href="../contact/">Organiser un cours privé</a></p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="section" id="ateliers">
+    <div class="container container--wide">
+      <div class="center" style="margin-bottom:clamp(30px,4vw,48px)">
+        <p class="eyebrow">Un dimanche par mois</p>
+        <h2 class="title">Les ateliers 2026-2027</h2>
+        <div class="rule"><span></span></div>
+      </div>
+      <div class="ateliers">
+{ateliers_html}      </div>
+      <p class="center" style="margin-top:clamp(28px,3.4vw,42px)">
+        <a class="btn btn--ghost" href="../{c.EVENT_PDF}" target="_blank" rel="noopener">
+          {c.IC_PDF}Télécharger le programme (PDF)
+        </a>
+      </p>
     </div>
   </section>
 
