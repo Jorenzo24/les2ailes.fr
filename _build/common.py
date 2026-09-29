@@ -16,6 +16,23 @@ PROD = True
 
 BASE_URL = "https://www.les2ailes.fr"
 
+def _version(fichier):
+    """Empreinte courte du fichier, pour casser les caches à chaque déploiement.
+
+    Sans ça, Cloudflare et les navigateurs gardent l'ancien CSS jusqu'à un mois
+    (max-age du .htaccess) et les modifications restent invisibles."""
+    import hashlib, os
+    chemin = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), fichier)
+    try:
+        with open(chemin, "rb") as f:
+            return hashlib.md5(f.read()).hexdigest()[:8]
+    except OSError:
+        return "0"
+
+
+V_CSS = _version("assets/css/style.css")
+V_JS = _version("assets/js/main.js")
+
 SITE = "LES 2 L"
 ADDRESS = "228 Chemin de Pagadoy, 64990 Mouguerre"
 FACEBOOK = "https://www.facebook.com/profile.php?id=100070696928721"
@@ -31,7 +48,7 @@ PHONE_HREF = "+33609148456"
 FACEBOOK_FORMATION = "https://www.facebook.com/profile.php?id=61572158867367"
 INSTAGRAM_FORMATION = "https://www.instagram.com/les2l.centre.de.formation/"
 
-EVENT_PDF = "assets/docs/events.pdf"
+EVENT_PDF = "assets/docs/events.pdf?v=" + _version("assets/docs/events.pdf")
 
 # TODO cliente : deux liens de paiement Stripe à recevoir, un pour les ateliers
 # d'1 h 30, un pour celui de 2 h. Renseignés ici, les boutons apparaissent seuls
@@ -41,8 +58,8 @@ STRIPE_ATELIER_2H = ""
 
 # TODO cliente : nouveaux PDF planning et tarifs à recevoir ; il suffira de
 # remplacer les fichiers dans assets/docs/, les liens ne bougent pas.
-PLANNING_PDF = "assets/docs/planning.pdf"
-TARIFS_PDF = "assets/docs/tarifs.pdf"
+PLANNING_PDF = "assets/docs/planning.pdf?v=" + _version("assets/docs/planning.pdf")
+TARIFS_PDF = "assets/docs/tarifs.pdf?v=" + _version("assets/docs/tarifs.pdf")
 
 # (cible, libelle, ouverture dans un nouvel onglet)
 # Les pages conservent exactement les URL du site actuel ; Planning et Tarifs
@@ -89,23 +106,6 @@ REVIEWS = [
     ("Karine Locatelli", 1679875200, 5, "Les cours de yoga et de pilates de Laurence sont tout simplement magiques. Une professeure de qualité qui œuvre pour le bien être de ses élèves. Résultats assurés !!!"),
     ("Mathias rosandic", 1679011200, 5, "Un lieu exceptionnel avec des cours géniaux. Bon pour le corps mais aussi avec de l'humour. La maîtresse des lieux donne envie que l'on revienne. Merci à Laurence pour ce qu'elle nous partage et enseigne."),
 ]
-
-def _version(fichier):
-    """Empreinte courte du fichier, pour casser les caches à chaque déploiement.
-
-    Sans ça, Cloudflare et les navigateurs gardent l'ancien CSS jusqu'à un mois
-    (max-age du .htaccess) et les modifications restent invisibles."""
-    import hashlib, os
-    chemin = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), fichier)
-    try:
-        with open(chemin, "rb") as f:
-            return hashlib.md5(f.read()).hexdigest()[:8]
-    except OSError:
-        return "0"
-
-
-V_CSS = _version("assets/css/style.css")
-V_JS = _version("assets/js/main.js")
 
 CUR = ' aria-current="page"'
 
