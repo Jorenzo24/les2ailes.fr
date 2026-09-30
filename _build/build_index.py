@@ -90,10 +90,10 @@ html += f"""
       <p class="hero__brand">Les<em>2</em>L</p>
       <h1 class="hero__tagline">Pilates - Yoga - Ballet</h1>
       <h2 class="hero__place">Pays Basque</h2>
-      <p class="hero__lead">Les Cours &amp; Le Centre de Formation Professionnelle</p>
+      <p class="hero__lead"><b>Les Cours</b><i>&amp;</i>le Centre de Formation Professionnelle</p>
       <div class="hero__actions">
         <a class="btn" href="les-disciplines/">Les cours</a>
-        <a class="btn btn--light" href="le-centre-de-formation/">Le centre de formation</a>
+        <a class="btn btn--sand" href="le-centre-de-formation/">Le centre de formation</a>
       </div>
       <div class="hero__socials">
         <a href="{c.FACEBOOK}" target="_blank" rel="noopener" aria-label="Facebook">{c.IC_FB}</a>

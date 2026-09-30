@@ -11,44 +11,58 @@ import common as c
 #   Matwork 1+2+3 = prix du package (2470/2770), Matwork 1&2 = 1650/1850.
 # Pour les intensives d'un seul module (Matwork 3, Petit matériel, Swiss Ball),
 # on applique le tarif du module correspondant : à confirmer.
+# Sessions listées dans l'ordre chronologique, tous modules confondus.
+# (intitulé, public, dates, tarifs, mentions)
+# Les mentions produisent les encadrés : « Formation intensive » est ajouté
+# partout où l'hébergement est possible, à la demande de la cliente (30/09/2026).
 MODULES = [
  ("MATWORK 1", "[pour public niveau débutant]", "26 &amp; 27 Septembre + 3 &amp; 4 octobre 2026",
-  [("financement personnel", "890€"), ("avec prise en charge", "1090€")], ""),
+  [("financement personnel", "890€"), ("avec prise en charge", "1090€")], []),
 
  ("MATWORK 2", "[pour public niveau intermédiaire]", "28 &amp; 29 novembre 2026 + 3 &amp; 5 décembre",
-  [("financement personnel", "890€"), ("avec prise en charge", "1090€")], ""),
+  [("financement personnel", "890€"), ("avec prise en charge", "1090€")], []),
 
  ("MATWORK 3", "[pour public niveau avancé]", "9 &amp; 10 janvier 2027 + 14 &amp; 16 janvier 2027",
-  [("financement personnel", "890€"), ("avec prise en charge", "1090€")], ""),
+  [("financement personnel", "890€"), ("avec prise en charge", "1090€")], []),
 
- ("MATWORK 1 + 2 + 3", "[formation intensive]", "du 13 au 19 février 2027",
-  [("financement personnel", "2470€"), ("avec prise en charge", "2770€")], "Possibilité d’hébergement"),
+ ("MATWORK 1 + 2 + 3", "", "du 15 au 21 février 2027",
+  [("financement personnel", "2470€"), ("avec prise en charge", "2770€")],
+  ["Formation intensive", "Possibilité d’hébergement"]),
 
  ("Petit matériel (magic circle, foam roller, élastique, balles, ballon paille.)", "[pour tous niveaux]",
   "4 &amp; 11 mars 2027",
-  [("financement personnel", "490€"), ("avec prise en charge", "590€")], ""),
+  [("financement personnel", "490€"), ("avec prise en charge", "590€")], []),
 
  ("SWISS BALL", "[pour tous niveaux]", "18 &amp; 25 mars 2027",
-  [("financement personnel", "490€"), ("avec prise en charge", "590€")], ""),
+  [("financement personnel", "490€"), ("avec prise en charge", "590€")], []),
 
- ("MATWORK 1 + 2 + 3", "[formation intensive]", "du 10 au 16 avril 2027",
-  [("financement personnel", "2470€"), ("avec prise en charge", "2770€")], "Possibilité d’hébergement"),
+ ("MATWORK 1 + 2 + 3", "", "du 12 au 18 avril 2027",
+  [("financement personnel", "2470€"), ("avec prise en charge", "2770€")],
+  ["Formation intensive", "Possibilité d’hébergement"]),
 
- ("MATWORK 1 &amp; 2", "[formation intensive]", "du 6 au 9 mai 2027, pont de l’Ascension",
-  [("financement personnel", "1650€"), ("avec prise en charge", "1850€")], "Possibilité d’hébergement"),
+ ("MATWORK 1 &amp; 2", "", "du 6 au 9 mai 2027, pont de l’Ascension",
+  [("financement personnel", "1650€"), ("avec prise en charge", "1850€")],
+  ["Formation intensive", "Possibilité d’hébergement"]),
 
- ("MATWORK 3", "[formation intensive]", "du samedi 15 au 17 mai 2027, pont de Pentecôte",
-  [("financement personnel", "890€"), ("avec prise en charge", "1090€")], "Possibilité d’hébergement"),
+ ("MATWORK 3", "", "du samedi 15 au 17 mai 2027, pont de Pentecôte",
+  [("financement personnel", "890€"), ("avec prise en charge", "1090€")],
+  ["Formation intensive", "Possibilité d’hébergement"]),
 
  ("WALL UNIT [Machine]", "[pour public niveau débutant, intermédiaire et avancé]",
   "29 &amp; 30 mai 2027 + 5 &amp; 6 juin 2027",
-  [("financement personnel", "1090€"), ("avec prise en charge", "1290€")], ""),
+  [("financement personnel", "1090€"), ("avec prise en charge", "1290€")], []),
 
- ("Petit matériel", "[formation intensive]", "19 &amp; 20 juin 2027",
-  [("financement personnel", "490€"), ("avec prise en charge", "590€")], ""),
+ ("Petit matériel", "", "19 &amp; 20 juin 2027",
+  [("financement personnel", "490€"), ("avec prise en charge", "590€")],
+  ["Formation intensive"]),
 
- ("SWISS BALL", "[formation intensive]", "27 juin 2027",
-  [("financement personnel", "490€"), ("avec prise en charge", "590€")], ""),
+ ("SWISS BALL", "", "27 juin 2027",
+  [("financement personnel", "490€"), ("avec prise en charge", "590€")],
+  ["Formation intensive"]),
+
+ # TODO cliente : tarif non communiqué pour cette session (30/09/2026)
+ ("MATWORK 1 + 2 + 3, Petit matériel &amp; Swiss Ball", "", "du 4 au 11 juillet 2027",
+  [], ["Formation intensive", "Possibilité d’hébergement"]),
 ]
 
 CURSUS = [
@@ -66,17 +80,20 @@ def prices(items):
 
 
 modules = ""
-for (title, level, dates, pr, mention) in MODULES:
+for (title, level, dates, pr, mentions) in MODULES:
     if pr:
         lignes = "".join('<li><span>%s</span><b>%s</b></li>' % (lbl, p) for lbl, p in pr)
     else:
         lignes = '<li><span>tarif</span><b>Nous consulter</b></li>'
-    badge = ('<span class="step__mention">%s</span>' % mention) if mention else ""
+    niveau = ('<p class="step__level">%s</p>' % level) if level else ""
+    badges = "".join('<span class="step__mention">%s</span>' % m for m in mentions)
+    badges = ('<p class="step__badges">%s</p>' % badges) if badges else ""
     modules += f"""      <article class="step reveal">
         <div>
           <h3 class="step__title">{title}</h3>
-          <p class="step__level">{level}</p>
-          <p class="step__dates">{c.IC_CAL}<span>{dates}</span>{badge}</p>
+          {niveau}
+          <p class="step__dates">{c.IC_CAL}<span>{dates}</span></p>
+          {badges}
         </div>
         <ul class="step__prices">{lignes}</ul>
       </article>
@@ -155,7 +172,8 @@ html += f"""
             <li>BALLON SWISSBALL (35 heures dont 15 en présentiel)</li>
             <li>WALLUNIT MACHINE (50 heures dont 30 en présentiel)</li>
           </ul>
-          <p>Chaque module est composé d’un ou deux week-ends de 15 heures chacun.</p>
+          <p>Il est possible de suivre la formation en visio sous certaines conditions,
+          prendre contact pour en connaitre les modalités.</p>
         </div>
       </div>
     </div>
@@ -177,7 +195,8 @@ html += f"""
           <ul>
             <li>de l’histoire et des fondamentaux de la méthode Joseph Pilates</li>
             <li>des exercices, des variantes et des enchaînements respectueux de son fondateur</li>
-            <li>d’anatomie et de prévention des blessures avec un médecin du sport et une kinesthésique</li>
+            <li>d’anatomie et de prévention des blessures avec un médecin du sport, une
+            kinésithérapeute et un ostéopathe</li>
             <li>de pédagogie avec une Professeure en titre</li>
             <li>de business avec un expert comptable</li>
             <li>de l’ouverture possible en Stott Pilates, TRX, Gyrohinesis avec des intervenants
@@ -247,7 +266,7 @@ html += f"""
           <img src="../assets/img/formation/ico-evaluation.png" alt="" width="112" height="112" loading="lazy">
           <h3>Les évaluations</h3>
           <p>Un contrôle continu est mis en place pendant toute la formation.</p>
-          <p>A la fin de chaque module, les stagiaires donneront une séance de 30mn de cours afin
+          <p>A la fin de chaque module, les stagiaires donneront une séance afin
           d’être évalués dans les meilleures conditions.</p>
           <p>Une évaluation écrite précède cette mise en situation.</p>
           <p>Une attestation de formation sera transmise au stagiaire.</p>

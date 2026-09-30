@@ -115,6 +115,9 @@ li{margin-bottom:.35em}
 .btn--ghost{background:transparent;color:var(--plum)}
 .btn--ghost:hover{background:var(--plum);color:#fff}
 .btn--light{background:transparent;border-color:rgba(255,255,255,.7);color:#fff}
+/* Bouton taupe : réservé au centre de formation, pour le distinguer des cours */
+.btn--sand{background:var(--sand);border-color:var(--sand);color:var(--navy)}
+.btn--sand:hover{background:#fff;border-color:#fff;color:var(--navy);box-shadow:0 10px 24px rgba(0,0,0,.26)}
 .btn--light:hover{background:#fff;border-color:#fff;color:var(--navy);box-shadow:0 10px 24px rgba(0,0,0,.22)}
 .btn--navy{background:var(--navy);border-color:var(--navy)}
 .btn--navy:hover{background:var(--navy-deep);border-color:var(--navy-deep);box-shadow:0 10px 24px rgba(6,44,90,.3)}
@@ -214,7 +217,7 @@ body.no-scroll{overflow:hidden}
   font-size:clamp(3rem,2rem + 6vw,5.4rem);
   line-height:1;margin:0 0 .18em;font-weight:600;
 }
-.hero__brand em{font-style:normal;color:var(--plum-light)}
+.hero__brand em{font-style:normal;color:var(--sand)}
 .hero__tagline{
   font-size:clamp(1.15rem,.95rem + 1.1vw,1.8rem);
   font-weight:600;margin:0 0 .1em;letter-spacing:.04em;
@@ -223,12 +226,19 @@ body.no-scroll{overflow:hidden}
   font-family:var(--script);
   font-size:clamp(1.25rem,1rem + 1.15vw,1.95rem);
   font-weight:600;
-  color:var(--plum-light);margin:0;
+  color:var(--sand);margin:0;
 }
+/* « Les Cours / & / le Centre de Formation Professionnelle » sur trois lignes,
+   composition demandée par la cliente le 30/09/2026. */
 .hero__lead{
-  margin:1.1em auto 0;max-width:30ch;
-  font-size:clamp(1rem,.92rem + .35vw,1.18rem);
-  letter-spacing:.02em;color:rgba(255,255,255,.88);
+  margin:1.3em auto .2em;
+  font-size:clamp(1.02rem,.92rem + .45vw,1.28rem);
+  line-height:1.5;letter-spacing:.02em;color:rgba(255,255,255,.9);
+}
+.hero__lead b{display:block;font-weight:600}
+.hero__lead i{
+  display:block;font-style:normal;
+  font-size:1.35em;color:var(--sand);line-height:1;margin:.1em 0;
 }
 .hero__socials{display:flex;justify-content:center;gap:14px;margin-top:26px}
 .hero__socials a{
@@ -667,12 +677,14 @@ body.no-scroll{overflow:hidden}
   margin:0;font-size:.95rem;color:var(--ink);
 }
 .step__dates svg{width:15px;height:15px;fill:var(--plum);flex:none}
+.step__badges{display:flex;flex-wrap:wrap;gap:8px;margin:.7em 0 0}
 .step__mention{
-  margin-left:12px;padding:3px 10px;
+  padding:3px 10px;
   font-size:.74rem;letter-spacing:.09em;text-transform:uppercase;
   border:1px solid currentColor;border-radius:999px;
-  opacity:.75;white-space:nowrap;
+  opacity:.8;white-space:nowrap;
 }
+.step__mention:first-child{opacity:1;border-width:1.5px}
 .step__prices{list-style:none;margin:0;padding:0;text-align:right;min-width:225px}
 .step__prices li{
   display:flex;align-items:baseline;justify-content:flex-end;gap:10px;

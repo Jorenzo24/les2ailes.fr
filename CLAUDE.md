@@ -252,6 +252,23 @@ vide affiche « Nous consulter » : c'est le cas des 5 sessions intensives, dont
 
 ---
 
+### Tout ce qui est servi porte une empreinte de version
+
+CSS, JS, PDF **et images**. Sans ça, remplacer un fichier sans changer son nom
+ne change pas son URL, et Cloudflare continue de servir l'ancien jusqu'à un an.
+C'est arrivé trois fois : le CSS du pot de miel, le planning corrigé, puis
+l'icône des évaluations restée blanche alors qu'elle était détourée.
+
+- CSS et JS : `V_CSS` / `V_JS` dans `common.py`
+- PDF : l'empreinte est intégrée à `PLANNING_PDF`, `TARIFS_PDF`, `EVENT_PDF`
+- **images** : ajoutées automatiquement par `build_all.py`, en post-traitement
+  du HTML généré. Rien à faire dans les gabarits.
+
+Conséquence : **toujours passer par `build_all.py`**, jamais par les
+`build_*.py` un par un, sinon les images perdent leur empreinte.
+
+---
+
 ### Le module d'avis est dans le pied de page
 
 Depuis le 28 septembre 2026, le carrousel d'avis Google est produit par

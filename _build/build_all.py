@@ -21,6 +21,48 @@ for f in sorted(glob.glob("build_*.py")):
         continue
     runpy.run_path(f, run_name="__main__")
 
+
+# --- Empreinte de version sur les images ------------------------------------
+# Sans ça, remplacer une photo ou une icône ne change pas son URL : Cloudflare
+# continue de servir l'ancienne pendant un an. C'est ce qui est arrivé à
+# l'icône des évaluations, corrigée mais toujours blanche en ligne.
+import hashlib
+import re
+
+_EMPREINTES = {}
+
+
+def _empreinte(chemin_disque):
+    if chemin_disque not in _EMPREINTES:
+        try:
+            with open(chemin_disque, "rb") as f:
+                _EMPREINTES[chemin_disque] = hashlib.md5(f.read()).hexdigest()[:8]
+        except OSError:
+            _EMPREINTES[chemin_disque] = None
+    return _EMPREINTES[chemin_disque]
+
+
+MOTIF = re.compile(r'((?:\.\./)*assets/img/[-\w./]+\.(?:jpg|jpeg|png|webp|svg))')
+pages = glob.glob(os.path.join(RACINE, "*.html")) + glob.glob(os.path.join(RACINE, "*", "index.html"))
+total = 0
+for page in pages:
+    dossier = os.path.dirname(page)
+    html = open(page, encoding="utf-8").read()
+
+    def remplacer(m):
+        global total
+        url = m.group(1)
+        v = _empreinte(os.path.normpath(os.path.join(dossier, url)))
+        if not v:
+            return url
+        total += 1
+        return url + "?v=" + v
+
+    nouveau = MOTIF.sub(remplacer, html)
+    if nouveau != html:
+        open(page, "w", encoding="utf-8").write(nouveau)
+print("images versionnées : %d" % total)
+
 # --- robots.txt ------------------------------------------------------------
 if c.PROD:
     robots = (

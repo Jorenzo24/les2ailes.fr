@@ -102,7 +102,14 @@ html += f"""
           groupe privé, la discipline de votre choix avec le professeur de votre choix (EVJF,
           anniversaire, cadeau, etc…). Tous les prétextes sont propices pour partager un moment
           inoubliable !</p>
-          <p><a class="btn btn--ghost" href="../contact/">Organiser un cours privé</a></p>
+          <p>Il y a la possibilité d’organiser un cours privé les week-end, en duo, trio ou
+          groupe pour un EVJF, Baby Shower, Retrouvailles, anniversaire de mariage,
+          anniversaire, célébration et réussite, etc.</p>
+          <p>Prenez contact avec moi par le formulaire ou par téléphone.</p>
+          <p style="display:flex;gap:12px;flex-wrap:wrap">
+            <a class="btn btn--ghost" href="../contact/">Nous écrire</a>
+            <a class="btn btn--ghost" href="tel:{c.PHONE_HREF}">{c.PHONE}</a>
+          </p>
         </div>
       </div>
     </div>

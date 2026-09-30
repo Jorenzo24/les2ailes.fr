@@ -50,11 +50,9 @@ INSTAGRAM_FORMATION = "https://www.instagram.com/les2l.centre.de.formation/"
 
 EVENT_PDF = "assets/docs/events.pdf?v=" + _version("assets/docs/events.pdf")
 
-# TODO cliente : deux liens de paiement Stripe à recevoir, un pour les ateliers
-# d'1 h 30, un pour celui de 2 h. Renseignés ici, les boutons apparaissent seuls
-# sur chaque atelier de /event/.
-STRIPE_ATELIER_1H30 = ""
-STRIPE_ATELIER_2H = ""
+# Paiement des ateliers du dimanche, transmis par la cliente le 30/09/2026.
+STRIPE_ATELIER_1H30 = "https://buy.stripe.com/7sY9AM5Za7p72iV98s2Fa01"
+STRIPE_ATELIER_2H = "https://buy.stripe.com/aFa8wI2MY10J9Ln98s2Fa02"
 
 # TODO cliente : nouveaux PDF planning et tarifs à recevoir ; il suffira de
 # remplacer les fichiers dans assets/docs/, les liens ne bougent pas.
