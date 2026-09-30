@@ -14,6 +14,10 @@
 
   /* Teintes relevées sur les PDF « Planning » et « Tarifs » de la cliente */
   --sand:#ddd7d0;        /* blocs Zoom / Carte / Modalités du PDF tarifs */
+  /* Taupe soutenu des blocs Munz Floor et Bodyflow du planning. Réservé au
+     texte sur fond bleu marine : le --sand, trop clair, s'y confond au blanc
+     (1,4:1 face au blanc, contre 2,9:1 ici). */
+  --taupe:#9c9893;
   --aubergine:#361d3b;   /* bloc Lunaire du PDF tarifs */
   --prune:#54305a;       /* constellations du PDF tarifs */
   --ink:#16233a;
@@ -217,7 +221,7 @@ body.no-scroll{overflow:hidden}
   font-size:clamp(3rem,2rem + 6vw,5.4rem);
   line-height:1;margin:0 0 .18em;font-weight:600;
 }
-.hero__brand em{font-style:normal;color:var(--sand)}
+.hero__brand em{font-style:normal;color:var(--taupe)}
 .hero__tagline{
   font-size:clamp(1.15rem,.95rem + 1.1vw,1.8rem);
   font-weight:600;margin:0 0 .1em;letter-spacing:.04em;
@@ -226,7 +230,7 @@ body.no-scroll{overflow:hidden}
   font-family:var(--script);
   font-size:clamp(1.25rem,1rem + 1.15vw,1.95rem);
   font-weight:600;
-  color:var(--sand);margin:0;
+  color:var(--taupe);margin:0;
 }
 /* « Les Cours / & / le Centre de Formation Professionnelle » sur trois lignes,
    composition demandée par la cliente le 30/09/2026. */
@@ -238,7 +242,7 @@ body.no-scroll{overflow:hidden}
 .hero__lead b{display:block;font-weight:600}
 .hero__lead i{
   display:block;font-style:normal;
-  font-size:1.35em;color:var(--sand);line-height:1;margin:.1em 0;
+  font-size:1.35em;color:var(--taupe);line-height:1;margin:.1em 0;
 }
 .hero__socials{display:flex;justify-content:center;gap:14px;margin-top:26px}
 .hero__socials a{

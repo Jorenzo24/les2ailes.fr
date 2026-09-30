@@ -387,6 +387,12 @@ seule teinte claire qui ne tire pas vers le rose (la cliente y est attentive).
 Le cursus complet se distingue par un filet supérieur et un titre en aubergine
 `#361d3b`.
 
+**Deux taupes, deux usages.** `--sand` (`#ddd7d0`) sert de **fond de carte** :
+sur le bleu marine il ressort à 9,7:1. Mais en **texte** il ne fait que 1,4:1
+face au blanc, donc on le prend pour du blanc sali. D'où `--taupe` (`#9c9893`),
+celui des blocs Munz Floor et Bodyflow du planning : 4,83:1 sur le marine et
+2,87:1 face au blanc, il se lit comme une vraie couleur. Ne pas intervertir.
+
 Pour refaire l'extraction après une mise à jour des PDF :
 `sips -s format png assets/docs/tarifs.pdf --out /tmp/t.png`, puis un comptage
 de couleurs avec Pillow en écartant le blanc.
