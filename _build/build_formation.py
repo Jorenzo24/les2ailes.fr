@@ -56,13 +56,13 @@ MODULES = [
   [("financement personnel", "490€"), ("avec prise en charge", "590€")],
   ["Formation intensive"]),
 
- ("SWISS BALL", "", "27 juin 2027",
+ ("SWISS BALL", "", "26 &amp; 27 juin 2027",
   [("financement personnel", "490€"), ("avec prise en charge", "590€")],
   ["Formation intensive"]),
 
- # TODO cliente : tarif non communiqué pour cette session (30/09/2026)
  ("MATWORK 1 + 2 + 3, Petit matériel &amp; Swiss Ball", "", "du 4 au 11 juillet 2027",
-  [], ["Formation intensive", "Possibilité d’hébergement"]),
+  [("financement personnel", "3260€"), ("avec prise en charge", "3560€")],
+  ["Formation intensive", "Possibilité d’hébergement"]),
 ]
 
 CURSUS = [
@@ -124,7 +124,7 @@ html += c.header("le-centre-de-formation/", "../")
 html += c.pagehead(
     "Formation Instructeur Pilates",
     "Le Centre de Formation",
-    "Une structure unique dans le Pays Basque, les Landes et le Béarn.",
+    "Une structure unique<br>dans le Pays Basque, les Landes et le Béarn.",
     h1="eyebrow",
 )
 html += f"""
@@ -247,8 +247,8 @@ html += f"""
           <ul>
             <li>Être âgé de 18 ans minimum</li>
             <li>Être titulaire de l’un des diplômes suivants : CQP, CQP ALS AGEE, BPJEPS, APT, licence
-            STAPS, kinésithérapeute, ostéopathe, sage-femme, de danse (classique, contemporain ou jazz),
-            professeur de danse ou professeur de yoga</li>
+            STAPS, kinésithérapeute, ostéopathe, sage-femme, professeur de danse (classique,
+            contemporain ou jazz) ou professeur de yoga</li>
             <li>Justifier d’une pratique préalable de 20 heures minimum de cours de Pilates Mat au
             moment de l’entrée en formation → Ces heures peuvent être réalisées en présentiel ou en
             visio au sein de la structure LES2L, en amont de la formation choisie</li>

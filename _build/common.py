@@ -94,6 +94,8 @@ IC_UP = ('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 6 8 8-1.4 1.4
 # (nom, horodatage unix, note, texte) : la date affichée est calculée en JS,
 # elle reste donc juste avec le temps.
 REVIEWS = [
+    ("Vicky Verfaillie", 1774000800, 5, "C'est depuis plus de 2 ans que j'ai intégré le studio les 2L, et je ne regrette pas. Laurence et toute son équipe m'ont permis de mieux me comprendre, et ainsi me permettre d'être en harmonie avec mon corps et mon esprit. Ce sont les yeux fermés que je recommande ce studio. Un immense merci pour tout."),
+    ("Christian Orleac", 1782000000, 5, "Des cours de qualité avec une professeure bienveillante et très professionnelle. Un travail sérieux sans se prendre au sérieux, dans une ambiance très agréable. Je recommande vivement !"),
     ("nathalie craspail", 1764720000, 5, "Laurence est une professionnelle hors pair, alliant bienveillance, rigueur et humour. Le tout dans un lieu magique et une très chaleureuse ambiance."),
     ("Nath Ledev", 1764720000, 5, "Un lieu magique, des cours exceptionnels où Laurence, par ses qualités professionnelles, sa créativité et sa grande bienveillance, permet à chacun de découvrir et d'entretenir son corps. Un moment d'apaisement précieux."),
     ("Gerard Zenoni", 1761609600, 5, "Incroyable d’avoir ce niveau de professionnalisme et d'équipements, à  Mouguerre, France ! En deux ans, je suis progressivement passé d'un cours par semaine... à deux... puis trois... et je sens que le quatre n'est pas loin ! Et plus de maux de dos 👍"),
