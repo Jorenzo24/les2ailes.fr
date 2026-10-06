@@ -14,10 +14,13 @@ avec seulement des améliorations visuelles et d'UX.
 
 - **Cliente** : Laurence Lanté — `les2ailespy@gmail.com` — gérante, ancienne
   danseuse professionnelle, enseigne le Pilates depuis 12 ans.
-- **Ancien site** : `https://www.les2ailes.fr/` — WordPress + Elementor + OceanWP.
-  **Toujours en ligne**, il reste la référence tant que la bascule n'est pas faite.
+- **En production** : `https://www.les2ailes.fr/` depuis le 28 septembre 2026,
+  serveur cPanel `65.21.136.233`, derrière Cloudflare.
+- **Ancien site** : WordPress + Elementor + OceanWP chez OVH mutualisé, remplacé.
+  Son hébergement n'est pas résilié : le domaine porte des **MX OVH actifs**.
 - **Compte GitHub** : `Jorenzo24` — repo : `github.com/Jorenzo24/les2ailes.fr` (public)
-- **Aperçu en ligne** : `https://jorenzo24.github.io/les2ailes.fr/` (GitHub Pages, branche `main`, racine `/`)
+- **GitHub Pages** a servi d'aperçu pendant la refonte. À couper si ce n'est pas
+  déjà fait : il ferait doublon avec la production.
 
 ---
 
@@ -30,12 +33,15 @@ avec seulement des améliorations visuelles et d'UX.
 | JS | **1 seul fichier** : `assets/js/main.js`, vanilla ES5, aucune dépendance | ✅ |
 | Polices | Google Fonts (EB Garamond + Dancing Script) | ✅ |
 | Génération | Scripts **Python 3** dans `_build/` (stdlib uniquement) | ✅ |
-| Hébergement | **GitHub Pages** (aperçu) — cible finale à décider avec la cliente | ✅ aperçu |
+| Hébergement | **cPanel** `65.21.136.233`, derrière **Cloudflare** | ✅ en prod |
+| Back-end | **PHP** pour le seul formulaire de contact (`contact/envoi.php`) | ✅ en prod |
 
 - **Pas de WordPress, pas de framework, pas de npm.** Le site doit rester
   ouvrable en double-cliquant sur `index.html`.
-- **Aucune dépendance externe** hors Google Fonts et l'iframe Google Maps de la
-  page contact.
+- **Aucune dépendance externe** hors Google Fonts, l'iframe Google Maps de la
+  page contact, et PHPMailer, embarqué dans `lib/` pour éviter Composer.
+- Un `cp -R` dans `.cpanel.yml` par dossier déployé : **penser à l'y ajouter**
+  en créant un nouveau dossier, sinon il ne partira jamais en ligne.
 
 ---
 
@@ -75,10 +81,16 @@ avec seulement des améliorations visuelles et d'UX.
    ponctuation. Utiliser virgules, deux-points ou `|` dans les balises title.
    Exception : les caractères présents dans les textes d'origine de la cliente
    (ex. le `–` de « LES2L Centre de Formation – est une nouvelle structure »).
-5. **Tant que le site est en aperçu** : `<meta name="robots" content="noindex, nofollow">`
-   sur toutes les pages + `robots.txt` en `Disallow: /`. Le site ne doit pas
-   concurrencer `les2ailes.fr` dans Google.
-6. **`_mails/` et `mails.zip` ne sont jamais commités** (photos personnelles des
+5. **`PROD` dans `_build/common.py` pilote l'indexation.** À `False`, toutes les
+   pages portent `noindex, nofollow` et `robots.txt` interdit tout ; à `True`,
+   l'indexation est ouverte et le sitemap pointe sur le domaine. **Il est à
+   `True` depuis la mise en production.** Ne le repasser à `False` que pour
+   remonter un aperçu, et ne jamais oublier de le remettre.
+6. **Les intitulés de la page Équipe ne se déduisent pas des disciplines.**
+   La cliente les a corrigés un par un le 30 septembre 2026 : Lénie n'enseigne
+   que le Munz Floor®, Alexandra que le Yoga Aérien pour Enfants, etc. Ne jamais
+   les « compléter » d'après les bios ou le planning, ils viennent d'elle.
+7. **`_mails/` et `mails.zip` ne sont jamais commités** (photos personnelles des
    professeures + adresses e-mail). Ils sont dans `.gitignore`.
 
 ---
@@ -112,28 +124,37 @@ les2ailes.fr/
 ├── index.html                        /
 ├── les-disciplines/index.html        /les-disciplines/
 ├── les-professionnels/index.html     /les-professionnels/   (L'équipe)
-├── planning/index.html               /planning/
-├── tarifs/index.html                 /tarifs/
 ├── event/index.html                  /event/
-├── contact/index.html                /contact/
+├── contact/
+│   ├── index.html                    /contact/
+│   └── envoi.php                     traitement du formulaire
 ├── le-centre-de-formation/index.html /le-centre-de-formation/
 ├── 404.html
-├── robots.txt / sitemap.xml / .nojekyll
+├── .htaccess                   redirections, cache, sécurité
+├── .cpanel.yml                 tâches de déploiement
+├── robots.txt / sitemap.xml
 ├── assets/
 │   ├── css/style.css           feuille unique (tokens en :root)
-│   ├── js/main.js              menu mobile, lightbox, reveal, cookies, formulaire
+│   ├── js/main.js              menu, lightbox, reveal, avis, cookies, formulaire
 │   ├── img/
-│   │   ├── equipe/             7 portraits N&B, 900×1200
-│   │   ├── gallery/            g01…g18.jpg (galerie accueil)
-│   │   ├── formation/          visuels + icônes du centre de formation
-│   │   ├── hero.jpg, logo.png, logo-blanc.png, planning-2026-2027.jpg…
-│   └── docs/                   tarifs.pdf, planning.pdf
+│   │   ├── equipe/             8 portraits N&B, 900×1200
+│   │   ├── gallery/            15 photos de l'accueil
+│   │   ├── formation/          visuels + pictogrammes du centre de formation
+│   │   └── hero.jpg, logo.png, logo-blanc.png, ornement.png, cours-prive.jpg…
+│   └── docs/                   planning.pdf, tarifs.pdf, events.pdf
+├── lib/PHPMailer/              3 fichiers, envoi SMTP du formulaire
 ├── _build/                     ← GÉNÉRATEURS (voir §6)
-│   ├── common.py               head / header / footer / pagehead partagés
-│   └── build_*.py              un script par page
+│   ├── common.py               données partagées + head / header / footer
+│   ├── build_all.py            ← LA commande à lancer
+│   ├── build_*.py              un script par page
+│   └── _inactif/               générateurs des pages planning et tarifs supprimées
 ├── _mails/                     ← gitignored (données cliente)
-└── mails.zip                   ← gitignored
+├── mails.zip                   ← gitignored
+└── .env                        ← gitignored (identifiants SMTP)
 ```
+
+**Pas de pages `/planning/` ni `/tarifs/`** : les onglets ouvrent directement
+les PDF. Leurs générateurs dorment dans `_build/_inactif/`.
 
 ---
 
@@ -160,7 +181,7 @@ les2ailes.fr/
 5. **Optimiser toute nouvelle image** avant commit (Pillow est dispo) :
    galerie ≤ 1100 px de large, photos pleine largeur ≤ 1400, hero ≤ 1920,
    portraits 900×1200 en niveaux de gris, JPEG qualité 84-86 progressif.
-6. **Ne rien inventer.** S'il manque un contenu (voir §8), le signaler à Joseph
+6. **Ne rien inventer.** S'il manque un contenu (voir §13), le signaler à Joseph
    plutôt que de rédiger un texte de remplacement.
 
 ---
@@ -175,27 +196,49 @@ Points à retenir :
   `cd _build && python3 build_all.py`.
 - `build_all.py` régénère **tout** (pages + robots + sitemap). C'est la
   commande à utiliser, pas les `build_*.py` un par un.
-- Le serveur cible est un **cPanel** (Git Version Control + `.cpanel.yml`),
-  pas l'OVH mutualisé où tourne encore le WordPress.
 - Le domaine reste canonique sur **www**, contrairement aux autres projets :
   c'est ce que Google a indexé.
 - ⚠️ Le domaine porte des **MX OVH actifs**. On ne modifie que les
   enregistrements A. Ne jamais toucher aux NS, MX ou SPF.
-
-
 - Branche unique : `main`. Push direct, pas de PR sur ce projet.
-- GitHub Pages est branché sur `main` / racine — **chaque push redéploie**
-  automatiquement en ~1 min.
-- `.nojekyll` est présent : les dossiers `_build/` et les fichiers commençant par
-  `_` sont donc servis tels quels (sans lui, Jekyll les ignorerait).
-- Vérifier après déploiement :
-  ```bash
-  curl -s -o /dev/null -w "%{http_code}\n" https://jorenzo24.github.io/les2ailes.fr/
-  ```
+
+### Le déploiement n'est pas automatique
+
+Pousser sur GitHub **ne met rien en ligne**. Il faut, dans cPanel →
+Git™ Version Control → onglet Pull or Deploy :
+
+1. **Update from Remote** (récupère le dernier commit)
+2. **Deploy HEAD Commit** (exécute `.cpanel.yml`)
+
+Le dépôt est cloné dans `/home/les2ailes/repositories/les2ailes.fr`, **pas dans
+`public_html`** : `.cpanel.yml` y copie les fichiers, ce qui garde `.git/`,
+`_build/` et `CLAUDE.md` hors du web.
+
+### Vérifier après déploiement
+
+```bash
+# la page sert bien la dernière version
+diff <(curl -s https://www.les2ailes.fr/) index.html >/dev/null && echo "à jour"
+
+# les redirections depuis l'ancien WordPress
+for u in "" les-disciplines/ planning/ tarifs/ wp-login.php nawak/; do
+  printf "%-22s %s\n" "/$u" "$(curl -s -o /dev/null -w '%{http_code}' "https://www.les2ailes.fr/$u")"
+done
+```
+
+Attendu : `200` sur les pages, `301` sur planning et tarifs, `410` sur
+`wp-login.php`, `404` sur une URL bidon.
+
+### Si une modification n'apparaît pas en ligne
+
+C'est **presque toujours le cache Cloudflare**, pas le déploiement. Vérifier
+l'en-tête `cf-cache-status`. Tout ce qui est servi porte une empreinte de
+version (voir plus bas) : si un fichier modifié garde la même URL, c'est que
+`build_all.py` n'a pas été relancé.
 
 ---
 
-## 7 bis. Typographie
+## 8. Typographie
 
 | Usage | Police |
 |---|---|
@@ -212,12 +255,31 @@ valeurs d'origine sans revoir l'ensemble.
 
 ---
 
-## 7 ter. Le centre de formation est en couleurs inversées
+## 9. Le centre de formation est en couleurs inversées
 
 À la demande de la cliente, `/le-centre-de-formation/` est **entièrement sur
 fond bleu marine** pour le distinguer du reste du site. C'est le rôle de
 `<body class="theme-navy">` : toutes les surcharges sont regroupées dans
 `style.css` sous « Page inversée (centre de formation) ».
+
+Son bandeau de page est un cas particulier : `c.pagehead(..., h1="eyebrow")`.
+Le `<h1>` est le **petit sur-titre violet** « Formation Instructeur Pilates »,
+pour le mot-clé, et le gros titre « Le Centre de Formation » n'est plus qu'un
+`<p class="pagehead__display">`. Une seule balise h1 sur la page, et le visuel
+reste celui d'origine.
+
+Points d'attention si on ajoute un bloc à cette page :
+- les cartes deviennent `rgba(255,255,255,.055)` avec bordure translucide ;
+- la carte mise en avant (`.pack--highlight`) s'inverse à son tour, en blanc ;
+- les pictogrammes noirs passent en `filter:brightness(0) invert(1)` ;
+- un logo sur fond blanc opaque (Qualiopi) doit être posé dans `.logo-card`,
+  sinon il forme un bloc blanc disgracieux ;
+- les boutons pleins passent en `--plum-light` sur texte bleu marine, sinon ils
+  ne ressortent pas.
+
+---
+
+## 10. Partis pris, page par page
 
 ### Les ateliers de la page Events
 
@@ -397,24 +459,10 @@ Pour refaire l'extraction après une mise à jour des PDF :
 `sips -s format png assets/docs/tarifs.pdf --out /tmp/t.png`, puis un comptage
 de couleurs avec Pillow en écartant le blanc.
 
-Son bandeau de page est un cas particulier : `c.pagehead(..., h1="eyebrow")`.
-Le `<h1>` est le **petit sur-titre violet** « Formation Instructeur Pilates »,
-pour le mot-clé, et le gros titre « Le Centre de Formation » n'est plus qu'un
-`<p class="pagehead__display">`. Une seule balise h1 sur la page, et le visuel
-reste celui d'origine.
-
-Points d'attention si on ajoute un bloc à cette page :
-- les cartes deviennent `rgba(255,255,255,.055)` avec bordure translucide ;
-- la carte mise en avant (`.pack--highlight`) s'inverse à son tour, en blanc ;
-- les pictogrammes noirs passent en `filter:brightness(0) invert(1)` ;
-- un logo sur fond blanc opaque (Qualiopi) doit être posé dans `.logo-card`,
-  sinon il forme un bloc blanc disgracieux ;
-- les boutons pleins passent en `--plum-light` sur texte bleu marine, sinon ils
-  ne ressortent pas.
 
 ---
 
-## 7 quater. Le formulaire de contact
+## 11. Le formulaire de contact
 
 Envoi par **SMTP authentifié**, via PHPMailer embarqué dans `lib/PHPMailer/`
 (3 fichiers, pas de Composer). Le traitement est dans `contact/envoi.php`.
@@ -442,43 +490,39 @@ cliente répond directement depuis Gmail.
 
 ---
 
-## 8. État d'avancement (maj 2026-09-28)
+## 12. État d'avancement (maj 2026-10-06)
 
-**Fait :** les 8 pages + 404, URL identiques au site actuel, charte,
-accessibilité (skip-link, `aria-current`, focus visibles,
-`prefers-reduced-motion`), SEO (meta, canonical, Open Graph, JSON-LD
-`SportsActivityLocation`), images optimisées, aperçu en ligne sur GitHub Pages.
+### Le site est **en production** depuis le 28 septembre 2026
 
-**Responsive vérifié** : 0 débordement horizontal sur les 7 pages à 500, 900 et
-1300 px (`scrollWidth == clientWidth`). Les grilles utilisent
-`minmax(min(Xpx,100%),1fr)` pour tenir jusqu'à 320 px. Seul le tableau du
-planning dépasse volontairement, dans un conteneur `.table-scroll`
-(`overflow-x:auto`). ⚠️ Chrome headless refusant de descendre sous 500 px, les
-largeurs 320-390 px n'ont pas pu être testées automatiquement.
+`https://www.les2ailes.fr` sert le site statique, sur le serveur cPanel
+`65.21.136.233`, derrière Cloudflare. Le WordPress OVH a été remplacé.
+Détail de la bascule dans [MIGRATION.md](MIGRATION.md).
 
-**Documents PDF** : le lien « planning » de l'ancien site pointait sur le
-**Planning 2025/2026** (`wp-content/uploads/2025/10/Planing.pdf`). Le PDF du
-site refait est régénéré à partir du visuel **2026-2027** envoyé par la cliente :
+Vérifié au moment de la bascule : les 6 pages en 200, `/planning/` et `/tarifs/`
+en 301 vers leur PDF, les reliquats WordPress en 410, `les2ailes.fr` → `www`,
+`http` → `https`, aucun `noindex`, et `/CLAUDE.md`, `/.git/config`, `/_build/`
+en 403. **Zéro 404 entre l'ancien et le nouveau site.**
 
-```python
-from PIL import Image
-im = Image.open('_mails/extracted/Planning/PLANNING 2026-2027.png').convert('RGB')
-# ... centrage sur une page A4 150 dpi (1240x1754) ...
-page.save('assets/docs/planning.pdf', 'PDF', resolution=150.0)
-```
+**Responsive** : 0 débordement horizontal sur toutes les pages à 500, 768, 1024
+et 1440 px (`scrollWidth == clientWidth`). Les grilles utilisent
+`minmax(min(Xpx,100%),1fr)` pour tenir jusqu'à 320 px.
+⚠️ Chrome headless refusant de descendre sous 500 px, les largeurs 320-390 px
+n'ont jamais pu être testées automatiquement.
 
-**Mise à jour du 14 septembre 2026** : la cliente a fourni les deux PDF
-officiels **2026-2027**, qui remplacent les fichiers de `assets/docs/`
-(le PDF de planning généré depuis le PNG n'a donc plus lieu d'être).
+### Les documents sont des PDF fournis par la cliente
+
+`assets/docs/planning.pdf`, `tarifs.pdf` et `events.pdf` viennent directement
+d'elle. Pour les mettre à jour : **remplacer le fichier, relancer `build_all.py`,
+committer**. L'empreinte de version change toute seule, donc pas de purge de
+cache à faire.
 
 ⚠️ La **grille tarifaire a entièrement changé** pour 2026-2027. L'ancienne
 (Liberté / Challenge / Zoom, cours à l'unité 25 €, inscription 50 €) est
-caduque. La nouvelle est construite en formules **Solaire, Lunaire, Étoile,
-Galaxie**, plus des **Constellations** (combinaisons), Zoom, Kids Yoga Aérien,
-Cours Privés, Carte et Modalités. Comme l'onglet Tarifs ouvre directement le
-PDF, aucune page n'a eu à être retouchée — mais **si une page de tarifs HTML
-est un jour réactivée depuis `_build/_inactif/`, tout son contenu est à
-refaire**.
+caduque. La nouvelle est en formules **Solaire, Lunaire, Étoile, Galaxie**, plus
+des **Constellations**, Zoom, Kids Yoga Aérien, Cours Privés, Carte et Modalités.
+L'onglet Tarifs ouvrant le PDF, aucune page n'a eu à être retouchée — mais **si
+une page de tarifs HTML est un jour réactivée depuis `_build/_inactif/`, tout son
+contenu est à refaire**.
 
 **Page planning** : supprimée le 7 septembre 2026, l'onglet ouvre le PDF.
 Le tableau HTML responsive reste disponible dans `_build/_inactif/`.
@@ -488,31 +532,64 @@ Le tableau HTML responsive reste disponible dans `_build/_inactif/`.
 est intégralement retranscrit en HTML : les republier ferait doublon, et du
 texte en image serait illisible pour Google et les lecteurs d'écran.
 
-**En attente de la cliente :**
+### Les trois liens de paiement Stripe
 
-| # | Manque | Impact |
+Dans `common.py`. Ce sont **trois produits distincts**, ne pas les confondre :
+
+| Constante | Usage | Où |
 |---|---|---|
-| 1 | *(réglé)* Bio de Laurence Lanté | Reçue le 24/09/2026, depuis sa publication Instagram. Voir §7 quater |
-| 2 | Contenu réel de la page **Event** | Page construite avec les textes events de l'accueil, faute de mieux |
-| 3 | *(réglé)* Photo de Laurence, photo des cours privés, PDF planning et tarifs | Reçus le 14 septembre 2026 |
-| 3 bis | *(réglé)* Téléphone | +33 6 09 14 84 56, reçu le 26 septembre 2026 |
-| 3 ter | *(réglé)* Réseaux du centre de formation | Reçus le 28 septembre 2026. Ce sont bien des comptes **distincts** de ceux du studio : `facebook.com/profile.php?id=61572158867367` et `instagram.com/les2l.centre.de.formation/`. Le pied de page garde ceux du studio, c'est voulu |
-| 4 | Fiches des disciplines manquantes | La cliente a fourni 12 fiches ; l'accueil en cite d'autres (Yoga Kundalini, Yoga Nidra, Bain Sonore, Pilates Reformer, coaching danseur préprofessionnel) |
-| 5 | Confirmation de la **grille tarifaire** | Le PDF vient de l'ancien site (déposé en 07/2025), comme le planning périmé qui s'y trouvait |
-| 6 | **PDF « évènements » et nouveau PDF planning** | Annoncés le 28/09/2026, pas encore déposés dans le projet. L'ancien EVENT_PDF + **liste des events** | `common.py` : `EVENT_PDF = "event/"` est un provisoire. À remplacer par `assets/docs/events.pdf`. Cible du bouton « Les prochains évènements » de l'accueil, et du bouton « Être informé » de `/event/` (qui pointe pour l'instant sur `/contact/` pour éviter un auto-lien) |
-| 7 | **1 photo pour la page Events** | Celle des « Ateliers, masterclass & stages ». La cliente préfère garder en attendant le visuel de yoga aérien `g02.jpg` (la femme à l'envers), repéré par un commentaire `TODO cliente` dans `build_event_contact.py`. Celle des groupes privés a été reçue le 14/09/2026 (`cours-prive.jpg`) |
-| 8 | **Dates des modules de formation** | La cliente annonce de nouvelles dates le 26/09/2026. Celles en ligne (`MODULES` dans `build_formation.py`) sont encore les anciennes |
-| 9 | **« finançables par l'état »** dans la carte « Le lieu » | Elle a demandé « l'État » → « les OPCO » pour le bandeau de financement. La carte « Le lieu » garde « finançables par l'état (FIFPL, AFDAS, France travail, Conseil régional) », qui liste des financeurs précis. À trancher |
+| `STRIPE_COURS_1H` | cours à l'unité, « ceux qui viennent en touriste » | bande de l'accueil |
+| `STRIPE_ATELIER_1H30` | 5 ateliers du dimanche | `/event/` |
+| `STRIPE_ATELIER_2H` | la danse aérienne, seule à durer 2 h | `/event/` |
 
-**Décisions techniques en attente :**
+Sur `/event/`, c'est la **durée de l'atelier** qui choisit le lien
+(dictionnaire `LIENS`). Un nouvel atelier prendra donc le bon tout seul.
 
-- **Formulaire de contact** : GitHub Pages n'envoie pas de mail. Actuellement
-  `main.js` ouvre le client mail du visiteur (`mailto:`). Pour un envoi direct,
-  renseigner l'attribut `action` du `<form id="contact-form">` avec un service
-  (Formspree, Netlify Forms…) — le JS se désactive tout seul dans ce cas.
-- **Hébergement final** : GitHub Pages n'est qu'un aperçu. À la bascule sur
-  `les2ailes.fr`, prévoir : retirer le `noindex` de `_build/common.py`, remplacer
-  `robots.txt` (modèle en commentaire dans le fichier), vérifier `sitemap.xml`,
-  et décider du plan de redirections depuis les anciennes URL WordPress
-  (`/les-disciplines/`, `/les-professionnels/`, `/le-centre-de-formation/`…)
-  vers les nouveaux fichiers `.html`.
+⚠️ La bande « De passage au Pays Basque ? » de l'accueil est **mon initiative**,
+pas une demande de la cliente, et son texte n'est pas d'elle. Elle a relu le
+site sans la relever. À reposer si l'occasion se présente.
+
+### Ajouter des avis Google
+
+`REVIEWS` dans `common.py` : `(nom, horodatage unix, note, texte)`. La liste
+est **triée automatiquement du plus récent au plus ancien**, donc l'ordre de
+saisie n'a pas d'importance.
+
+- **Vérifier les doublons avant d'ajouter.** Sur un lot de 5 reçus le
+  30/09/2026, 3 étaient déjà en ligne.
+- **Google ne se laisse pas lire automatiquement** : page entièrement en
+  JavaScript et mur de consentement européen. Testé, y compris en pilotant un
+  vrai navigateur. Il faut des captures d'écran, ou brancher l'API Google
+  Places (clé Google Cloud, gratuit sous 5 000 requêtes/mois).
+- L'horodatage se déduit du « il y a N jours / mois » affiché par Google.
+  19 avis au 30 septembre 2026.
+
+---
+
+## 13. En attente de la cliente
+
+| # | Manque | Détail |
+|---|---|---|
+| 1 | **3 avis Google** | Sur les 11 noms de son mail, Sabrina, Marilyn et LTN manquent encore |
+| 2 | **1 photo pour la page Events** | Celle des « Ateliers, masterclass & stages ». En attendant elle a choisi de garder `g02.jpg`, la femme à l'envers. Repéré par un `TODO cliente` dans `build_event_contact.py` |
+| 3 | **Fiches de disciplines manquantes** | Elle a fourni 12 fiches ; l'accueil en cite d'autres : Yoga Kundalini, Yoga Nidra, Bain Sonore, Pilates Reformer, coaching du danseur préprofessionnel |
+| 4 | **Cohérence du bain sonore** | Il est dans les 17 disciplines de l'accueil et existe comme atelier du 21 mars, mais il a disparu du planning hebdomadaire |
+| 5 | **« finançables par l'état »** | Elle a demandé « l'État » → « les OPCO » pour le bandeau de financement. La carte « Le lieu » garde « finançables par l'état (FIFPL, AFDAS, France travail, Conseil régional) », qui liste des financeurs précis. À trancher |
+| 6 | **Pré-requis, formulation** | Sa correction « il manque professeur avant de danse » créait un doublon avec le « professeur de danse » qui suivait. Le second a été retiré. À faire valider |
+| 7 | **Nouveaux intervenants** | Melissa Delattre, Sabine Sandri, Benjamin et Itziar Mendivil animent des ateliers mais ne sont pas sur la page Équipe. Volontaire ? |
+
+## 14. Chantiers reportés
+
+- **La refonte en deux onglets.** Elle veut séparer « Les cours » et « Le centre
+  de formation », qui va prendre de l'ampleur. Reporté d'un commun accord à
+  **fin octobre 2026**, pour laisser Google digérer la migration. En attendant,
+  les deux boutons du hero donnent déjà l'accès direct qu'elle demandait.
+  Ce ne sera pas qu'un changement de menu : il faudra une vraie page d'accueil
+  pour la formation, avec ses sous-pages.
+- **AutoSSL et `Full (strict)`.** Cloudflare est en `Full`, ce qui fonctionne.
+  Passer en `Full (strict)` une fois le certificat d'origine émis.
+- **Search Console.** Soumettre `sitemap.xml`, supprimer l'ancien
+  `wp-sitemap.xml`, surveiller la couverture.
+- **Ne rien résilier chez OVH** tant que la question des mails n'est pas
+  tranchée : le domaine porte des **MX OVH actifs**, et chez OVH la messagerie
+  est souvent adossée au pack d'hébergement web.
